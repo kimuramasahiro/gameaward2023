@@ -34,14 +34,19 @@ public class ElementGenerator : MonoBehaviour
     private DungeonGenerator dungeonGenerator;
     private int[,] map;
 
-    private int[,] Originalmap = { { 0, 0, 0, 0, 0, 0, 0},
-                                   { 0, 1, 1, 1, 1, 1, 0},
-                                   { 0, 1, 1, 1, 2, 1, 0},
-                                   { 0, 1, 1, 3, 1, 1, 0},
-                                   { 0, 1, 1, 1, 1, 1, 0},
-                                   { 0, 1, 1, 1, 1, 1, 0},
-                                   { 0, 0, 0, 0, 0, 0, 0}};
-
+    private int[,] Originalmap = { 
+                                   {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                                   {0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0},
+                                   {0, 0, 0, 0, 1, 1, 2, 0, 0, 0, 0},
+                                   {0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0},
+                                   {0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0},
+                                   {0, 1, 1, 1, 1, 1, 1, 1, 1, 3, 0},//上
+                                   {0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0},
+                                   {0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0},
+                                   {0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0},
+                                   {0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0},
+                                   {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},};
+                                                //↓
 
     // パス読み込み用
     private GameObject objMap2D;                //Map2D
@@ -176,16 +181,17 @@ public class ElementGenerator : MonoBehaviour
         while (true)
         {
             // 左下に生成
-            //int Player_Pos_X = 1;
-            int Player_Pos_X = Originalmap.GetLength(1) - 2;
-            int Player_Pos_Y = 1;
+            int Player_Pos_X = 5;
+            //int Player_Pos_X = Originalmap.GetLength(1) - 2;
+            int Player_Pos_Y = 2;
             //int mapX = Random.Range(0, Originalmap.GetLength(0) - 1);
             //int mapY = Random.Range(0, Originalmap.GetLength(1) - 1);
 
             // 右上に生成
             //int Enemy_Pos_X = Originalmap.GetLength(0) - 2;
-            int Enemy_Pos_X = 1;
-            int Enemy_Pos_Y = Originalmap.GetLength(1) - 2;
+            int Enemy_Pos_X = 3;
+            int Enemy_Pos_Y = 6;
+            //int Enemy_Pos_Y = Originalmap.GetLength(1) - 2;
 
             if (Originalmap[Player_Pos_X, Player_Pos_Y] == 1)
             {
