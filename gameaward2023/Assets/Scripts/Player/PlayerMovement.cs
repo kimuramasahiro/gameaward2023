@@ -104,6 +104,7 @@ public class PlayerMovement : MonoBehaviour
                 {
                     CurrentPos.z += 1.0f;
                 }
+
             }
             if (Input.GetKeyDown(KeyCode.S))
             {
