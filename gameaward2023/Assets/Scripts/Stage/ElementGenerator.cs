@@ -22,6 +22,8 @@ public class ElementGenerator : MonoBehaviour
     private GameObject blockPrefab_Water;                       // 水Obj
     private GameObject PlayerObj;                               // プレイヤーObj
     private GameObject EnemyObj;
+    private GameObject LateralMove_Skeleton;
+    private GameObject VerticalMove_Skeleton;
     private GameObject[] EnemyObjList = new GameObject[1];      // 敵リストObj
     private GameObject GoalObj;                                 // ゴールObj
     private GameObject ObstacleObj;                             // 障害物Obj
@@ -34,18 +36,17 @@ public class ElementGenerator : MonoBehaviour
     private DungeonGenerator dungeonGenerator;
     private int[,] map;
 
-    private int[,] Originalmap = { 
-                                   {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    private int[,] Originalmap = { {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                                    {0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0},
-                                   {0, 0, 0, 0, 1, 1, 2, 0, 0, 0, 0},
+                                   {0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0},
                                    {0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0},
                                    {0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0},
-                                   {0, 1, 1, 1, 1, 1, 1, 1, 1, 3, 0},//上
-                                   {0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0},
-                                   {0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0},
+                                   {0, 1, 1, 1, 1, 3, 1, 1, 1, 1, 0},//上
+                                   {0, 0, 1, 1, 0, 1, 1, 1, 1, 0, 0},
+                                   {0, 0, 0, 1, 1, 1, 2, 1, 0, 0, 0},
                                    {0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0},
                                    {0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0},
-                                   {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},};
+                                   {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
                                                 //↓
 
     // パス読み込み用
@@ -66,7 +67,16 @@ public class ElementGenerator : MonoBehaviour
 
         GenerateObj(Originalmap, PlayerObj);    // プレイヤーを生成
 
-        GenerateObj(Originalmap, EnemyObj);     // 敵を生成
+        //GenerateObj(Originalmap, EnemyObj);     // 敵を生成
+
+        GenerateEnemy(Originalmap, EnemyObj, new Vector2(5.0f, 7.0f));
+
+        GenerateEnemy(Originalmap, EnemyObj, new Vector2(3.0f, 3.0f));
+        GenerateEnemy(Originalmap, EnemyObj, new Vector2(6.0f, 3.0f));
+        GenerateEnemy(Originalmap, EnemyObj, new Vector2(4.0f, 5.0f));
+        GenerateEnemy(Originalmap, EnemyObj, new Vector2(5.0f, 6.0f));
+        GenerateEnemy(Originalmap, EnemyObj, new Vector2(6.0f, 5.0f));
+
     }
 
     void Awake()
@@ -183,7 +193,7 @@ public class ElementGenerator : MonoBehaviour
             // 左下に生成
             int Player_Pos_X = 5;
             //int Player_Pos_X = Originalmap.GetLength(1) - 2;
-            int Player_Pos_Y = 2;
+            int Player_Pos_Y = 1;
             //int mapX = Random.Range(0, Originalmap.GetLength(0) - 1);
             //int mapY = Random.Range(0, Originalmap.GetLength(1) - 1);
 
@@ -216,6 +226,12 @@ public class ElementGenerator : MonoBehaviour
                 break;
             }
         }
+    }
+
+    //オブジェクト生成
+    private void GenerateEnemy(int[,] Originalmap, GameObject obj, Vector2 pos)
+    {
+       GameObject objInstant = Instantiate(obj, new Vector3(pos.x, 2.0f, pos.y), Quaternion.Euler(0f, 0f, 0f));
     }
 
     public int[,] GetMapGenerate()

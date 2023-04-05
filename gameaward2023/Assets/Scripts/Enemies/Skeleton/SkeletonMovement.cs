@@ -32,7 +32,7 @@ public class SkeletonMovement : MonoBehaviour
     private ElementGenerator elementGenerator;  // 
     private int[,] map;                         // マップ情報格納用
     private bool bMapLoading = false;           // マップがロードされたか
-    // ------------------------------------------------------------------
+   // -------------------------------------------------------------------
 
     // Start is called before the first frame update
     void Start()
@@ -65,7 +65,7 @@ public class SkeletonMovement : MonoBehaviour
             IsMovable = true;
         }
 
-        CheckPlayerWithToNear();
+        //CheckPlayerWithToNear();
 
         // 進める状態か
         if (IsMovable)
@@ -76,7 +76,6 @@ public class SkeletonMovement : MonoBehaviour
             if (PlayerMovement.IsMoving)
             {
                 
-
                 //// プレイヤーが近くにいる場合
                 //if (bPlayerNear)
                 //{
@@ -272,7 +271,7 @@ public class SkeletonMovement : MonoBehaviour
     private void MoveSkeleton()
     {
         // プレイヤーが前に進んだら
-        if(PlayerMovement.PressKey_W)
+        if (PlayerMovement.PressKey_W)
         {
             if (map[(int)CurrentPos.x, (int)CurrentPos.z - 1] == 0 || map[(int)CurrentPos.x, (int)CurrentPos.z - 1] == 2)
             {
