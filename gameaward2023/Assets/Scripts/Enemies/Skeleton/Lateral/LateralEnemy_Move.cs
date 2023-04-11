@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LateralEnemy_Move : MonoBehaviour
+public class LateralEnemy_Move : EnemyBase
 {
     // スケルトン関連 ---------------------------------------------------
     private GameObject SkeletonObj = null;      // スケルトンオブジェクト
@@ -41,6 +41,7 @@ public class LateralEnemy_Move : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        base.Start();
         PlayerObj = GameObject.Find("Player");
         PlayerMovement = PlayerObj.GetComponent<PlayerMovement>();
 

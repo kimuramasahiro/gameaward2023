@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SkeletonMovement : MonoBehaviour
+public class SkeletonMovement :EnemyBase
 {
     // スケルトン関連 ---------------------------------------------------
     private GameObject SkeletonObj = null;      // スケルトンオブジェクト
@@ -37,6 +37,7 @@ public class SkeletonMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        base.Start();
         PlayerObj = GameObject.Find("Player");
         PlayerMovement = PlayerObj.GetComponent<PlayerMovement>();
 

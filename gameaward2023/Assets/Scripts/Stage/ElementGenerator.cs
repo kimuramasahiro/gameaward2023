@@ -61,6 +61,12 @@ public class ElementGenerator : MonoBehaviour
     public List<GameObject> GrassList = new List<GameObject>();
     // ------------------------------------------------------------------
 
+    // --- ìGÉfÅ[É^ ---
+    [SerializeField]
+    private EnemyData enemyData;
+    [SerializeField]
+    private List<GameObject> enemies = new List<GameObject>();
+    
     void Start()
     {
         PlayerObj = GameObject.Find("Player");  // ÉvÉåÉCÉÑÅ[ObjÇíTÇ∑
@@ -69,13 +75,21 @@ public class ElementGenerator : MonoBehaviour
 
         //GenerateObj(Originalmap, EnemyObj);     // ìGÇê∂ê¨
 
-        GenerateEnemy(Originalmap, EnemyObj, new Vector2(5.0f, 7.0f));
+        //GenerateEnemy(Originalmap, EnemyObj, new Vector2(5.0f, 7.0f));
 
-        GenerateEnemy(Originalmap, LateralMove_Enemy, new Vector2(7.0f, 3.0f));
-        GenerateEnemy(Originalmap, LateralMove_Enemy, new Vector2(9.0f, 5.0f));
-        GenerateEnemy(Originalmap, LateralMove_Enemy, new Vector2(7.0f, 7.0f));
-        GenerateEnemy(Originalmap, VerticalMove_Enemy, new Vector2(3.0f, 7.0f));
+        //GenerateEnemy(Originalmap, LateralMove_Enemy, new Vector2(7.0f, 3.0f));
+        //GenerateEnemy(Originalmap, LateralMove_Enemy, new Vector2(9.0f, 5.0f));
+        //GenerateEnemy(Originalmap, LateralMove_Enemy, new Vector2(7.0f, 7.0f));
+        //GenerateEnemy(Originalmap, VerticalMove_Enemy, new Vector2(3.0f, 7.0f));
 
+        foreach(var data in enemyData.enemies)
+        {
+            GameObject enemy;
+            enemy = (GameObject)Resources.Load(data.GetAddress());
+            GameObject objInstant = Instantiate(enemy, new Vector3(data.GetPos().x, 2.0f, data.GetPos().y), Quaternion.Euler(0f, 0f, 0f));
+            objInstant.GetComponent<EnemyBase>().SetEnemy(data);
+            enemies.Add(objInstant);
+        }
     }
 
     void Awake()
@@ -96,10 +110,10 @@ public class ElementGenerator : MonoBehaviour
         // ÉSÅ[Éã
         GoalObj = (GameObject)Resources.Load("Prefabs/Goal");
 
-        EnemyObj = (GameObject)Resources.Load("Prefabs/Enemies/Skeleton");
+        //EnemyObj = (GameObject)Resources.Load("Prefabs/Enemies/Skeleton");
 
-        VerticalMove_Enemy = (GameObject)Resources.Load("Prefabs/Enemies/Enemy_02");
-        LateralMove_Enemy = (GameObject)Resources.Load("Prefabs/Enemies/Enemy_03");
+        //VerticalMove_Enemy = (GameObject)Resources.Load("Prefabs/Enemies/Enemy_02");
+        //LateralMove_Enemy = (GameObject)Resources.Load("Prefabs/Enemies/Enemy_03");
 
         ObstacleObj = (GameObject)Resources.Load("Prefabs/obstacle");
 
