@@ -96,51 +96,53 @@ public class PlayerMovement : MonoBehaviour
             // é~Ç‹Ç¡ÇƒÇ¢ÇÈ
             IsMoving = false;
 
-            if (Input.GetKeyDown(KeyCode.W))
+            if (!IsAdvance_KeyW)
             {
-                PressKey_W = true;
-
-                if (!IsAdvance_KeyW)
+                if (Input.GetKeyDown(KeyCode.W))
                 {
+                    PressKey_W = true;
                     CurrentPos.z += 1.0f;
                 }
-
             }
-            if (Input.GetKeyDown(KeyCode.S))
+            if (!IsAdvance_KeyS)
             {
-                PressKey_S = true;
-
-                if (!IsAdvance_KeyS)
+                if (Input.GetKeyDown(KeyCode.S))
                 {
+                    PressKey_S = true;
                     CurrentPos.z -= 1.0f;
                 }
             }
-            if (Input.GetKeyDown(KeyCode.A))
+            if (!IsAdvance_KeyA)
             {
-                PressKey_A = true;
-
-                if (!IsAdvance_KeyA)
+                if (Input.GetKeyDown(KeyCode.A))
                 {
+                    PressKey_A = true;
                     PlayerDir = true;
                     CurrentPos.x -= 1.0f;
                 }
             }
-            if (Input.GetKeyDown(KeyCode.D))
+            if (!IsAdvance_KeyD)
             {
-                PressKey_D = true;
-
-                if (!IsAdvance_KeyD)
+                if (Input.GetKeyDown(KeyCode.D))
                 {
+                    PressKey_D = true;
+
                     PlayerDir = false;
                     CurrentPos.x += 1.0f;
                 }
             }
+
 
         }
         else
         {
             // ìÆÇ¢ÇƒÇ¢ÇÈ
             IsMoving = true;
+
+            PressKey_W = false;
+            PressKey_A = false;
+            PressKey_S = false;
+            PressKey_D = false;
         }
 
         // ÉSÅ[ÉãÇµÇƒÇ¢ÇÈÇ©

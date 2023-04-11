@@ -282,7 +282,7 @@ public class SkeletonMovement : MonoBehaviour
                 CurrentPos.z -= 1.0f;
             }
 
-            PlayerMovement.PressKey_W = false;
+            //PlayerMovement.PressKey_W = false;
         }
         // プレイヤーが後ろに進んだら
         else if (PlayerMovement.PressKey_S)
@@ -297,7 +297,7 @@ public class SkeletonMovement : MonoBehaviour
                 CurrentPos.z += 1.0f;
             }
 
-            PlayerMovement.PressKey_S = false;
+            //PlayerMovement.PressKey_S = false;
         }
         // プレイヤーが左に進んだら
         else if (PlayerMovement.PressKey_A)
@@ -313,7 +313,7 @@ public class SkeletonMovement : MonoBehaviour
                 CurrentPos.x += 1.0f;
             }
 
-            PlayerMovement.PressKey_A = false;
+            //PlayerMovement.PressKey_A = false;
         }
         // プレイヤーが右に進んだら
         else if (PlayerMovement.PressKey_D)
@@ -328,7 +328,7 @@ public class SkeletonMovement : MonoBehaviour
                 CurrentPos.x -= 1.0f;
             }
 
-            PlayerMovement.PressKey_D = false;
+           //PlayerMovement.PressKey_D = false;
         }
     }
 }
