@@ -29,6 +29,9 @@ public class PlayerMovement : MonoBehaviour
     public bool PressKey_S = false;
     [SerializeField]
     public bool PressKey_D = false;
+
+    [SerializeField]
+    public int StepCount = 0;                  // 歩数
     // ------------------------------------------------------------------
 
     // 2Dマップ生成スクリプト用 -----------------------------------------
@@ -102,6 +105,7 @@ public class PlayerMovement : MonoBehaviour
                 {
                     PressKey_W = true;
                     CurrentPos.z += 1.0f;
+                    StepCount++;
                 }
             }
             if (!IsAdvance_KeyS)
@@ -110,6 +114,7 @@ public class PlayerMovement : MonoBehaviour
                 {
                     PressKey_S = true;
                     CurrentPos.z -= 1.0f;
+                    StepCount++;
                 }
             }
             if (!IsAdvance_KeyA)
@@ -119,6 +124,7 @@ public class PlayerMovement : MonoBehaviour
                     PressKey_A = true;
                     PlayerDir = true;
                     CurrentPos.x -= 1.0f;
+                    StepCount++;
                 }
             }
             if (!IsAdvance_KeyD)
@@ -129,6 +135,7 @@ public class PlayerMovement : MonoBehaviour
 
                     PlayerDir = false;
                     CurrentPos.x += 1.0f;
+                    StepCount++;
                 }
             }
 
