@@ -22,7 +22,51 @@ public enum SKILL
 [CreateAssetMenu(menuName = "EnemyData")]
 public class EnemyData : ScriptableObject
 {
+    [SerializeField,HideInInspector]
+    private bool save = false;
+    [SerializeField,HideInInspector]
+    private int[] map;
+    [SerializeField,HideInInspector]
+    private string[] imageMap;
+    [SerializeField,HideInInspector]
+    private int mapSize;
     public List<Enemy> enemies = new List<Enemy>();
+    public int[] GetMap()
+    {
+        return map;
+    }
+    public void SetMap(int[] data)
+    {
+        map = data;
+    }
+    public string[] GetImageMap()
+    {
+        return imageMap;
+    }
+    public void SetImageMap(string[] data)
+    {
+        imageMap = data;
+    }
+    public void Save()
+    {
+        save = true;
+    }
+    public void Reset()
+    {
+        save = false;
+    }
+    public bool isSaved()
+    {
+        return save;
+    }
+    public int GetMapSize()
+    {
+        return mapSize;
+    }
+    public void SetMapSize(int size)
+    {
+        mapSize = size;
+    }
 }
 
 [System.Serializable]
@@ -85,4 +129,5 @@ public class Enemy
     {
         return moveSpeed;
     }
+    
 }
