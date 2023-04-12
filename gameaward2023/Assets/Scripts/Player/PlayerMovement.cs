@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System; // イベントの利用
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -29,6 +30,9 @@ public class PlayerMovement : MonoBehaviour
     public bool PressKey_S = false;
     [SerializeField]
     public bool PressKey_D = false;
+
+    [SerializeField]
+    public int StepCount = 0;                  // 歩数
     // ------------------------------------------------------------------
 
     // 2Dマップ生成スクリプト用 -----------------------------------------
@@ -45,6 +49,9 @@ public class PlayerMovement : MonoBehaviour
     private int[,] map;                         // マップ情報格納用
     private bool bMapLoading = false;           // マップがロードされたか
     // ------------------------------------------------------------------
+
+    // 歩数カウントを伝えるイベント
+    public event Action Walk;
 
     // Start is called before the first frame update
     void Start()
@@ -96,51 +103,61 @@ public class PlayerMovement : MonoBehaviour
             // 止まっている
             IsMoving = false;
 
-            if (Input.GetKeyDown(KeyCode.W))
+            if (!IsAdvance_KeyW)
             {
-                PressKey_W = true;
-
-                if (!IsAdvance_KeyW)
+                if (Input.GetKeyDown(KeyCode.W))
                 {
+                    PressKey_W = true;
                     CurrentPos.z += 1.0f;
+                    Walk?.Invoke();
+                    StepCount++;
                 }
-
             }
-            if (Input.GetKeyDown(KeyCode.S))
+            if (!IsAdvance_KeyS)
             {
-                PressKey_S = true;
-
-                if (!IsAdvance_KeyS)
+                if (Input.GetKeyDown(KeyCode.S))
                 {
+                    PressKey_S = true;
                     CurrentPos.z -= 1.0f;
+                    Walk?.Invoke();
+                    StepCount++;
                 }
             }
-            if (Input.GetKeyDown(KeyCode.A))
+            if (!IsAdvance_KeyA)
             {
-                PressKey_A = true;
-
-                if (!IsAdvance_KeyA)
+                if (Input.GetKeyDown(KeyCode.A))
                 {
+                    PressKey_A = true;
                     PlayerDir = true;
                     CurrentPos.x -= 1.0f;
+                    Walk?.Invoke();
+                    StepCount++;
                 }
             }
-            if (Input.GetKeyDown(KeyCode.D))
+            if (!IsAdvance_KeyD)
             {
-                PressKey_D = true;
-
-                if (!IsAdvance_KeyD)
+                if (Input.GetKeyDown(KeyCode.D))
                 {
+                    PressKey_D = true;
+
                     PlayerDir = false;
                     CurrentPos.x += 1.0f;
+                    Walk?.Invoke();
+                    StepCount++;
                 }
             }
+
 
         }
         else
         {
             // 動いている
             IsMoving = true;
+
+            PressKey_W = false;
+            PressKey_A = false;
+            PressKey_S = false;
+            PressKey_D = false;
         }
 
         // ゴールしているか
