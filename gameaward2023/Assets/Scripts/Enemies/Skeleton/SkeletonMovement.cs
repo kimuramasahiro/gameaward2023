@@ -6,7 +6,7 @@ public class SkeletonMovement :EnemyBase
 {
     // スケルトン関連 ---------------------------------------------------
     private GameObject SkeletonObj = null;      // スケルトンオブジェクト
-    private Vector3 CurrentPos = Vector3.zero;  // スケルトン座標格納用
+    //private Vector3 CurrentPos = Vector3.zero;  // スケルトン座標格納用
     private Vector2 CheckPos = Vector2.zero;    // 
     public float MoveSpeed = 3.0f;              // スケルトンの動く速さ
     private int MoveDir = 0;                    // スケルトンの進む方向
@@ -27,12 +27,12 @@ public class SkeletonMovement :EnemyBase
     private Vector2 PlayerCurrentPos = Vector2.zero;
     // ------------------------------------------------------------------
 
-    // 2Dマップ生成スクリプト用 -----------------------------------------
-    private GameObject StageMake;               // 
-    private ElementGenerator elementGenerator;  // 
-    private int[,] map;                         // マップ情報格納用
-    private bool bMapLoading = false;           // マップがロードされたか
-   // -------------------------------------------------------------------
+   // // 2Dマップ生成スクリプト用 -----------------------------------------
+   // private GameObject StageMake;               // 
+   // private ElementGenerator elementGenerator;  // 
+   // private int[,] map;                         // マップ情報格納用
+   // private bool bMapLoading = false;           // マップがロードされたか
+   //// -------------------------------------------------------------------
 
     // Start is called before the first frame update
     void Start()
@@ -41,29 +41,40 @@ public class SkeletonMovement :EnemyBase
         PlayerObj = GameObject.Find("Player");
         PlayerMovement = PlayerObj.GetComponent<PlayerMovement>();
 
-        StageMake = GameObject.Find("StageMake");
+        //StageMake = GameObject.Find("StageMake");
     }
 
     // Update is called once per frame
     void Update()
     {
-        // 一度だけ実行
-        if (!bMapLoading)
-        {
-            // ダンジョンマップ読み込み
-            elementGenerator = StageMake.GetComponent<ElementGenerator>();
-            map = elementGenerator.GetMapGenerate();
+        //// 一度だけ実行
+        //if (!bMapLoading)
+        //{
+        //    // ダンジョンマップ読み込み
+        //    elementGenerator = StageMake.GetComponent<ElementGenerator>();
+        //    map = elementGenerator.GetMapGenerate();
 
-            // スポーン時の座標を格納
-            CurrentPos = this.gameObject.transform.position;
+        //    // スポーン時の座標を格納
+        //    CurrentPos = this.gameObject.transform.position;
 
-            bMapLoading = true;
-        }
+        //    bMapLoading = true;
+        //}
 
         // 進んでいないときtrueにする
         if(CurrentPos == this.gameObject.transform.position)
         {
             IsMovable = true;
+
+            if (inSkill)
+            {
+                chargedSkill = false;
+                inSkill = false;
+            }
+            if (onMove && chargedSkill)
+            {
+                SkillActivation();
+            }
+            onMove = false;
         }
 
         //CheckPlayerWithToNear();
@@ -283,6 +294,7 @@ public class SkeletonMovement :EnemyBase
                 CurrentPos.z -= 1.0f;
             }
 
+            onMove = true;
             //PlayerMovement.PressKey_W = false;
         }
         // プレイヤーが後ろに進んだら
@@ -298,6 +310,7 @@ public class SkeletonMovement :EnemyBase
                 CurrentPos.z += 1.0f;
             }
 
+            onMove = true;
             //PlayerMovement.PressKey_S = false;
         }
         // プレイヤーが左に進んだら
@@ -314,6 +327,7 @@ public class SkeletonMovement :EnemyBase
                 CurrentPos.x += 1.0f;
             }
 
+            onMove = true;
             //PlayerMovement.PressKey_A = false;
         }
         // プレイヤーが右に進んだら
@@ -329,7 +343,8 @@ public class SkeletonMovement :EnemyBase
                 CurrentPos.x -= 1.0f;
             }
 
-           //PlayerMovement.PressKey_D = false;
+            onMove = true;
+            //PlayerMovement.PressKey_D = false;
         }
     }
 }

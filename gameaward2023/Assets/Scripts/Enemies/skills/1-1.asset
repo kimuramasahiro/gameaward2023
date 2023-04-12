@@ -16,30 +16,35 @@ MonoBehaviour:
   - tag: "\u30B9\u30B1\u30EB\u30C8\u30F3\u3000\u666E\u901A"
     name: 0
     health: 50
-    skillTurn: 31
+    moveSpeed: 3
+    skillTurn: 5
     pos: {x: 5, y: 7}
-    skill: 0
+    skill: 1
   - tag: "\u30B9\u30B1\u30EB\u30C8\u30F3\u3000\u6C34\u5E73"
     name: 2
     health: 50
+    moveSpeed: 3
     skillTurn: 4
     pos: {x: 7, y: 3}
-    skill: 0
+    skill: 2
   - tag: "\u30B9\u30B1\u30EB\u30C8\u30F3\u3000\u6C34\u5E73"
     name: 2
     health: 50
-    skillTurn: 10
+    moveSpeed: 3
+    skillTurn: 3
     pos: {x: 9, y: 5}
-    skill: 0
+    skill: 3
   - tag: "\u30B9\u30B1\u30EB\u30C8\u30F3\u3000\u6C34\u5E73"
     name: 2
     health: 50
+    moveSpeed: 3
     skillTurn: 8
     pos: {x: 7, y: 7}
     skill: 0
   - tag: "\u30B9\u30B1\u30EB\u30C8\u30F3\u3000\u5782\u76F4"
     name: 1
     health: 50
+    moveSpeed: 3
     skillTurn: 4
     pos: {x: 3, y: 7}
     skill: 0

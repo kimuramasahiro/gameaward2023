@@ -41,6 +41,9 @@ public class Enemy
     private int health;
 
     [SerializeField]
+    private float moveSpeed = 3.0f;
+
+    [SerializeField]
     private int skillTurn;
 
     [SerializeField]
@@ -78,5 +81,8 @@ public class Enemy
     {
         return pos;
     }
-
+    public float GetMoveSpeed()
+    {
+        return moveSpeed;
+    }
 }
