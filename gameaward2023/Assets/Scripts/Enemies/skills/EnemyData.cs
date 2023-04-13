@@ -31,6 +31,8 @@ public class EnemyData : ScriptableObject
     [SerializeField,HideInInspector]
     private int mapSize;
     public List<Enemy> enemies = new List<Enemy>();
+    [SerializeField, HideInInspector]
+    private Vector2 heroPos;
     public int[] GetMap()
     {
         return map;
@@ -67,6 +69,14 @@ public class EnemyData : ScriptableObject
     {
         mapSize = size;
     }
+    public Vector2 GetHeroPos()
+    {
+        return heroPos;
+    }
+    public void SetHeroPos(Vector2 data)
+    {
+        heroPos = data;
+    }
 }
 
 [System.Serializable]
@@ -90,7 +100,7 @@ public class Enemy
     [SerializeField]
     private int skillTurn;
 
-    [SerializeField]
+    [SerializeField,HideInInspector]
     private Vector2 pos;
 
     [SerializeField]
@@ -124,6 +134,10 @@ public class Enemy
     public Vector2 GetPos()
     {
         return pos;
+    }
+    public void SetPos(Vector2 data)
+    {
+        pos = data;
     }
     public float GetMoveSpeed()
     {

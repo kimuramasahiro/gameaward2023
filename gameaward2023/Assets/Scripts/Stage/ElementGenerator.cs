@@ -87,7 +87,7 @@ public class ElementGenerator : MonoBehaviour
         {
             GameObject enemy;
             enemy = (GameObject)Resources.Load(data.GetAddress());
-            GameObject objInstant = Instantiate(enemy, new Vector3(data.GetPos().x, 2.0f, data.GetPos().y), Quaternion.Euler(0f, 0f, 0f));
+            GameObject objInstant = Instantiate(enemy, new Vector3(data.GetPos().x, 2.0f, 10-data.GetPos().y), Quaternion.Euler(0f, 0f, 0f));
             objInstant.GetComponent<EnemyBase>().SetEnemy(data);
             enemies.Add(objInstant);
         }
@@ -100,7 +100,13 @@ public class ElementGenerator : MonoBehaviour
         Originalmap = new int[enemyData.GetMapSize(), enemyData.GetMapSize()];
         for (int yy = 0; yy < enemyData.GetMapSize(); yy++)
             for (int xx = 0; xx < enemyData.GetMapSize(); xx++)
-                Originalmap[yy, xx] = enemyData.GetMap()[ (start+yy)-minus*xx];
+            {
+                if(enemyData.GetMap()[(start + yy) - minus * xx]==-1)
+                    Originalmap[yy, xx] =-1;
+                else
+                    Originalmap[yy, xx] = enemyData.GetMap()[(start + yy) - minus * xx] % 10;
+            }
+                
         //Originalmap[yy, xx] = enemyData.GetMap()[enemyData.GetMapSize() * enemyData.GetMapSize() - 1 - (xx * enemyData.GetMapSize() + yy)];
         //ƒŠƒ\[ƒX“Ç‚Ýž‚Ý
         ReadResources();
@@ -215,9 +221,10 @@ public class ElementGenerator : MonoBehaviour
         while (true)
         {
             // ¶‰º‚É¶¬
-            int Player_Pos_X = 5;
+            int Player_Pos_X = (int)enemyData.GetHeroPos().x;
             //int Player_Pos_X = Originalmap.GetLength(1) - 2;
-            int Player_Pos_Y = 1;
+            int Player_Pos_Y = 10-(int)enemyData.GetHeroPos().y;
+
             //int mapX = Random.Range(0, Originalmap.GetLength(0) - 1);
             //int mapY = Random.Range(0, Originalmap.GetLength(1) - 1);
 

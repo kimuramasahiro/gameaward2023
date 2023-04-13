@@ -46,9 +46,9 @@ public class MapEditor : Editor
     {
         EditorGUILayout.BeginVertical();
         GUILayout.FlexibleSpace(); // フィールドの右寄せ
-        // ディレクトリを指定させる
+        // ディレクトリを指定させる　一旦させない
          
-        directory = (DefaultAsset)EditorGUILayout.ObjectField("ディレクトリを指定", directory, typeof(DefaultAsset), true);
+        //directory = (DefaultAsset)EditorGUILayout.ObjectField("ディレクトリを指定", directory, typeof(DefaultAsset), true);
         if (directory != null)
         {
             // DefaultAssetのパスを取得する
@@ -109,6 +109,20 @@ public class CreateMap : EditorWindow
         goal,
         land,
         sea,
+        hero,
+        _1,
+        _2,
+        _3,
+        _4,
+        _5,
+        _6,
+        _7,
+        _8,
+        _9,
+        _10,
+        _11,
+        _12,
+        _13,
 
 
     }
@@ -124,6 +138,10 @@ public class CreateMap : EditorWindow
     private Rect[,] gridRect;// グリッドの配列 
     private string path;
     private string imagePath;
+    private string landImagePath;
+    private string seaImagePath;
+    private string goalImagePath;
+    private string[] enemyImagePath = new string[1];
     private EnemyData data;
     // サブウィンドウを開く
     public static CreateMap WillAppear(MapEditor _parent)
@@ -156,6 +174,7 @@ public class CreateMap : EditorWindow
             map = data.GetMap();
             imageMap = data.GetImageMap();
         }
+        
     }
     private void SetParent(MapEditor _parent)
     {
@@ -174,12 +193,13 @@ public class CreateMap : EditorWindow
         }
         DrawImageParts();
 
-        DrawResetMapButton();
-        
         DrawSetData();
+        
+        DrawResetMapButton();
         
         // クリックされた位置を探して、その場所に画像データを入れる
         Event e = Event.current;
+        
         if (e.type == EventType.MouseDown)
         {
             Vector2 pos = Event.current.mousePosition;
@@ -205,13 +225,53 @@ public class CreateMap : EditorWindow
                     // 消しゴムの時はデータを消す
                     if(imagePath == null)
                     {
-                        imageMap[yy * mapSize + xx] = "";
-                        map[yy * mapSize + xx] = -1;
+                        if (map[yy * mapSize + xx] > 9)
+                        {
+                            
+                            map[yy * mapSize + xx] %= 10;
+                            if (map[yy * mapSize + xx] == 0)
+                            {
+                                imageMap[yy * mapSize + xx] = seaImagePath;
+                            }
+                            else if (map[yy * mapSize + xx] == 1)
+                            {
+                                imageMap[yy * mapSize + xx] = landImagePath;
+                            }
+                            else if (map[yy * mapSize + xx] == 3)
+                            {
+                                imageMap[yy * mapSize + xx] = goalImagePath;
+                            }
+                        }
+                        else
+                        {
+                            imageMap[yy * mapSize + xx] = "";
+                            map[yy * mapSize + xx] = -1;
+                        }
                     }
                     else if (imagePath.IndexOf(IMAGE.none.ToString()) > -1)
                     {
-                        imageMap[yy * mapSize + xx] = "";
-                        map[yy * mapSize + xx] = -1;
+                        if(map[yy * mapSize + xx]>9)
+                        {
+                            map[yy * mapSize + xx] %= 10;
+                            if (map[yy * mapSize + xx] == 0)
+                            {
+                                imageMap[yy * mapSize + xx] = seaImagePath;
+                            }
+                            else if (map[yy * mapSize + xx] == 1)
+                            {
+                                imageMap[yy * mapSize + xx] = landImagePath;
+                            }
+                            else if (map[yy * mapSize + xx] == 3)
+                            {
+                                imageMap[yy * mapSize + xx] = goalImagePath;
+                            }
+                        }
+                        else
+                        {
+                            imageMap[yy * mapSize + xx] = "";
+                            map[yy * mapSize + xx] = -1;
+                        }
+                        
                     }
                     else if (imagePath.IndexOf(IMAGE.sea.ToString()) > -1)
                     {
@@ -228,6 +288,146 @@ public class CreateMap : EditorWindow
                         imageMap[yy * mapSize + xx] = imagePath;
                         map[yy * mapSize + xx] = 3;
                     }
+                    else if (imagePath.IndexOf(IMAGE._1.ToString()) > -1)
+                    {
+                        if (map[yy * mapSize + xx] != -1 && map[yy * mapSize + xx] < 10)
+                        {
+                            imageMap[yy * mapSize + xx] = imagePath;
+                            map[yy * mapSize + xx] += 10;
+                            data.enemies[0].SetPos(new Vector2(xx, yy));
+                        }
+
+                    }
+                    else if (imagePath.IndexOf(IMAGE._2.ToString()) > -1)
+                    {
+                        if (map[yy * mapSize + xx] != -1 && map[yy * mapSize + xx] < 10)
+                        {
+                            imageMap[yy * mapSize + xx] = imagePath;
+                            map[yy * mapSize + xx] += 20;
+                            data.enemies[1].SetPos(new Vector2(xx, yy));
+                        }
+
+                    }
+                    else if (imagePath.IndexOf(IMAGE._3.ToString()) > -1)
+                    {
+                        if (map[yy * mapSize + xx] != -1 && map[yy * mapSize + xx] < 10)
+                        {
+                            imageMap[yy * mapSize + xx] = imagePath;
+                            map[yy * mapSize + xx] += 30;
+                            data.enemies[2].SetPos(new Vector2(xx, yy));
+                        }
+
+                    }
+                    else if (imagePath.IndexOf(IMAGE._4.ToString()) > -1)
+                    {
+                        if (map[yy * mapSize + xx] != -1 && map[yy * mapSize + xx] < 10)
+                        {
+                            imageMap[yy * mapSize + xx] = imagePath;
+                            map[yy * mapSize + xx] += 40;
+                            data.enemies[3].SetPos(new Vector2(xx, yy));
+                        }
+
+                    }
+                    else if (imagePath.IndexOf(IMAGE._5.ToString()) > -1)
+                    {
+                        if (map[yy * mapSize + xx] != -1 && map[yy * mapSize + xx] < 10)
+                        {
+                            imageMap[yy * mapSize + xx] = imagePath;
+                            map[yy * mapSize + xx] += 50;
+                            data.enemies[4].SetPos(new Vector2(xx, yy));
+                        }
+
+                    }
+                    else if (imagePath.IndexOf(IMAGE._6.ToString()) > -1)
+                    {
+                        if (map[yy * mapSize + xx] != -1 && map[yy * mapSize + xx] < 10)
+                        {
+                            imageMap[yy * mapSize + xx] = imagePath;
+                            map[yy * mapSize + xx] += 60;
+                            data.enemies[5].SetPos(new Vector2(xx, yy));
+                        }
+
+                    }
+                    else if (imagePath.IndexOf(IMAGE._7.ToString()) > -1)
+                    {
+                        if (map[yy * mapSize + xx] != -1 && map[yy * mapSize + xx] < 10)
+                        {
+                            imageMap[yy * mapSize + xx] = imagePath;
+                            map[yy * mapSize + xx] += 70;
+                            data.enemies[6].SetPos(new Vector2(xx, yy));
+                        }
+
+                    }
+                    else if (imagePath.IndexOf(IMAGE._8.ToString()) > -1)
+                    {
+                        if (map[yy * mapSize + xx] != -1 && map[yy * mapSize + xx] < 10)
+                        {
+                            imageMap[yy * mapSize + xx] = imagePath;
+                            map[yy * mapSize + xx] += 80;
+                            data.enemies[7].SetPos(new Vector2(xx, yy));
+                        }
+
+                    }
+                    else if (imagePath.IndexOf(IMAGE._9.ToString()) > -1)
+                    {
+                        if (map[yy * mapSize + xx] != -1 && map[yy * mapSize + xx] < 10)
+                        {
+                            imageMap[yy * mapSize + xx] = imagePath;
+                            map[yy * mapSize + xx] += 90;
+                            data.enemies[8].SetPos(new Vector2(xx, yy));
+                        }
+
+                    }
+                    else if (imagePath.IndexOf(IMAGE._10.ToString()) > -1)
+                    {
+                        if (map[yy * mapSize + xx] != -1 && map[yy * mapSize + xx] < 10)
+                        {
+                            imageMap[yy * mapSize + xx] = imagePath;
+                            map[yy * mapSize + xx] += 100;
+                            data.enemies[9].SetPos(new Vector2(xx, yy));
+                        }
+
+                    }
+                    else if (imagePath.IndexOf(IMAGE._11.ToString()) > -1)
+                    {
+                        if (map[yy * mapSize + xx] != -1 && map[yy * mapSize + xx] < 10)
+                        {
+                            imageMap[yy * mapSize + xx] = imagePath;
+                            map[yy * mapSize + xx] += 110;
+                            data.enemies[10].SetPos(new Vector2(xx, yy));
+                        }
+
+                    }
+                    else if (imagePath.IndexOf(IMAGE._12.ToString()) > -1)
+                    {
+                        if (map[yy * mapSize + xx] != -1 && map[yy * mapSize + xx] < 10)
+                        {
+                            imageMap[yy * mapSize + xx] = imagePath;
+                            map[yy * mapSize + xx] += 120;
+                            data.enemies[11].SetPos(new Vector2(xx, yy));
+                        }
+
+                    }
+                    else if (imagePath.IndexOf(IMAGE._13.ToString()) > -1)
+                    {
+                        if (map[yy * mapSize + xx] != -1 && map[yy * mapSize + xx] < 10)
+                        {
+                            imageMap[yy * mapSize + xx] = imagePath;
+                            map[yy * mapSize + xx] += 130;
+                            data.enemies[12].SetPos(new Vector2(xx, yy));
+                        }
+
+                    }
+                    else if (imagePath.IndexOf(IMAGE.hero.ToString()) > -1)
+                    {
+                        if (map[yy * mapSize + xx] != -1 && map[yy * mapSize + xx] < 10)
+                        {
+                            imageMap[yy * mapSize + xx] = imagePath;
+                            map[yy * mapSize + xx] += 1000;
+                            data.SetHeroPos(new Vector2(xx, yy));
+                        }
+
+                    }
                     else
                     {
                         imageMap[yy* xx] = "";
@@ -238,7 +438,7 @@ public class CreateMap : EditorWindow
                 }
             }
         }
-
+        
         // 選択した画像を描画する
         for (int yy = 0; yy < mapSize; yy++)
         {
@@ -250,8 +450,51 @@ public class CreateMap : EditorWindow
                 }
                 if (imageMap[yy * mapSize + xx] != null && imageMap[yy * mapSize + xx].Length > 0)
                 {
-                    Texture2D tex = (Texture2D)AssetDatabase.LoadAssetAtPath(imageMap[yy * mapSize + xx], typeof(Texture2D));
-                    GUI.DrawTexture(gridRect[yy, xx], tex);
+                    if (map[yy * mapSize + xx] > 9)
+                    {
+                        enemyImagePath[0] = imageMap[yy * mapSize + xx];
+                        int mapBase = map[yy * mapSize + xx] % 10;
+                        
+                        if (mapBase == 0)
+                        {
+                            imageMap[yy * mapSize + xx] = seaImagePath;
+                        }
+                        else if (mapBase == 1)
+                        {
+                            imageMap[yy * mapSize + xx] = landImagePath;
+                        }
+                        else if (mapBase == 3)
+                        {
+                            imageMap[yy * mapSize + xx] = goalImagePath;
+                        }
+                        Texture2D tex = (Texture2D)AssetDatabase.LoadAssetAtPath(imageMap[yy * mapSize + xx], typeof(Texture2D));
+                        GUI.DrawTexture(gridRect[yy, xx], tex, ScaleMode.StretchToFill, true);
+                        int enemyData = (map[yy * mapSize + xx] - (map[yy * mapSize + xx] % 10)) / 10;
+                        Debug.Log(enemyData);
+                        Debug.Log(map[yy * mapSize + xx]);
+                        
+
+                        
+
+                        if (data.enemies.Count() >= enemyData||enemyData==100)
+                        {
+                            Texture2D tex1 = (Texture2D)AssetDatabase.LoadAssetAtPath(enemyImagePath[0], typeof(Texture2D));
+                            GUI.DrawTexture(gridRect[yy, xx], tex1, ScaleMode.StretchToFill, true);
+                            Debug.Log(imageMap[yy * mapSize + xx] + "::" + enemyImagePath[0] + "::" + map[yy * mapSize + xx] + ":y=" + yy + ":x=" + xx);
+                            imageMap[yy * mapSize + xx] = enemyImagePath[0];
+                        }
+                        else
+                        {
+                            map[yy * mapSize + xx] = mapBase;
+                        }
+                        
+
+                    }
+                    else
+                    {
+                        Texture2D tex = (Texture2D)AssetDatabase.LoadAssetAtPath(imageMap[yy * mapSize + xx], typeof(Texture2D));
+                        GUI.DrawTexture(gridRect[yy, xx], tex);
+                    }
                 }
             }
         }
@@ -289,7 +532,7 @@ public class CreateMap : EditorWindow
         int sizeH = div;
 
         float x = 0.0f;
-        float y = windowHeight * 0.1f;
+        float y = windowHeight * 0.2f;
         float w = windowWidth * 0.6f / div;
         float h = windowHeight * 0.6f / div;
 
@@ -316,7 +559,6 @@ public class CreateMap : EditorWindow
         data.SetImageMap(imageMap);
         data.Save();
         EditorUtility.SetDirty(data);
-        // Undoに対応する
         Undo.RegisterCompleteObjectUndo(data, "map");
         Undo.RegisterCompleteObjectUndo(data, "imageMap");
         Undo.RegisterCompleteObjectUndo(data, "save");
@@ -326,36 +568,60 @@ public class CreateMap : EditorWindow
     {
         if (!string.IsNullOrEmpty(path))
         {
-            float x = 0.0f;
+            float x = 00.0f;
             float y = 00.0f;
-            float w = 50.0f;
-            float h = 50.0f;
-            float maxW = 300.0f;
-            
-            string[] names = AssetDatabase.FindAssets("", new[] { path }).Select(AssetDatabase.GUIDToAssetPath).ToArray();
-            //Directory.GetFiles(path, "*.png");
-            EditorGUILayout.BeginVertical();
+            float w = 40.0f;
+            float h = 40.0f;
+            float maxW = 750.0f/*windowHeight * 0.1f*/;
+
+            List<string> names = AssetDatabase.FindAssets("", new[] { path }).Select(AssetDatabase.GUIDToAssetPath).ToList();
+            List<string> enemiesNames = AssetDatabase.FindAssets("_", new[] { path }).Select(AssetDatabase.GUIDToAssetPath).ToList();
+            Debug.Log(enemiesNames.Count());
+            foreach (string d in enemiesNames)
+            {
+                Debug.Log(d);
+            }
+            names.RemoveRange(data.enemies.Count(), enemiesNames.Count() - data.enemies.Count());
+                //Directory.GetFiles(path, "*.png");
+                EditorGUILayout.BeginVertical();
+            EditorGUILayout.BeginHorizontal();
             foreach (string d in names)
             {
+                //if (x == 0.0f)
+                //{
+                //    EditorGUILayout.BeginHorizontal();
+                //}
                 if (x > maxW)
                 {
                     x = 0.0f;
                     y += h;
                     EditorGUILayout.EndHorizontal();
-                }
-                if (x == windowHeight * 0.1f)
-                {
                     EditorGUILayout.BeginHorizontal();
                 }
+                
                 GUILayout.FlexibleSpace();
                 Texture2D tex = (Texture2D)AssetDatabase.LoadAssetAtPath(d, typeof(Texture2D));
+                if (d.IndexOf(IMAGE.land.ToString()) > -1)
+                {
+                    landImagePath = d;
+                }
+                else if (d.IndexOf(IMAGE.sea.ToString()) > -1)
+                {
+                    seaImagePath = d;
+                }
+                else if (d.IndexOf(IMAGE.goal.ToString()) > -1)
+                {
+                    goalImagePath = d;
+                }
                 if (GUILayout.Button(tex, GUILayout.MaxWidth(w), GUILayout.MaxHeight(h), GUILayout.ExpandWidth(false), GUILayout.ExpandHeight(false)))
                 {
                     imagePath = d;
                 }
-                GUILayout.FlexibleSpace();
+                //GUILayout.FlexibleSpace();
                 x += w;
             }
+
+            EditorGUILayout.EndHorizontal();
             EditorGUILayout.EndVertical();
         }
     }
@@ -363,6 +629,7 @@ public class CreateMap : EditorWindow
     private void DrawResetMapButton()
     {
         EditorGUILayout.BeginVertical();
+        EditorGUILayout.BeginHorizontal();
         GUILayout.FlexibleSpace(); // フィールドの右寄せ
         if (GUILayout.Button("reset map"))
         {
@@ -376,17 +643,20 @@ public class CreateMap : EditorWindow
                     imageMap[yy * mapSize + xx] = "";
                 }
         }
+        EditorGUILayout.EndHorizontal();
         EditorGUILayout.EndVertical();
     }
 
     private void DrawSetData()
     {
         EditorGUILayout.BeginVertical();
-        GUILayout.FlexibleSpace(); // フィールドの右寄せ
+        EditorGUILayout.BeginHorizontal();
+        //GUILayout.FlexibleSpace(); // フィールドの右寄せ
         if (GUILayout.Button("set map"))
         {
             SetMapData();
         }
+        EditorGUILayout.EndHorizontal();
         EditorGUILayout.EndVertical();
     }
 }
