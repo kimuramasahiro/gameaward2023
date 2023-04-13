@@ -148,7 +148,7 @@ public class CreateMap : EditorWindow
         for (int yy = 0; yy < mapSize; ++yy)
             for (int xx = 0; xx < mapSize; ++xx)
             {
-                map[yy * mapSize + xx] = 0;
+                map[yy * mapSize + xx] = -1;
                 imageMap[yy * mapSize + xx] = "";
             }
         if (data.isSaved())
@@ -372,7 +372,7 @@ public class CreateMap : EditorWindow
             for (int yy = 0; yy < mapSize; ++yy)
                 for (int xx = 0; xx < mapSize; ++xx)
                 {
-                    map[yy * mapSize + xx] = 0;
+                    map[yy * mapSize + xx] = -1;
                     imageMap[yy * mapSize + xx] = "";
                 }
         }

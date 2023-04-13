@@ -35,19 +35,19 @@ public class ElementGenerator : MonoBehaviour
     // 2Dマップ生成スクリプト用
     private DungeonGenerator dungeonGenerator;
     private int[,] map;
-
-    private int[,] Originalmap = { {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                                   {0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0},
-                                   {0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0},
-                                   {0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0},
-                                   {0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0},
-                                   {0, 1, 1, 1, 1, 3, 1, 1, 1, 1, 0},//上
-                                   {0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0},
-                                   {0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0},
-                                   {0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0},
-                                   {0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0},
-                                   {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
-                                                //↓
+    private int[,] Originalmap;
+    //private int[,] Originalmap = { {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    //                               {0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0},
+    //                               {0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0},
+    //                               {0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0},
+    //                               {0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0},
+    //                               {0, 1, 1, 1, 1, 3, 1, 1, 1, 1, 0},//上
+    //                               {0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0},
+    //                               {0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0},
+    //                               {0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0},
+    //                               {0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0},
+    //                               {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
+    //                                            //↓
 
     // パス読み込み用
     private GameObject objMap2D;                //Map2D
@@ -69,6 +69,7 @@ public class ElementGenerator : MonoBehaviour
     
     void Start()
     {
+        
         PlayerObj = GameObject.Find("Player");  // プレイヤーObjを探す
 
         GenerateObj(Originalmap, PlayerObj);    // プレイヤーを生成
@@ -94,6 +95,13 @@ public class ElementGenerator : MonoBehaviour
 
     void Awake()
     {
+        int start = enemyData.GetMapSize() * (enemyData.GetMapSize() -1);
+        int minus = enemyData.GetMapSize();
+        Originalmap = new int[enemyData.GetMapSize(), enemyData.GetMapSize()];
+        for (int yy = 0; yy < enemyData.GetMapSize(); yy++)
+            for (int xx = 0; xx < enemyData.GetMapSize(); xx++)
+                Originalmap[yy, xx] = enemyData.GetMap()[ (start+yy)-minus*xx];
+        //Originalmap[yy, xx] = enemyData.GetMap()[enemyData.GetMapSize() * enemyData.GetMapSize() - 1 - (xx * enemyData.GetMapSize() + yy)];
         //リソース読み込み
         ReadResources();
 
