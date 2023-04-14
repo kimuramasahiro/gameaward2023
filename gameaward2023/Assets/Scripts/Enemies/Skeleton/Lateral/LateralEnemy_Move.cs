@@ -130,6 +130,12 @@ public class LateralEnemy_Move : EnemyBase
             isTouched_A_Wall = false;
             isTouched_D_Wall = true;
         }
+        else
+        {
+            bTouch = false;
+            isTouched_A_Wall = false;
+            isTouched_D_Wall = false;
+        }
 
 
         // ÉvÉåÉCÉÑÅ[Ç™à⁄ìÆÇµÇΩÇÁ
@@ -148,6 +154,17 @@ public class LateralEnemy_Move : EnemyBase
             {
                 SkeletonDir = true;
                 CurrentPos.x -= 1.0f;
+            }
+            else
+            {
+                if(SkeletonDir)
+                {
+                    CurrentPos.x -= 1.0f;
+                }
+                else
+                {
+                    CurrentPos.x += 1.0f;
+                }
             }
             onMove = true;
         }
