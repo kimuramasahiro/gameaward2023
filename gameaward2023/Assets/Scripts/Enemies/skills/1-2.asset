@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 1-2
   m_EditorClassIdentifier: 
   save: 1
-  map: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff0000000000000000000000000000000000000000ffffffffffffffffffffffffffffffffffffffffffffffff0000000001000000010000000b00000000000000ffffffffffffffffffffffffffffffffffffffffffffffff0000000001000000010000000100000000000000ffffffffffffffffffffffffffffffffffffffffffffffff0000000003000000010000000100000000000000ffffffffffffffffffffffffffffffffffffffffffffffff0000000001000000010000000100000000000000ffffffffffffffffffffffffffffffffffffffffffffffff0000000001000000e90300000100000000000000ffffffffffffffffffffffffffffffffffffffffffffffff0000000000000000000000000000000000000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+  map: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff000000000000000000000000000000000000000000000000ffffffffffffffffffffffffffffffffffffffff000000000100000015000000010000000100000000000000ffffffffffffffffffffffffffffffffffffffff0000000001000000010000000b0000000100000000000000ffffffffffffffffffffffffffffffffffffffff000000000300000001000000010000000100000000000000ffffffffffffffffffffffffffffffffffffffff000000000100000001000000010000000100000000000000ffffffffffffffffffffffffffffffffffffffff0000000001000000e9030000010000000100000000000000ffffffffffffffffffffffffffffffffffffffff000000000000000000000000000000000000000000000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
   imageMap:
   - 
   - 
@@ -46,7 +46,18 @@ MonoBehaviour:
   - Assets/Resources/MapTile/sea.png
   - Assets/Resources/MapTile/sea.png
   - Assets/Resources/MapTile/sea.png
+  - Assets/Resources/MapTile/sea.png
   - 
+  - 
+  - 
+  - 
+  - 
+  - Assets/Resources/MapTile/sea.png
+  - Assets/Resources/MapTile/land.png
+  - Assets/Resources/MapTile/_2.png
+  - Assets/Resources/MapTile/land.png
+  - Assets/Resources/MapTile/land.png
+  - Assets/Resources/MapTile/sea.png
   - 
   - 
   - 
@@ -56,19 +67,8 @@ MonoBehaviour:
   - Assets/Resources/MapTile/land.png
   - Assets/Resources/MapTile/land.png
   - Assets/Resources/MapTile/_1.png
-  - Assets/Resources/MapTile/sea.png
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - Assets/Resources/MapTile/sea.png
-  - Assets/Resources/MapTile/land.png
-  - Assets/Resources/MapTile/land.png
   - Assets/Resources/MapTile/land.png
   - Assets/Resources/MapTile/sea.png
-  - 
   - 
   - 
   - 
@@ -78,8 +78,8 @@ MonoBehaviour:
   - Assets/Resources/MapTile/goal.png
   - Assets/Resources/MapTile/land.png
   - Assets/Resources/MapTile/land.png
+  - Assets/Resources/MapTile/land.png
   - Assets/Resources/MapTile/sea.png
-  - 
   - 
   - 
   - 
@@ -89,8 +89,8 @@ MonoBehaviour:
   - Assets/Resources/MapTile/land.png
   - Assets/Resources/MapTile/land.png
   - Assets/Resources/MapTile/land.png
+  - Assets/Resources/MapTile/land.png
   - Assets/Resources/MapTile/sea.png
-  - 
   - 
   - 
   - 
@@ -100,19 +100,19 @@ MonoBehaviour:
   - Assets/Resources/MapTile/land.png
   - Assets/Resources/MapTile/hero.png
   - Assets/Resources/MapTile/land.png
+  - Assets/Resources/MapTile/land.png
   - Assets/Resources/MapTile/sea.png
   - 
   - 
   - 
   - 
   - 
-  - 
   - Assets/Resources/MapTile/sea.png
   - Assets/Resources/MapTile/sea.png
   - Assets/Resources/MapTile/sea.png
   - Assets/Resources/MapTile/sea.png
   - Assets/Resources/MapTile/sea.png
-  - 
+  - Assets/Resources/MapTile/sea.png
   - 
   - 
   - 
@@ -139,10 +139,17 @@ MonoBehaviour:
   mapSize: 11
   enemies:
   - tag: "\u30C6\u30B9\u30C8\u3060\u3088"
-    name: 0
+    name: 2
     health: 5
     moveSpeed: 4
     skillTurn: 9
-    pos: {x: 7, y: 3}
-    skill: 0
+    pos: {x: 7, y: 4}
+    skill: 1
+  - tag: "\u30C6\u30B9\u30C8\u3060\u3088"
+    name: 1
+    health: 5
+    moveSpeed: 4
+    skillTurn: 9
+    pos: {x: 6, y: 3}
+    skill: 1
   heroPos: {x: 6, y: 7}
