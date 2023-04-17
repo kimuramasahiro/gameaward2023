@@ -22,7 +22,7 @@ public enum SKILL
 [CreateAssetMenu(menuName = "EnemyData")]
 public class EnemyData : ScriptableObject
 {
-    [SerializeField,HideInInspector]
+    [SerializeField]
     private bool save = false;
     [SerializeField,HideInInspector]
     private int[] map;

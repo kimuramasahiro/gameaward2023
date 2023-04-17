@@ -9,7 +9,7 @@ public class MapEditor : Editor
 {
     EnemyData data;
     // マップサイズ
-    private int mapSize = 11;
+    private int mapSize = 25;
     private int[] map;
     private DefaultAsset directory;
     private string path;
@@ -533,8 +533,8 @@ public class CreateMap : EditorWindow
 
         float x = 0.0f;
         float y = windowHeight * 0.2f;
-        float w = windowWidth * 0.6f / div;
-        float h = windowHeight * 0.6f / div;
+        float w = windowWidth * 0.7f / div;
+        float h = windowHeight * 0.7f / div;
 
         Rect[,] resultRects = new Rect[sizeH, sizeW];
 
