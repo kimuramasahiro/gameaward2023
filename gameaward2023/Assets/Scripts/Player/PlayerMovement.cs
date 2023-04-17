@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System; // イベントの利用
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -48,6 +49,9 @@ public class PlayerMovement : MonoBehaviour
     private int[,] map;                         // マップ情報格納用
     private bool bMapLoading = false;           // マップがロードされたか
     // ------------------------------------------------------------------
+
+    // 歩数カウントを伝えるイベント
+    public event Action Walk;
 
     // Start is called before the first frame update
     void Start()
@@ -105,6 +109,7 @@ public class PlayerMovement : MonoBehaviour
                 {
                     PressKey_W = true;
                     CurrentPos.z += 1.0f;
+                    Walk?.Invoke();
                     StepCount++;
                 }
             }
@@ -114,6 +119,7 @@ public class PlayerMovement : MonoBehaviour
                 {
                     PressKey_S = true;
                     CurrentPos.z -= 1.0f;
+                    Walk?.Invoke();
                     StepCount++;
                 }
             }
@@ -124,6 +130,7 @@ public class PlayerMovement : MonoBehaviour
                     PressKey_A = true;
                     PlayerDir = true;
                     CurrentPos.x -= 1.0f;
+                    Walk?.Invoke();
                     StepCount++;
                 }
             }
@@ -135,6 +142,7 @@ public class PlayerMovement : MonoBehaviour
 
                     PlayerDir = false;
                     CurrentPos.x += 1.0f;
+                    Walk?.Invoke();
                     StepCount++;
                 }
             }

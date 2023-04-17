@@ -35,19 +35,19 @@ public class ElementGenerator : MonoBehaviour
     // 2Dマップ生成スクリプト用
     private DungeonGenerator dungeonGenerator;
     private int[,] map;
-
-    private int[,] Originalmap = { {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                                   {0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0},
-                                   {0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0},
-                                   {0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0},
-                                   {0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0},
-                                   {0, 1, 1, 1, 1, 3, 1, 1, 1, 1, 0},//上
-                                   {0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0},
-                                   {0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0},
-                                   {0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0},
-                                   {0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0},
-                                   {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
-                                                //↓
+    private int[,] Originalmap;
+    //private int[,] Originalmap = { {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    //                               {0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0},
+    //                               {0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0},
+    //                               {0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0},
+    //                               {0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0},
+    //                               {0, 1, 1, 1, 1, 3, 1, 1, 1, 1, 0},//上
+    //                               {0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0},
+    //                               {0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0},
+    //                               {0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0},
+    //                               {0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0},
+    //                               {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
+    //                                            //↓
 
     // パス読み込み用
     private GameObject objMap2D;                //Map2D
@@ -61,25 +61,53 @@ public class ElementGenerator : MonoBehaviour
     public List<GameObject> GrassList = new List<GameObject>();
     // ------------------------------------------------------------------
 
+    // --- 敵データ ---
+    [SerializeField]
+    private EnemyData enemyData;
+    [SerializeField]
+    private List<GameObject> enemies = new List<GameObject>();
+    
     void Start()
     {
+        
         PlayerObj = GameObject.Find("Player");  // プレイヤーObjを探す
 
         GenerateObj(Originalmap, PlayerObj);    // プレイヤーを生成
 
         //GenerateObj(Originalmap, EnemyObj);     // 敵を生成
 
-        GenerateEnemy(Originalmap, EnemyObj, new Vector2(5.0f, 7.0f));
+        //GenerateEnemy(Originalmap, EnemyObj, new Vector2(5.0f, 7.0f));
 
-        GenerateEnemy(Originalmap, LateralMove_Enemy, new Vector2(7.0f, 3.0f));
-        GenerateEnemy(Originalmap, LateralMove_Enemy, new Vector2(9.0f, 5.0f));
-        GenerateEnemy(Originalmap, LateralMove_Enemy, new Vector2(7.0f, 7.0f));
-        GenerateEnemy(Originalmap, VerticalMove_Enemy, new Vector2(3.0f, 7.0f));
+        //GenerateEnemy(Originalmap, LateralMove_Enemy, new Vector2(7.0f, 3.0f));
+        //GenerateEnemy(Originalmap, LateralMove_Enemy, new Vector2(9.0f, 5.0f));
+        //GenerateEnemy(Originalmap, LateralMove_Enemy, new Vector2(7.0f, 7.0f));
+        //GenerateEnemy(Originalmap, VerticalMove_Enemy, new Vector2(3.0f, 7.0f));
 
+        foreach(var data in enemyData.enemies)
+        {
+            GameObject enemy;
+            enemy = (GameObject)Resources.Load(data.GetAddress());
+            GameObject objInstant = Instantiate(enemy, new Vector3(data.GetPos().x, 2.0f, 10-data.GetPos().y), Quaternion.Euler(0f, 0f, 0f));
+            objInstant.GetComponent<EnemyBase>().SetEnemy(data);
+            enemies.Add(objInstant);
+        }
     }
 
     void Awake()
     {
+        int start = enemyData.GetMapSize() * (enemyData.GetMapSize() -1);
+        int minus = enemyData.GetMapSize();
+        Originalmap = new int[enemyData.GetMapSize(), enemyData.GetMapSize()];
+        for (int yy = 0; yy < enemyData.GetMapSize(); yy++)
+            for (int xx = 0; xx < enemyData.GetMapSize(); xx++)
+            {
+                if(enemyData.GetMap()[(start + yy) - minus * xx]==-1)
+                    Originalmap[yy, xx] =-1;
+                else
+                    Originalmap[yy, xx] = enemyData.GetMap()[(start + yy) - minus * xx] % 10;
+            }
+                
+        //Originalmap[yy, xx] = enemyData.GetMap()[enemyData.GetMapSize() * enemyData.GetMapSize() - 1 - (xx * enemyData.GetMapSize() + yy)];
         //リソース読み込み
         ReadResources();
 
@@ -96,10 +124,10 @@ public class ElementGenerator : MonoBehaviour
         // ゴール
         GoalObj = (GameObject)Resources.Load("Prefabs/Goal");
 
-        EnemyObj = (GameObject)Resources.Load("Prefabs/Enemies/Skeleton");
+        //EnemyObj = (GameObject)Resources.Load("Prefabs/Enemies/Skeleton");
 
-        VerticalMove_Enemy = (GameObject)Resources.Load("Prefabs/Enemies/Enemy_02");
-        LateralMove_Enemy = (GameObject)Resources.Load("Prefabs/Enemies/Enemy_03");
+        //VerticalMove_Enemy = (GameObject)Resources.Load("Prefabs/Enemies/Enemy_02");
+        //LateralMove_Enemy = (GameObject)Resources.Load("Prefabs/Enemies/Enemy_03");
 
         ObstacleObj = (GameObject)Resources.Load("Prefabs/obstacle");
 
@@ -193,9 +221,10 @@ public class ElementGenerator : MonoBehaviour
         while (true)
         {
             // 左下に生成
-            int Player_Pos_X = 5;
+            int Player_Pos_X = (int)enemyData.GetHeroPos().x;
             //int Player_Pos_X = Originalmap.GetLength(1) - 2;
-            int Player_Pos_Y = 1;
+            int Player_Pos_Y = 10-(int)enemyData.GetHeroPos().y;
+
             //int mapX = Random.Range(0, Originalmap.GetLength(0) - 1);
             //int mapY = Random.Range(0, Originalmap.GetLength(1) - 1);
 
