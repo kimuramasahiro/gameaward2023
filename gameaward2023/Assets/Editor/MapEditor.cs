@@ -202,32 +202,32 @@ public class CreateMap : EditorWindow
         
         if (e.type == EventType.MouseDown)
         {
-            Vector2 pos = Event.current.mousePosition;
-            int xx;
-            // x位置を先に計算して、計算回数を減らす
-            for (xx = 0; xx < mapSize; xx++)
+            if (e.button == 1)// 左
             {
-                Rect r = gridRect[0, xx];
-                if (r.x <= pos.x && pos.x <= r.x + r.width)
+                Vector2 pos = Event.current.mousePosition;
+                int xx;
+                // x位置を先に計算して、計算回数を減らす
+                for (xx = 0; xx < mapSize; xx++)
                 {
-                    break;
-                }
-            }
-            if(xx == mapSize)
-            {
-                return;
-            }
-            // 後はy位置だけ探す
-            for (int yy = 0; yy < mapSize; yy++)
-            {
-                if (gridRect[yy, xx].Contains(pos))
-                {
-                    // 消しゴムの時はデータを消す
-                    if(imagePath == null)
+                    Rect r = gridRect[0, xx];
+                    if (r.x <= pos.x && pos.x <= r.x + r.width)
                     {
+                        break;
+                    }
+                }
+                if (xx == mapSize)
+                {
+                    return;
+                }
+                // 後はy位置だけ探す
+                for (int yy = 0; yy < mapSize; yy++)
+                {
+                    if (gridRect[yy, xx].Contains(pos))
+                    {
+
                         if (map[yy * mapSize + xx] > 9)
                         {
-                            
+
                             map[yy * mapSize + xx] %= 10;
                             if (map[yy * mapSize + xx] == 0)
                             {
@@ -247,194 +247,247 @@ public class CreateMap : EditorWindow
                             imageMap[yy * mapSize + xx] = "";
                             map[yy * mapSize + xx] = -1;
                         }
+                        Repaint();
+                        break;
                     }
-                    else if (imagePath.IndexOf(IMAGE.none.ToString()) > -1)
+                }
+            }
+            else if (e.button == 0)//右
+            {
+                Vector2 pos = Event.current.mousePosition;
+                int xx;
+                // x位置を先に計算して、計算回数を減らす
+                for (xx = 0; xx < mapSize; xx++)
+                {
+                    Rect r = gridRect[0, xx];
+                    if (r.x <= pos.x && pos.x <= r.x + r.width)
                     {
-                        if(map[yy * mapSize + xx]>9)
+                        break;
+                    }
+                }
+                if (xx == mapSize)
+                {
+                    return;
+                }
+                // 後はy位置だけ探す
+                for (int yy = 0; yy < mapSize; yy++)
+                {
+                    if (gridRect[yy, xx].Contains(pos))
+                    {
+                        // 消しゴムの時はデータを消す
+                        if (imagePath == null)
                         {
-                            map[yy * mapSize + xx] %= 10;
-                            if (map[yy * mapSize + xx] == 0)
+                            if (map[yy * mapSize + xx] > 9)
                             {
-                                imageMap[yy * mapSize + xx] = seaImagePath;
+
+                                map[yy * mapSize + xx] %= 10;
+                                if (map[yy * mapSize + xx] == 0)
+                                {
+                                    imageMap[yy * mapSize + xx] = seaImagePath;
+                                }
+                                else if (map[yy * mapSize + xx] == 1)
+                                {
+                                    imageMap[yy * mapSize + xx] = landImagePath;
+                                }
+                                else if (map[yy * mapSize + xx] == 3)
+                                {
+                                    imageMap[yy * mapSize + xx] = goalImagePath;
+                                }
                             }
-                            else if (map[yy * mapSize + xx] == 1)
+                            else
                             {
-                                imageMap[yy * mapSize + xx] = landImagePath;
+                                imageMap[yy * mapSize + xx] = "";
+                                map[yy * mapSize + xx] = -1;
                             }
-                            else if (map[yy * mapSize + xx] == 3)
+                        }
+                        else if (imagePath.IndexOf(IMAGE.none.ToString()) > -1)
+                        {
+                            if (map[yy * mapSize + xx] > 9)
                             {
-                                imageMap[yy * mapSize + xx] = goalImagePath;
+                                map[yy * mapSize + xx] %= 10;
+                                if (map[yy * mapSize + xx] == 0)
+                                {
+                                    imageMap[yy * mapSize + xx] = seaImagePath;
+                                }
+                                else if (map[yy * mapSize + xx] == 1)
+                                {
+                                    imageMap[yy * mapSize + xx] = landImagePath;
+                                }
+                                else if (map[yy * mapSize + xx] == 3)
+                                {
+                                    imageMap[yy * mapSize + xx] = goalImagePath;
+                                }
                             }
+                            else
+                            {
+                                imageMap[yy * mapSize + xx] = "";
+                                map[yy * mapSize + xx] = -1;
+                            }
+
+                        }
+                        else if (imagePath.IndexOf(IMAGE.sea.ToString()) > -1)
+                        {
+                            imageMap[yy * mapSize + xx] = imagePath;
+                            map[yy * mapSize + xx] = 0;
+                        }
+                        else if (imagePath.IndexOf(IMAGE.land.ToString()) > -1)
+                        {
+                            imageMap[yy * mapSize + xx] = imagePath;
+                            map[yy * mapSize + xx] = 1;
+                        }
+                        else if (imagePath.IndexOf(IMAGE.goal.ToString()) > -1)
+                        {
+                            imageMap[yy * mapSize + xx] = imagePath;
+                            map[yy * mapSize + xx] = 3;
+                        }
+                        else if (imagePath.IndexOf(IMAGE._1.ToString()) > -1)
+                        {
+                            if (map[yy * mapSize + xx] != -1 && map[yy * mapSize + xx] < 10)
+                            {
+                                imageMap[yy * mapSize + xx] = imagePath;
+                                map[yy * mapSize + xx] += 10;
+                                data.enemies[0].SetPos(new Vector2(xx, yy));
+                            }
+
+                        }
+                        else if (imagePath.IndexOf(IMAGE._2.ToString()) > -1)
+                        {
+                            if (map[yy * mapSize + xx] != -1 && map[yy * mapSize + xx] < 10)
+                            {
+                                imageMap[yy * mapSize + xx] = imagePath;
+                                map[yy * mapSize + xx] += 20;
+                                data.enemies[1].SetPos(new Vector2(xx, yy));
+                            }
+
+                        }
+                        else if (imagePath.IndexOf(IMAGE._3.ToString()) > -1)
+                        {
+                            if (map[yy * mapSize + xx] != -1 && map[yy * mapSize + xx] < 10)
+                            {
+                                imageMap[yy * mapSize + xx] = imagePath;
+                                map[yy * mapSize + xx] += 30;
+                                data.enemies[2].SetPos(new Vector2(xx, yy));
+                            }
+
+                        }
+                        else if (imagePath.IndexOf(IMAGE._4.ToString()) > -1)
+                        {
+                            if (map[yy * mapSize + xx] != -1 && map[yy * mapSize + xx] < 10)
+                            {
+                                imageMap[yy * mapSize + xx] = imagePath;
+                                map[yy * mapSize + xx] += 40;
+                                data.enemies[3].SetPos(new Vector2(xx, yy));
+                            }
+
+                        }
+                        else if (imagePath.IndexOf(IMAGE._5.ToString()) > -1)
+                        {
+                            if (map[yy * mapSize + xx] != -1 && map[yy * mapSize + xx] < 10)
+                            {
+                                imageMap[yy * mapSize + xx] = imagePath;
+                                map[yy * mapSize + xx] += 50;
+                                data.enemies[4].SetPos(new Vector2(xx, yy));
+                            }
+
+                        }
+                        else if (imagePath.IndexOf(IMAGE._6.ToString()) > -1)
+                        {
+                            if (map[yy * mapSize + xx] != -1 && map[yy * mapSize + xx] < 10)
+                            {
+                                imageMap[yy * mapSize + xx] = imagePath;
+                                map[yy * mapSize + xx] += 60;
+                                data.enemies[5].SetPos(new Vector2(xx, yy));
+                            }
+
+                        }
+                        else if (imagePath.IndexOf(IMAGE._7.ToString()) > -1)
+                        {
+                            if (map[yy * mapSize + xx] != -1 && map[yy * mapSize + xx] < 10)
+                            {
+                                imageMap[yy * mapSize + xx] = imagePath;
+                                map[yy * mapSize + xx] += 70;
+                                data.enemies[6].SetPos(new Vector2(xx, yy));
+                            }
+
+                        }
+                        else if (imagePath.IndexOf(IMAGE._8.ToString()) > -1)
+                        {
+                            if (map[yy * mapSize + xx] != -1 && map[yy * mapSize + xx] < 10)
+                            {
+                                imageMap[yy * mapSize + xx] = imagePath;
+                                map[yy * mapSize + xx] += 80;
+                                data.enemies[7].SetPos(new Vector2(xx, yy));
+                            }
+
+                        }
+                        else if (imagePath.IndexOf(IMAGE._9.ToString()) > -1)
+                        {
+                            if (map[yy * mapSize + xx] != -1 && map[yy * mapSize + xx] < 10)
+                            {
+                                imageMap[yy * mapSize + xx] = imagePath;
+                                map[yy * mapSize + xx] += 90;
+                                data.enemies[8].SetPos(new Vector2(xx, yy));
+                            }
+
+                        }
+                        else if (imagePath.IndexOf(IMAGE._10.ToString()) > -1)
+                        {
+                            if (map[yy * mapSize + xx] != -1 && map[yy * mapSize + xx] < 10)
+                            {
+                                imageMap[yy * mapSize + xx] = imagePath;
+                                map[yy * mapSize + xx] += 100;
+                                data.enemies[9].SetPos(new Vector2(xx, yy));
+                            }
+
+                        }
+                        else if (imagePath.IndexOf(IMAGE._11.ToString()) > -1)
+                        {
+                            if (map[yy * mapSize + xx] != -1 && map[yy * mapSize + xx] < 10)
+                            {
+                                imageMap[yy * mapSize + xx] = imagePath;
+                                map[yy * mapSize + xx] += 110;
+                                data.enemies[10].SetPos(new Vector2(xx, yy));
+                            }
+
+                        }
+                        else if (imagePath.IndexOf(IMAGE._12.ToString()) > -1)
+                        {
+                            if (map[yy * mapSize + xx] != -1 && map[yy * mapSize + xx] < 10)
+                            {
+                                imageMap[yy * mapSize + xx] = imagePath;
+                                map[yy * mapSize + xx] += 120;
+                                data.enemies[11].SetPos(new Vector2(xx, yy));
+                            }
+
+                        }
+                        else if (imagePath.IndexOf(IMAGE._13.ToString()) > -1)
+                        {
+                            if (map[yy * mapSize + xx] != -1 && map[yy * mapSize + xx] < 10)
+                            {
+                                imageMap[yy * mapSize + xx] = imagePath;
+                                map[yy * mapSize + xx] += 130;
+                                data.enemies[12].SetPos(new Vector2(xx, yy));
+                            }
+
+                        }
+                        else if (imagePath.IndexOf(IMAGE.hero.ToString()) > -1)
+                        {
+                            if (map[yy * mapSize + xx] != -1 && map[yy * mapSize + xx] < 10)
+                            {
+                                imageMap[yy * mapSize + xx] = imagePath;
+                                map[yy * mapSize + xx] += 1000;
+                                data.SetHeroPos(new Vector2(xx, yy));
+                            }
+
                         }
                         else
                         {
-                            imageMap[yy * mapSize + xx] = "";
-                            map[yy * mapSize + xx] = -1;
+                            imageMap[yy * xx] = "";
+                            map[yy * xx] = -1;
                         }
-                        
+                        Repaint();
+                        break;
                     }
-                    else if (imagePath.IndexOf(IMAGE.sea.ToString()) > -1)
-                    {
-                        imageMap[yy * mapSize + xx] = imagePath;
-                        map[yy * mapSize + xx] = 0;
-                    }
-                    else if (imagePath.IndexOf(IMAGE.land.ToString()) > -1)
-                    {
-                        imageMap[yy * mapSize + xx] = imagePath;
-                        map[yy * mapSize + xx] = 1;
-                    }
-                    else if (imagePath.IndexOf(IMAGE.goal.ToString()) > -1)
-                    {
-                        imageMap[yy * mapSize + xx] = imagePath;
-                        map[yy * mapSize + xx] = 3;
-                    }
-                    else if (imagePath.IndexOf(IMAGE._1.ToString()) > -1)
-                    {
-                        if (map[yy * mapSize + xx] != -1 && map[yy * mapSize + xx] < 10)
-                        {
-                            imageMap[yy * mapSize + xx] = imagePath;
-                            map[yy * mapSize + xx] += 10;
-                            data.enemies[0].SetPos(new Vector2(xx, yy));
-                        }
-
-                    }
-                    else if (imagePath.IndexOf(IMAGE._2.ToString()) > -1)
-                    {
-                        if (map[yy * mapSize + xx] != -1 && map[yy * mapSize + xx] < 10)
-                        {
-                            imageMap[yy * mapSize + xx] = imagePath;
-                            map[yy * mapSize + xx] += 20;
-                            data.enemies[1].SetPos(new Vector2(xx, yy));
-                        }
-
-                    }
-                    else if (imagePath.IndexOf(IMAGE._3.ToString()) > -1)
-                    {
-                        if (map[yy * mapSize + xx] != -1 && map[yy * mapSize + xx] < 10)
-                        {
-                            imageMap[yy * mapSize + xx] = imagePath;
-                            map[yy * mapSize + xx] += 30;
-                            data.enemies[2].SetPos(new Vector2(xx, yy));
-                        }
-
-                    }
-                    else if (imagePath.IndexOf(IMAGE._4.ToString()) > -1)
-                    {
-                        if (map[yy * mapSize + xx] != -1 && map[yy * mapSize + xx] < 10)
-                        {
-                            imageMap[yy * mapSize + xx] = imagePath;
-                            map[yy * mapSize + xx] += 40;
-                            data.enemies[3].SetPos(new Vector2(xx, yy));
-                        }
-
-                    }
-                    else if (imagePath.IndexOf(IMAGE._5.ToString()) > -1)
-                    {
-                        if (map[yy * mapSize + xx] != -1 && map[yy * mapSize + xx] < 10)
-                        {
-                            imageMap[yy * mapSize + xx] = imagePath;
-                            map[yy * mapSize + xx] += 50;
-                            data.enemies[4].SetPos(new Vector2(xx, yy));
-                        }
-
-                    }
-                    else if (imagePath.IndexOf(IMAGE._6.ToString()) > -1)
-                    {
-                        if (map[yy * mapSize + xx] != -1 && map[yy * mapSize + xx] < 10)
-                        {
-                            imageMap[yy * mapSize + xx] = imagePath;
-                            map[yy * mapSize + xx] += 60;
-                            data.enemies[5].SetPos(new Vector2(xx, yy));
-                        }
-
-                    }
-                    else if (imagePath.IndexOf(IMAGE._7.ToString()) > -1)
-                    {
-                        if (map[yy * mapSize + xx] != -1 && map[yy * mapSize + xx] < 10)
-                        {
-                            imageMap[yy * mapSize + xx] = imagePath;
-                            map[yy * mapSize + xx] += 70;
-                            data.enemies[6].SetPos(new Vector2(xx, yy));
-                        }
-
-                    }
-                    else if (imagePath.IndexOf(IMAGE._8.ToString()) > -1)
-                    {
-                        if (map[yy * mapSize + xx] != -1 && map[yy * mapSize + xx] < 10)
-                        {
-                            imageMap[yy * mapSize + xx] = imagePath;
-                            map[yy * mapSize + xx] += 80;
-                            data.enemies[7].SetPos(new Vector2(xx, yy));
-                        }
-
-                    }
-                    else if (imagePath.IndexOf(IMAGE._9.ToString()) > -1)
-                    {
-                        if (map[yy * mapSize + xx] != -1 && map[yy * mapSize + xx] < 10)
-                        {
-                            imageMap[yy * mapSize + xx] = imagePath;
-                            map[yy * mapSize + xx] += 90;
-                            data.enemies[8].SetPos(new Vector2(xx, yy));
-                        }
-
-                    }
-                    else if (imagePath.IndexOf(IMAGE._10.ToString()) > -1)
-                    {
-                        if (map[yy * mapSize + xx] != -1 && map[yy * mapSize + xx] < 10)
-                        {
-                            imageMap[yy * mapSize + xx] = imagePath;
-                            map[yy * mapSize + xx] += 100;
-                            data.enemies[9].SetPos(new Vector2(xx, yy));
-                        }
-
-                    }
-                    else if (imagePath.IndexOf(IMAGE._11.ToString()) > -1)
-                    {
-                        if (map[yy * mapSize + xx] != -1 && map[yy * mapSize + xx] < 10)
-                        {
-                            imageMap[yy * mapSize + xx] = imagePath;
-                            map[yy * mapSize + xx] += 110;
-                            data.enemies[10].SetPos(new Vector2(xx, yy));
-                        }
-
-                    }
-                    else if (imagePath.IndexOf(IMAGE._12.ToString()) > -1)
-                    {
-                        if (map[yy * mapSize + xx] != -1 && map[yy * mapSize + xx] < 10)
-                        {
-                            imageMap[yy * mapSize + xx] = imagePath;
-                            map[yy * mapSize + xx] += 120;
-                            data.enemies[11].SetPos(new Vector2(xx, yy));
-                        }
-
-                    }
-                    else if (imagePath.IndexOf(IMAGE._13.ToString()) > -1)
-                    {
-                        if (map[yy * mapSize + xx] != -1 && map[yy * mapSize + xx] < 10)
-                        {
-                            imageMap[yy * mapSize + xx] = imagePath;
-                            map[yy * mapSize + xx] += 130;
-                            data.enemies[12].SetPos(new Vector2(xx, yy));
-                        }
-
-                    }
-                    else if (imagePath.IndexOf(IMAGE.hero.ToString()) > -1)
-                    {
-                        if (map[yy * mapSize + xx] != -1 && map[yy * mapSize + xx] < 10)
-                        {
-                            imageMap[yy * mapSize + xx] = imagePath;
-                            map[yy * mapSize + xx] += 1000;
-                            data.SetHeroPos(new Vector2(xx, yy));
-                        }
-
-                    }
-                    else
-                    {
-                        imageMap[yy* xx] = "";
-                        map[yy* xx] = -1;
-                    }
-                    Repaint();
-                    break;
                 }
             }
         }
