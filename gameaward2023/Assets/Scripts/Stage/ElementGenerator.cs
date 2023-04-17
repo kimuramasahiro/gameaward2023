@@ -35,7 +35,7 @@ public class ElementGenerator : MonoBehaviour
     // 2Dマップ生成スクリプト用
     private DungeonGenerator dungeonGenerator;
     private int[,] map;
-    private int[,] Originalmap;
+    public int[,] Originalmap;
     //private int[,] Originalmap = { {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     //                               {0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0},
     //                               {0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0},

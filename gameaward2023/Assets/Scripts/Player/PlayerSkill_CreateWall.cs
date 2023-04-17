@@ -15,9 +15,11 @@ public class PlayerSkill_CreateWall : MonoBehaviour
     private ElementGenerator elementGenerator;  // 
     private int[,] map;                         // マップ情報格納用
     private bool bMapLoading = false;           // マップがロードされたか
-    // -------------------------------------------------------------------
+                                                // -------------------------------------------------------------------
 
     // スキル関連 --------------------------------------------------------
+    private GameObject ObstacleObj;                             // 障害物Obj
+
     private GameObject TargetObj = null;        // タップ対象のオブジェクト
     [SerializeField]
     private bool bSkill = false;
@@ -29,6 +31,14 @@ public class PlayerSkill_CreateWall : MonoBehaviour
         PlayerMovement = PlayerObj.GetComponent<PlayerMovement>();
 
         StageMake = GameObject.Find("StageMake");
+
+        //リソース読み込み
+        ReadResources();
+    }
+
+    void ReadResources()
+    {
+        ObstacleObj = (GameObject)Resources.Load("Prefabs/obstacle");
     }
 
     void Update()
@@ -96,7 +106,15 @@ public class PlayerSkill_CreateWall : MonoBehaviour
     private void ChangeBlock(MapBlock targetBlock)
     {
         // 選択した地面を障害物に変更
-        map[(int)targetBlock.transform.position.x, (int)targetBlock.transform.position.z] = 2;
+        elementGenerator.Originalmap[(int)targetBlock.transform.position.x, (int)targetBlock.transform.position.z] = 2;
+
+        // 地面を削除
+        TargetObj.SetActive(false);
+
+        // 障害物を生成
+        GameObject obj;
+        obj = Instantiate(ObstacleObj);
+        obj.transform.position = new Vector3(targetBlock.transform.position.x, 2.0f, targetBlock.transform.position.z);
     }
 
     public int[,] GetUpdateMap()
