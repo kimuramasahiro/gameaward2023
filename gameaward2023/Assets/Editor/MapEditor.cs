@@ -17,6 +17,17 @@ public class MapEditor : Editor
     // サブウィンドウ
     private CreateMap subWindow;
     SerializedProperty list;
+    private void OnEnable()
+    {
+
+        EditorApplication.playModeStateChanged += CloseWhenPlay;
+    }
+    private void CloseWhenPlay(PlayModeStateChange state)
+    {
+        if (state == PlayModeStateChange.ExitingEditMode)
+            subWindow.Close2();
+            
+    }
     public override void OnInspectorGUI()
     {
         serializedObject.Update();
