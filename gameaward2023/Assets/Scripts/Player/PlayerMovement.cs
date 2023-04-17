@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System; // イベントの利用
+using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -14,6 +15,9 @@ public class PlayerMovement : MonoBehaviour
     public float MoveSpeed = 1.0f;              // プレイヤーの動く速さ
     private bool PlayerDir = false;             // プレイヤーの向き(false:右 true:左)
     public bool IsMoving = false;               // プレイヤーが動いているか
+
+    private Controller _gameInputs;             //
+    private Vector2 _moveInputValue;            //プレイヤームーブcontroller兼キーボード
 
     // プレイヤーが全方向に進めるかどうか
     private bool IsAdvance_KeyW = false;        // Z+方向
@@ -58,6 +62,24 @@ public class PlayerMovement : MonoBehaviour
     {
         PlayerObj = GameObject.Find("Player");
         StageMake = GameObject.Find("StageMake");
+
+        // Input Actionインスタンス生成
+        _gameInputs = new Controller();
+
+        // Actionイベント登録
+        _gameInputs.Player.Move.started += OnMove;
+        _gameInputs.Player.Move.performed += OnMove;
+        _gameInputs.Player.Move.canceled += OnMove;
+
+        // Input Actionを機能させるためには、
+        // 有効化する必要がある
+        _gameInputs.Enable();
+    }
+
+    private void OnMove(InputAction.CallbackContext context)
+    {
+        // Moveアクションの入力取得
+        _moveInputValue = context.ReadValue<Vector2>();
     }
 
     // Update is called once per frame
