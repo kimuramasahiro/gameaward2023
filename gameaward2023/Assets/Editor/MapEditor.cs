@@ -205,7 +205,7 @@ public class CreateMap : EditorWindow
         // クリックされた位置を探して、その場所に画像データを入れる
         Event e = Event.current;
         
-        if (e.type == EventType.MouseDown)
+        if (e.type == EventType.MouseDown || e.type == EventType.MouseDrag)
         {
             if (e.button == 1)// 右
             {
