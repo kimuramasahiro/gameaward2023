@@ -16,7 +16,8 @@ public class PlayerMovement : MonoBehaviour
     private bool PlayerDir = false;             // プレイヤーの向き(false:右 true:左)
     public bool IsMoving = false;               // プレイヤーが動いているか
 
-    private Controller _gameIputs;
+    private Controller _gameInputs;             //
+    private Vector2 _moveInputValue;            //プレイヤームーブcontroller兼キーボード
 
     // プレイヤーが全方向に進めるかどうか
     private bool IsAdvance_KeyW = false;        // Z+方向
