@@ -95,6 +95,7 @@ public class ElementGenerator : MonoBehaviour
 
     void Awake()
     {
+            Debug.Assert(enemyData != null, "StageMakeにマップ情報をセットしてください。");
         int start = enemyData.GetMapSize() * (enemyData.GetMapSize() -1);
         int minus = enemyData.GetMapSize();
         Originalmap = new int[enemyData.GetMapSize(), enemyData.GetMapSize()];
@@ -218,8 +219,8 @@ public class ElementGenerator : MonoBehaviour
     //オブジェクト生成 (プレイヤー以外)
     private void GenerateObj(int[,] Originalmap, GameObject obj)
     {
-        while (true)
-        {
+        //while (true)
+        //{
             // 左下に生成
             int Player_Pos_X = (int)enemyData.GetHeroPos().x;
             //int Player_Pos_X = Originalmap.GetLength(1) - 2;
@@ -230,8 +231,8 @@ public class ElementGenerator : MonoBehaviour
 
             // 右上に生成
             //int Enemy_Pos_X = Originalmap.GetLength(0) - 2;
-            int Enemy_Pos_X = 3;
-            int Enemy_Pos_Y = 6;
+            //int Enemy_Pos_X = 3;
+            //int Enemy_Pos_Y = 6;
             //int Enemy_Pos_Y = Originalmap.GetLength(1) - 2;
 
             if (Originalmap[Player_Pos_X, Player_Pos_Y] == 1)
@@ -244,19 +245,21 @@ public class ElementGenerator : MonoBehaviour
                     PlayerPos.x = Player_Pos_X;
                     PlayerPos.y = Player_Pos_Y;
                 }
+                
                 // エネミー
-                else if (obj.CompareTag("Enemy") == true)
-                {
-                    GameObject objInstant = Instantiate(obj, new Vector3(Enemy_Pos_X, 2.0f, Enemy_Pos_Y), Quaternion.Euler(0f, 0f, 0f));
-                }
+                //else if (obj.CompareTag("Enemy") == true)
+                //{
+                //    GameObject objInstant = Instantiate(obj, new Vector3(Enemy_Pos_X, 2.0f, Enemy_Pos_Y), Quaternion.Euler(0f, 0f, 0f));
+                //}
                 //その他は生成と移動
                 //else
                 //{
                 //    GameObject objInstant = Instantiate(obj, new Vector3(mapX, 2.0f, mapY), Quaternion.Euler(0f, 0f, 0f));
                 //}
-                break;
+                //break;
             }
-        }
+            Debug.Assert(Originalmap[Player_Pos_X, Player_Pos_Y] == 1, "マップエディタ状のPlayerの位置を確認してください");
+        //}
     }
 
     //オブジェクト生成

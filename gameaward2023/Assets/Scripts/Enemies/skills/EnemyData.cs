@@ -30,7 +30,7 @@ public class EnemyData : ScriptableObject
     private string[] imageMap;
     [SerializeField,HideInInspector]
     private int mapSize;
-    public List<Enemy> enemies = new List<Enemy>();
+    public List<Enemy> enemies/* = new List<Enemy>()*/;
     [SerializeField, HideInInspector]
     private Vector2 heroPos;
     public int[] GetMap()
@@ -86,19 +86,19 @@ public class Enemy
     private string prefabAddress = "Prefabs/Enemies/";
 
     [SerializeField]
-    private string tag = "ŽG‹›“G‚P";
+    private string tag = "ŽG‹›“G";
 
     [SerializeField]
     private NAME name;
 
     [SerializeField]
-    private int health;
+    private int health = 50;
 
     [SerializeField]
     private float moveSpeed = 3.0f;
 
     [SerializeField]
-    private int skillTurn;
+    private int skillTurn = 3;
 
     [SerializeField,HideInInspector]
     private Vector2 pos;
