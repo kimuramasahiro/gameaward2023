@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class PlayerSkill_CreateWall : MonoBehaviour
 {
@@ -105,6 +106,12 @@ public class PlayerSkill_CreateWall : MonoBehaviour
 
     private void ChangeBlock(MapBlock targetBlock)
     {
+        if (targetBlock = null)
+        {
+            Debug.Log("指定の場所には使えません");
+            return;
+        }
+
         // 選択した地面を障害物に変更
         elementGenerator.Originalmap[(int)targetBlock.transform.position.x, (int)targetBlock.transform.position.z] = 2;
 
