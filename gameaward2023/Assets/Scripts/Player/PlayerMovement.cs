@@ -127,7 +127,7 @@ public class PlayerMovement : MonoBehaviour
 
             if (!IsAdvance_KeyW)
             {
-                if (Input.GetKeyDown(KeyCode.W))
+                if (Input.GetKeyDown(KeyCode.W) || Gamepad.current.dpad.up.wasPressedThisFrame)
                 {
                     PressKey_W = true;
                     CurrentPos.z += 1.0f;
@@ -137,7 +137,7 @@ public class PlayerMovement : MonoBehaviour
             }
             if (!IsAdvance_KeyS)
             {
-                if (Input.GetKeyDown(KeyCode.S))
+                if (Input.GetKeyDown(KeyCode.S)|| Gamepad.current.dpad.left.wasPressedThisFrame)
                 {
                     PressKey_S = true;
                     CurrentPos.z -= 1.0f;
@@ -147,7 +147,7 @@ public class PlayerMovement : MonoBehaviour
             }
             if (!IsAdvance_KeyA)
             {
-                if (Input.GetKeyDown(KeyCode.A))
+                if (Input.GetKeyDown(KeyCode.A)|| Gamepad.current.dpad.right.wasPressedThisFrame)
                 {
                     PressKey_A = true;
                     PlayerDir = true;
@@ -158,7 +158,7 @@ public class PlayerMovement : MonoBehaviour
             }
             if (!IsAdvance_KeyD)
             {
-                if (Input.GetKeyDown(KeyCode.D))
+                if (Input.GetKeyDown(KeyCode.D)|| Gamepad.current.dpad.down.wasPressedThisFrame)
                 {
                     PressKey_D = true;
 
