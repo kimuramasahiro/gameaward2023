@@ -66,7 +66,10 @@ public class ElementGenerator : MonoBehaviour
     private EnemyData enemyData;
     [SerializeField]
     private List<GameObject> enemies = new List<GameObject>();
-    
+    public EnemyData GetEnemyData()
+    {
+        return enemyData;
+    }
     void Start()
     {
         

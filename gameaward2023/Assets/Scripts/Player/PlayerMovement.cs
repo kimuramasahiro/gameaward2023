@@ -56,13 +56,16 @@ public class PlayerMovement : MonoBehaviour
 
     // 歩数カウントを伝えるイベント
     public event Action Walk;
-
+    public event Action Auto;
+    private List<int> log;
+    private int logIdx = 0;
+    private bool replay = false;
     // Start is called before the first frame update
     void Start()
     {
         PlayerObj = GameObject.Find("Player");
         StageMake = GameObject.Find("StageMake");
-
+        log = StageMake.GetComponent<ElementGenerator>().GetEnemyData().GetReplay();
         // Input Actionインスタンス生成
         _gameInputs = new Controller();
 
@@ -74,6 +77,7 @@ public class PlayerMovement : MonoBehaviour
         // Input Actionを機能させるためには、
         // 有効化する必要がある
         _gameInputs.Enable();
+
     }
 
     private void OnMove(InputAction.CallbackContext context)
@@ -85,6 +89,13 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(Input.GetKeyDown(KeyCode.R) && StepCount == 0)
+        {
+            if (log.Count > 0)
+                replay = true;
+            else
+                Debug.Log("一度以上クリアしてください");
+        }
         // 一度だけ実行
         if (!bMapLoading)
         {
@@ -127,8 +138,14 @@ public class PlayerMovement : MonoBehaviour
 
             if (!IsAdvance_KeyW)
             {
+<<<<<<< HEAD
                 if (Input.GetKeyDown(KeyCode.W) || Gamepad.current.dpad.up.wasPressedThisFrame)
+=======
+                if (Input.GetKeyDown(KeyCode.W) || (replay&&log[logIdx] == 0))
+>>>>>>> origin/suezaki
                 {
+                    if (log.Count > logIdx + 1)
+                        logIdx++;
                     PressKey_W = true;
                     CurrentPos.z += 1.0f;
                     Walk?.Invoke();
@@ -137,8 +154,14 @@ public class PlayerMovement : MonoBehaviour
             }
             if (!IsAdvance_KeyS)
             {
+<<<<<<< HEAD
                 if (Input.GetKeyDown(KeyCode.S)|| Gamepad.current.dpad.left.wasPressedThisFrame)
+=======
+                if (Input.GetKeyDown(KeyCode.S)|| (replay&&log[logIdx] == 2))
+>>>>>>> origin/suezaki
                 {
+                    if (log.Count > logIdx + 1)
+                        logIdx++;
                     PressKey_S = true;
                     CurrentPos.z -= 1.0f;
                     Walk?.Invoke();
@@ -147,8 +170,14 @@ public class PlayerMovement : MonoBehaviour
             }
             if (!IsAdvance_KeyA)
             {
+<<<<<<< HEAD
                 if (Input.GetKeyDown(KeyCode.A)|| Gamepad.current.dpad.right.wasPressedThisFrame)
+=======
+                if (Input.GetKeyDown(KeyCode.A) || (replay&&log[logIdx] == 1))
+>>>>>>> origin/suezaki
                 {
+                    if (log.Count > logIdx+1)
+                        logIdx++;
                     PressKey_A = true;
                     PlayerDir = true;
                     CurrentPos.x -= 1.0f;
@@ -158,8 +187,14 @@ public class PlayerMovement : MonoBehaviour
             }
             if (!IsAdvance_KeyD)
             {
+<<<<<<< HEAD
                 if (Input.GetKeyDown(KeyCode.D)|| Gamepad.current.dpad.down.wasPressedThisFrame)
+=======
+                if (Input.GetKeyDown(KeyCode.D) || (replay&&log[logIdx] == 3))
+>>>>>>> origin/suezaki
                 {
+                    if (log.Count > logIdx+1)
+                        logIdx++;
                     PressKey_D = true;
 
                     PlayerDir = false;
@@ -185,6 +220,8 @@ public class PlayerMovement : MonoBehaviour
         // ゴールしているか
         if(map[(int)CurrentPos.x,(int)CurrentPos.z] == 3 && !IsTouched)
         {
+            replay = false;
+            StageMake.GetComponent<ElementGenerator>().GetEnemyData().SetReplay(GetComponent<AutoRun>().GetDir());
             GameClear_Text.SetActive(true);
         }
 
@@ -196,6 +233,7 @@ public class PlayerMovement : MonoBehaviour
         // 移動処理
         PlayerObj.transform.position = Vector3.MoveTowards(PlayerObj.transform.position, CurrentPos, MoveSpeed * Time.deltaTime);
     }
+
 
     private void IsAdvancePlayer()
     {

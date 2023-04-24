@@ -22,6 +22,8 @@ public enum SKILL
 [CreateAssetMenu(menuName = "EnemyData")]
 public class EnemyData : ScriptableObject
 {
+    [SerializeField]
+    private List<int> replay;
     [SerializeField,HideInInspector]
     private bool save = false;
     [SerializeField,HideInInspector]
@@ -76,6 +78,14 @@ public class EnemyData : ScriptableObject
     public void SetHeroPos(Vector2 data)
     {
         heroPos = data;
+    }
+    public void SetReplay(List<int> data)
+    {
+        replay = data;
+    }
+    public List<int> GetReplay()
+    {
+        return replay;
     }
 }
 
