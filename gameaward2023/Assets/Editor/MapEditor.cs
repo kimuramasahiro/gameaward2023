@@ -17,6 +17,7 @@ public class MapEditor : Editor
     // サブウィンドウ
     private CreateMap subWindow;
     SerializedProperty list;
+    SerializedProperty log;
     private void OnEnable()
     {
 
@@ -32,6 +33,9 @@ public class MapEditor : Editor
     {
         serializedObject.Update();
         list = serializedObject.FindProperty("enemies");
+        log = serializedObject.FindProperty("replay");
+        DisplayArray(log, "ログ");
+        GUILayout.Space(10);
         DisplayArray(list,"敵");
         GUILayout.Space(10);
         EditorGUILayout.BeginVertical();
