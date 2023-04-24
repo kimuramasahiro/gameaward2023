@@ -108,6 +108,10 @@ public class EnemyBase : MonoBehaviour
                     WalkUpSkill();
                     break;
                 }
+            case SKILL none:
+                {
+                    break;
+                }
             default:
                 {
                     break;

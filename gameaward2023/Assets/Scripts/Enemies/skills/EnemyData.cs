@@ -6,8 +6,8 @@ using UnityEngine;
 public enum NAME
 {
     Skeleton,
-    Enemy_02,
-    Enemy_03,
+    Tate,
+    Yoko,
 }
 
 // --- ÉXÉLÉãñº ---
@@ -17,6 +17,7 @@ public enum SKILL
     down,
     right,
     left,
+    none,
 }
 
 [CreateAssetMenu(menuName = "EnemyData")]
@@ -118,7 +119,12 @@ public class Enemy
 
     public string GetAddress()
     {
-        return prefabAddress + name.ToString();
+        if (name.ToString() == "Tate")
+            return prefabAddress + "Enemy_02";
+        else if (name.ToString() == "Yoko")
+            return prefabAddress + "Enemy_03";
+        else 
+            return prefabAddress + name.ToString();
     }
     public NAME GetName()
     {
