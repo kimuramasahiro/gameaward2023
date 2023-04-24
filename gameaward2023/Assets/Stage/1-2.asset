@@ -1,0 +1,764 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85e78dee701ff4b41b640e883d81733c, type: 3}
+  m_Name: 1-2
+  m_EditorClassIdentifier: 
+  save: 1
+  map: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff000000000000000000000000000000000000000000000000000000000000000000000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff000000000000000000000000000000000000000051000000000000000000000000000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff0000000000000000000000000000000000000000000000001f00000000000000010000000000000001000000000000000000000000000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff0000000001000000010000000100000000000000010000000100000000000000010000000100000001000000000000000000000000000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff00000000e90300005b000000150000000100000001000000010000000100000033000000010000000b000000010000006500000000000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff0000000001000000010000000100000000000000000000000100000001000000010000000000000001000000a10000000100000000000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff00000000000000000000000000000000000000000000000001000000000000003d0000000000000001000000000000000100000000000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff000000002900000000000000000000000000000047000000000000000100000000000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff000000000000000000000000000000000000000000000000000000000000000000000000000000000100000000000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff00000000010000006f00000001000000970000008d000000010000000100000000000000010000000100000000000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff00000000030000000100000079000000010000000100000001000000ab00000000000000010000000100000000000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff000000000100000001000000010000000100000001000000830000000100000001000000010000000100000000000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+  imageMap:
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - Assets/Resources/MapTile/sea.png
+  - Assets/Resources/MapTile/sea.png
+  - Assets/Resources/MapTile/sea.png
+  - Assets/Resources/MapTile/sea.png
+  - Assets/Resources/MapTile/sea.png
+  - Assets/Resources/MapTile/sea.png
+  - Assets/Resources/MapTile/sea.png
+  - Assets/Resources/MapTile/sea.png
+  - Assets/Resources/MapTile/sea.png
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - Assets/Resources/MapTile/sea.png
+  - Assets/Resources/MapTile/sea.png
+  - Assets/Resources/MapTile/sea.png
+  - Assets/Resources/MapTile/sea.png
+  - Assets/Resources/MapTile/sea.png
+  - Assets/Resources/MapTile/_8.png
+  - Assets/Resources/MapTile/sea.png
+  - Assets/Resources/MapTile/sea.png
+  - Assets/Resources/MapTile/sea.png
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - Assets/Resources/MapTile/sea.png
+  - Assets/Resources/MapTile/sea.png
+  - Assets/Resources/MapTile/sea.png
+  - Assets/Resources/MapTile/sea.png
+  - Assets/Resources/MapTile/sea.png
+  - Assets/Resources/MapTile/sea.png
+  - Assets/Resources/MapTile/_3.png
+  - Assets/Resources/MapTile/sea.png
+  - Assets/Resources/MapTile/land.png
+  - Assets/Resources/MapTile/sea.png
+  - Assets/Resources/MapTile/land.png
+  - Assets/Resources/MapTile/sea.png
+  - Assets/Resources/MapTile/sea.png
+  - Assets/Resources/MapTile/sea.png
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - Assets/Resources/MapTile/sea.png
+  - Assets/Resources/MapTile/land.png
+  - Assets/Resources/MapTile/land.png
+  - Assets/Resources/MapTile/land.png
+  - Assets/Resources/MapTile/sea.png
+  - Assets/Resources/MapTile/land.png
+  - Assets/Resources/MapTile/land.png
+  - Assets/Resources/MapTile/sea.png
+  - Assets/Resources/MapTile/land.png
+  - Assets/Resources/MapTile/land.png
+  - Assets/Resources/MapTile/land.png
+  - Assets/Resources/MapTile/sea.png
+  - Assets/Resources/MapTile/sea.png
+  - Assets/Resources/MapTile/sea.png
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - Assets/Resources/MapTile/sea.png
+  - Assets/Resources/MapTile/hero.png
+  - Assets/Resources/MapTile/_9.png
+  - Assets/Resources/MapTile/_2.png
+  - Assets/Resources/MapTile/land.png
+  - Assets/Resources/MapTile/land.png
+  - Assets/Resources/MapTile/land.png
+  - Assets/Resources/MapTile/land.png
+  - Assets/Resources/MapTile/_5.png
+  - Assets/Resources/MapTile/land.png
+  - Assets/Resources/MapTile/_1.png
+  - Assets/Resources/MapTile/land.png
+  - Assets/Resources/MapTile/_10.png
+  - Assets/Resources/MapTile/sea.png
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - Assets/Resources/MapTile/sea.png
+  - Assets/Resources/MapTile/land.png
+  - Assets/Resources/MapTile/land.png
+  - Assets/Resources/MapTile/land.png
+  - Assets/Resources/MapTile/sea.png
+  - Assets/Resources/MapTile/sea.png
+  - Assets/Resources/MapTile/land.png
+  - Assets/Resources/MapTile/land.png
+  - Assets/Resources/MapTile/land.png
+  - Assets/Resources/MapTile/sea.png
+  - Assets/Resources/MapTile/land.png
+  - Assets/Resources/MapTile/_16.png
+  - Assets/Resources/MapTile/land.png
+  - Assets/Resources/MapTile/sea.png
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - Assets/Resources/MapTile/sea.png
+  - Assets/Resources/MapTile/sea.png
+  - Assets/Resources/MapTile/sea.png
+  - Assets/Resources/MapTile/sea.png
+  - Assets/Resources/MapTile/sea.png
+  - Assets/Resources/MapTile/sea.png
+  - Assets/Resources/MapTile/land.png
+  - Assets/Resources/MapTile/sea.png
+  - Assets/Resources/MapTile/_6.png
+  - Assets/Resources/MapTile/sea.png
+  - Assets/Resources/MapTile/land.png
+  - Assets/Resources/MapTile/sea.png
+  - Assets/Resources/MapTile/land.png
+  - Assets/Resources/MapTile/sea.png
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - Assets/Resources/MapTile/sea.png
+  - Assets/Resources/MapTile/_4.png
+  - Assets/Resources/MapTile/sea.png
+  - Assets/Resources/MapTile/sea.png
+  - Assets/Resources/MapTile/sea.png
+  - Assets/Resources/MapTile/_7.png
+  - Assets/Resources/MapTile/sea.png
+  - Assets/Resources/MapTile/land.png
+  - Assets/Resources/MapTile/sea.png
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - Assets/Resources/MapTile/sea.png
+  - Assets/Resources/MapTile/sea.png
+  - Assets/Resources/MapTile/sea.png
+  - Assets/Resources/MapTile/sea.png
+  - Assets/Resources/MapTile/sea.png
+  - Assets/Resources/MapTile/sea.png
+  - Assets/Resources/MapTile/sea.png
+  - Assets/Resources/MapTile/sea.png
+  - Assets/Resources/MapTile/sea.png
+  - Assets/Resources/MapTile/sea.png
+  - Assets/Resources/MapTile/land.png
+  - Assets/Resources/MapTile/sea.png
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - Assets/Resources/MapTile/sea.png
+  - Assets/Resources/MapTile/land.png
+  - Assets/Resources/MapTile/_11.png
+  - Assets/Resources/MapTile/land.png
+  - Assets/Resources/MapTile/_15.png
+  - Assets/Resources/MapTile/_14.png
+  - Assets/Resources/MapTile/land.png
+  - Assets/Resources/MapTile/land.png
+  - Assets/Resources/MapTile/sea.png
+  - Assets/Resources/MapTile/land.png
+  - Assets/Resources/MapTile/land.png
+  - Assets/Resources/MapTile/sea.png
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - Assets/Resources/MapTile/sea.png
+  - Assets/Resources/MapTile/goal.png
+  - Assets/Resources/MapTile/land.png
+  - Assets/Resources/MapTile/_12.png
+  - Assets/Resources/MapTile/land.png
+  - Assets/Resources/MapTile/land.png
+  - Assets/Resources/MapTile/land.png
+  - Assets/Resources/MapTile/_17.png
+  - Assets/Resources/MapTile/sea.png
+  - Assets/Resources/MapTile/land.png
+  - Assets/Resources/MapTile/land.png
+  - Assets/Resources/MapTile/sea.png
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - Assets/Resources/MapTile/sea.png
+  - Assets/Resources/MapTile/land.png
+  - Assets/Resources/MapTile/land.png
+  - Assets/Resources/MapTile/land.png
+  - Assets/Resources/MapTile/land.png
+  - Assets/Resources/MapTile/land.png
+  - Assets/Resources/MapTile/_13.png
+  - Assets/Resources/MapTile/land.png
+  - Assets/Resources/MapTile/land.png
+  - Assets/Resources/MapTile/land.png
+  - Assets/Resources/MapTile/land.png
+  - Assets/Resources/MapTile/sea.png
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - Assets/Resources/MapTile/sea.png
+  - Assets/Resources/MapTile/sea.png
+  - Assets/Resources/MapTile/sea.png
+  - Assets/Resources/MapTile/sea.png
+  - Assets/Resources/MapTile/sea.png
+  - Assets/Resources/MapTile/sea.png
+  - Assets/Resources/MapTile/sea.png
+  - Assets/Resources/MapTile/sea.png
+  - Assets/Resources/MapTile/sea.png
+  - Assets/Resources/MapTile/sea.png
+  - Assets/Resources/MapTile/sea.png
+  - Assets/Resources/MapTile/sea.png
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  mapSize: 25
+  enemies:
+  - tag: yoko1
+    name: 2
+    health: 10
+    moveSpeed: 3
+    skillTurn: 2
+    pos: {x: 21, y: 5}
+    skill: 3
+  - tag: yoko2
+    name: 2
+    health: 10
+    moveSpeed: 3
+    skillTurn: 1
+    pos: {x: 14, y: 5}
+    skill: 2
+  - tag: tate3
+    name: 1
+    health: 10
+    moveSpeed: 3
+    skillTurn: 1
+    pos: {x: 17, y: 3}
+    skill: 1
+  - tag: tate4
+    name: 1
+    health: 10
+    moveSpeed: 3
+    skillTurn: 1
+    pos: {x: 17, y: 8}
+    skill: 0
+  - tag: tate5
+    name: 1
+    health: 10
+    moveSpeed: 3
+    skillTurn: 1
+    pos: {x: 19, y: 5}
+    skill: 1
+  - tag: tate6
+    name: 1
+    health: 10
+    moveSpeed: 3
+    skillTurn: 2
+    pos: {x: 19, y: 7}
+    skill: 0
+  - tag: tate7
+    name: 1
+    health: 10
+    moveSpeed: 3
+    skillTurn: 5
+    pos: {x: 21, y: 8}
+    skill: 0
+  - tag: tate8
+    name: 1
+    health: 10
+    moveSpeed: 3
+    skillTurn: 1
+    pos: {x: 21, y: 2}
+    skill: 1
+  - tag: skel9
+    name: 0
+    health: 10
+    moveSpeed: 3
+    skillTurn: 1
+    pos: {x: 13, y: 5}
+    skill: 2
+  - tag: tate10
+    name: 1
+    health: 10
+    moveSpeed: 3
+    skillTurn: 15
+    pos: {x: 23, y: 5}
+    skill: 1
+  - tag: tate11
+    name: 1
+    health: 10
+    moveSpeed: 3
+    skillTurn: 2
+    pos: {x: 15, y: 10}
+    skill: 1
+  - tag: tate12
+    name: 1
+    health: 10
+    moveSpeed: 3
+    skillTurn: 3
+    pos: {x: 16, y: 11}
+    skill: 0
+  - tag: yoko13
+    name: 2
+    health: 10
+    moveSpeed: 3
+    skillTurn: 5
+    pos: {x: 19, y: 12}
+    skill: 3
+  - tag: tate14
+    name: 1
+    health: 10
+    moveSpeed: 3
+    skillTurn: 1
+    pos: {x: 18, y: 10}
+    skill: 1
+  - tag: yoko15
+    name: 2
+    health: 10
+    moveSpeed: 3
+    skillTurn: 1
+    pos: {x: 17, y: 10}
+    skill: 2
+  - tag: skel16
+    name: 0
+    health: 10
+    moveSpeed: 3
+    skillTurn: 15
+    pos: {x: 22, y: 6}
+    skill: 3
+  - tag: tate17
+    name: 1
+    health: 10
+    moveSpeed: 3
+    skillTurn: 6
+    pos: {x: 20, y: 11}
+    skill: 0
+  heroPos: {x: 12, y: 5}
