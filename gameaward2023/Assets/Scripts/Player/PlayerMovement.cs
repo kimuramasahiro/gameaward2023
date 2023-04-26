@@ -138,11 +138,7 @@ public class PlayerMovement : MonoBehaviour
 
             if (!IsAdvance_KeyW)
             {
-<<<<<<< HEAD
-                if (Input.GetKeyDown(KeyCode.W) || Gamepad.current.dpad.up.wasPressedThisFrame)
-=======
                 if (Input.GetKeyDown(KeyCode.W) || (replay&&log[logIdx] == 0))
->>>>>>> origin/suezaki
                 {
                     if (log.Count > logIdx + 1)
                         logIdx++;
@@ -154,11 +150,7 @@ public class PlayerMovement : MonoBehaviour
             }
             if (!IsAdvance_KeyS)
             {
-<<<<<<< HEAD
-                if (Input.GetKeyDown(KeyCode.S)|| Gamepad.current.dpad.left.wasPressedThisFrame)
-=======
                 if (Input.GetKeyDown(KeyCode.S)|| (replay&&log[logIdx] == 2))
->>>>>>> origin/suezaki
                 {
                     if (log.Count > logIdx + 1)
                         logIdx++;
@@ -170,11 +162,7 @@ public class PlayerMovement : MonoBehaviour
             }
             if (!IsAdvance_KeyA)
             {
-<<<<<<< HEAD
-                if (Input.GetKeyDown(KeyCode.A)|| Gamepad.current.dpad.right.wasPressedThisFrame)
-=======
                 if (Input.GetKeyDown(KeyCode.A) || (replay&&log[logIdx] == 1))
->>>>>>> origin/suezaki
                 {
                     if (log.Count > logIdx+1)
                         logIdx++;
@@ -187,11 +175,7 @@ public class PlayerMovement : MonoBehaviour
             }
             if (!IsAdvance_KeyD)
             {
-<<<<<<< HEAD
-                if (Input.GetKeyDown(KeyCode.D)|| Gamepad.current.dpad.down.wasPressedThisFrame)
-=======
                 if (Input.GetKeyDown(KeyCode.D) || (replay&&log[logIdx] == 3))
->>>>>>> origin/suezaki
                 {
                     if (log.Count > logIdx+1)
                         logIdx++;
