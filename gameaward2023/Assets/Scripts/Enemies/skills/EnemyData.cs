@@ -17,6 +17,7 @@ public enum SKILL
     down,
     right,
     left,
+    invisible,
     none,
 }
 

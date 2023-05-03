@@ -108,6 +108,11 @@ public class EnemyBase : MonoBehaviour
                     WalkUpSkill();
                     break;
                 }
+            case SKILL.invisible:
+                {
+                    InvisibleSkill();
+                    break;
+                }
             case SKILL none:
                 {
                     break;
@@ -193,5 +198,21 @@ public class EnemyBase : MonoBehaviour
         }
         // ç¿ïWçXêV
         //this.gameObject.transform.position = Vector3.MoveTowards(this.gameObject.transform.position, CurrentPos, moveSpeed * Time.deltaTime);
+    }
+
+    //  ìßñæâª
+    protected void InvisibleSkill()
+    {
+        SpriteRenderer body2D = GetComponent<SpriteRenderer>();
+        if (body2D != null)
+        {
+            body2D.enabled = !body2D.enabled;
+        }
+        else
+        {
+            MeshRenderer body3D = GetComponent<MeshRenderer>();
+            if(body3D != null)
+                body3D.enabled = !body3D.enabled;
+        }
     }
 }
