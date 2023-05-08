@@ -1741,7 +1741,7 @@ MonoBehaviour:
   blockParent: {fileID: 2121854277}
   flgSearchMap: 0
   GrassList: []
-  enemyData: {fileID: 11400000, guid: d2ecc7af15c4d63419693f28565b766e, type: 2}
+  enemyData: {fileID: 11400000, guid: 138bb78b54ff029449847465b968b785, type: 2}
   enemies: []
 --- !u!114 &1725119085
 MonoBehaviour:
