@@ -21,8 +21,25 @@ public class TitleScene : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Return) && Only)
         {
             audioSource.PlayOneShot(sound1);
-            FadeManager.Instance.LoadScene("MainScene",1.0f);
+            FadeManager.Instance.LoadScene("1_1",1.0f);
             Only = false;
         }
+
+        EndGame();
+    }
+    //ゲーム終了
+    private void EndGame()
+    {
+        //Escが押された時
+        if (Input.GetKey(KeyCode.Escape))
+        {
+
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;//ゲームプレイ終了
+#else
+    Application.Quit();//ゲームプレイ終了
+#endif
+        }
+
     }
 }
