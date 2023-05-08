@@ -108,6 +108,15 @@ public class EnemyBase : MonoBehaviour
                     WalkUpSkill();
                     break;
                 }
+            case SKILL.invisible:
+                {
+                    InvisibleSkill();
+                    break;
+                }
+            case SKILL none:
+                {
+                    break;
+                }
             default:
                 {
                     break;
@@ -119,12 +128,13 @@ public class EnemyBase : MonoBehaviour
     protected void WalkLeftSkill()
     {
         // ï«Ç™Ç†ÇÈÇ©
-        if (map[(int)CurrentPos.x - 1, (int)CurrentPos.z] == 0)
+        if (map[(int)CurrentPos.x - 1, (int)CurrentPos.z] == 0 ||
+                map[(int)CurrentPos.x - 1, (int)CurrentPos.z] == 2)
         {
             CurrentPos.x -= 0.0f;
         }
         else if (map[(int)CurrentPos.x - 1, (int)CurrentPos.z] == 1 ||
-                map[(int)CurrentPos.x - 1, (int)CurrentPos.z] == 2)
+                map[(int)CurrentPos.x - 1, (int)CurrentPos.z] == 3)
         {
             CurrentPos.x -= 1.0f;
         }
@@ -138,12 +148,13 @@ public class EnemyBase : MonoBehaviour
     protected void WalkRightSkill()
     {
         // ï«Ç™Ç†ÇÈÇ©
-        if (map[(int)CurrentPos.x + 1, (int)CurrentPos.z] == 0)
+        if (map[(int)CurrentPos.x + 1, (int)CurrentPos.z] == 0 ||
+                map[(int)CurrentPos.x + 1, (int)CurrentPos.z] == 2)
         {
             CurrentPos.x += 0.0f;
         }
         else if (map[(int)CurrentPos.x + 1, (int)CurrentPos.z] == 1 ||
-                map[(int)CurrentPos.x + 1, (int)CurrentPos.z] == 2)
+                map[(int)CurrentPos.x + 1, (int)CurrentPos.z] == 3)
         {
             CurrentPos.x += 1.0f;
         }
@@ -157,12 +168,13 @@ public class EnemyBase : MonoBehaviour
     protected void WalkUpSkill()
     {
         // ï«Ç™Ç†ÇÈÇ©
-        if (map[(int)CurrentPos.x, (int)CurrentPos.z + 1] == 0)
+        if (map[(int)CurrentPos.x, (int)CurrentPos.z + 1] == 0 ||
+               map[(int)CurrentPos.x, (int)CurrentPos.z + 1] == 2)
         {
             CurrentPos.z += 0.0f;
         }
         else if (map[(int)CurrentPos.x, (int)CurrentPos.z + 1] == 1 ||
-               map[(int)CurrentPos.x, (int)CurrentPos.z + 1] == 2)
+               map[(int)CurrentPos.x, (int)CurrentPos.z + 1] == 3)
         {
             CurrentPos.z += 1.0f;
         }
@@ -174,16 +186,33 @@ public class EnemyBase : MonoBehaviour
     protected void WalkDownSkill()
     {
         // ï«Ç™Ç†ÇÈÇ©
-        if (map[(int)CurrentPos.x, (int)CurrentPos.z - 1] == 0)
+        if (map[(int)CurrentPos.x, (int)CurrentPos.z - 1] == 0 ||
+                map[(int)CurrentPos.x, (int)CurrentPos.z - 1] == 2)
         {
             CurrentPos.z -= 0.0f;
         }
         else if (map[(int)CurrentPos.x, (int)CurrentPos.z - 1] == 1 ||
-                map[(int)CurrentPos.x, (int)CurrentPos.z - 1] == 2)
+                map[(int)CurrentPos.x, (int)CurrentPos.z - 1] == 3)
         {
             CurrentPos.z -= 1.0f;
         }
         // ç¿ïWçXêV
         //this.gameObject.transform.position = Vector3.MoveTowards(this.gameObject.transform.position, CurrentPos, moveSpeed * Time.deltaTime);
+    }
+
+    //  ìßñæâª
+    protected void InvisibleSkill()
+    {
+        SpriteRenderer body2D = GetComponent<SpriteRenderer>();
+        if (body2D != null)
+        {
+            body2D.enabled = !body2D.enabled;
+        }
+        else
+        {
+            MeshRenderer body3D = GetComponent<MeshRenderer>();
+            if(body3D != null)
+                body3D.enabled = !body3D.enabled;
+        }
     }
 }
