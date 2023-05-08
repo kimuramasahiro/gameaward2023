@@ -17,7 +17,7 @@ public class PlayerMovement : MonoBehaviour
     private bool PlayerDir = false;             // プレイヤーの向き(false:右 true:左)
     public bool IsMoving = false;               // プレイヤーが動いているか
 
-    private Controller _gameInputs;             //
+    private GamePad _gameInputs;             //
     private Vector2 _moveInputValue;            //プレイヤームーブcontroller兼キーボード
 
     // プレイヤーが全方向に進めるかどうか
@@ -71,7 +71,7 @@ public class PlayerMovement : MonoBehaviour
         StageMake = GameObject.Find("StageMake");
         log = StageMake.GetComponent<ElementGenerator>().GetEnemyData().GetReplay();
         // Input Actionインスタンス生成
-        _gameInputs = new Controller();
+        _gameInputs = new GamePad();
 
         // Actionイベント登録
         _gameInputs.Player.Move.started += OnMove;
@@ -90,6 +90,7 @@ public class PlayerMovement : MonoBehaviour
     {
         // Moveアクションの入力取得
         _moveInputValue = context.ReadValue<Vector2>();
+        Debug.Log(_moveInputValue);
     }
 
     // Update is called once per frame
@@ -144,7 +145,7 @@ public class PlayerMovement : MonoBehaviour
 
             if (!IsAdvance_KeyW)
             {
-                if (Input.GetKeyDown(KeyCode.W) || (replay&&log[logIdx] == 0))
+                if (Input.GetKeyDown(KeyCode.W) || (replay&&log[logIdx] == 0) || _moveInputValue.y > 0)
                 {
                     if (log.Count > logIdx + 1)
                         logIdx++;
@@ -156,7 +157,7 @@ public class PlayerMovement : MonoBehaviour
             }
             if (!IsAdvance_KeyS)
             {
-                if (Input.GetKeyDown(KeyCode.S)|| (replay&&log[logIdx] == 2))
+                if (Input.GetKeyDown(KeyCode.S)|| (replay&&log[logIdx] == 2) || _moveInputValue.y < 0)
                 {
                     if (log.Count > logIdx + 1)
                         logIdx++;
@@ -168,7 +169,7 @@ public class PlayerMovement : MonoBehaviour
             }
             if (!IsAdvance_KeyA)
             {
-                if (Input.GetKeyDown(KeyCode.A) || (replay&&log[logIdx] == 1))
+                if (Input.GetKeyDown(KeyCode.A) || (replay&&log[logIdx] == 1)||_moveInputValue.x < 0)
                 {
                     if (log.Count > logIdx+1)
                         logIdx++;
@@ -179,9 +180,9 @@ public class PlayerMovement : MonoBehaviour
                     StepCount++;
                 }
             }
-            if (!IsAdvance_KeyD)
+            if (!IsAdvance_KeyD )
             {
-                if (Input.GetKeyDown(KeyCode.D) || (replay&&log[logIdx] == 3))
+                if (Input.GetKeyDown(KeyCode.D) || (replay&&log[logIdx] == 3) || _moveInputValue.x > 0)
                 {
                     if (log.Count > logIdx+1)
                         logIdx++;
