@@ -1,31 +1,32 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using System; // ƒCƒxƒ“ƒg‚Ì—˜—p
+using System; // ã‚¤ãƒ™ãƒ³ãƒˆã®åˆ©ç”¨
 using UnityEngine.InputSystem;
+
 
 public class PlayerMovement : MonoBehaviour
 {
-    // ƒvƒŒƒCƒ„[ŠÖ˜A ---------------------------------------------------
-    private GameObject PlayerObj = null;        // ƒvƒŒƒCƒ„[ƒIƒuƒWƒFƒNƒg
-    private Vector3 CurrentPos = Vector3.zero;  // ƒvƒŒƒCƒ„[À•WŠi”[—p
-    private int[,] PlayerPos;                   // ƒvƒŒƒCƒ„[À•W”äŠr—p
+    // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼é–¢é€£ ---------------------------------------------------
+    private GameObject PlayerObj = null;        // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+    private Vector3 CurrentPos = Vector3.zero;  // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼åº§æ¨™æ ¼ç´ç”¨
+    private int[,] PlayerPos;                   // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼åº§æ¨™æ¯”è¼ƒç”¨
 
-    public float MoveSpeed = 1.0f;              // ƒvƒŒƒCƒ„[‚Ì“®‚­‘¬‚³
-    private bool PlayerDir = false;             // ƒvƒŒƒCƒ„[‚ÌŒü‚«(false:‰E true:¶)
-    public bool IsMoving = false;               // ƒvƒŒƒCƒ„[‚ª“®‚¢‚Ä‚¢‚é‚©
+    public float MoveSpeed = 1.0f;              // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®å‹•ãé€Ÿã•
+    private bool PlayerDir = false;             // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®å‘ã(false:å³ true:å·¦)
+    public bool IsMoving = false;               // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒå‹•ã„ã¦ã„ã‚‹ã‹
 
     private Controller _gameInputs;             //
-    private Vector2 _moveInputValue;            //ƒvƒŒƒCƒ„[ƒ€[ƒucontrollerŒ“ƒL[ƒ{[ƒh
+    private Vector2 _moveInputValue;            //ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãƒ ãƒ¼ãƒ–controllerå…¼ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰
 
-    // ƒvƒŒƒCƒ„[‚ª‘S•ûŒü‚Éi‚ß‚é‚©‚Ç‚¤‚©
-    private bool IsAdvance_KeyW = false;        // Z+•ûŒü
-    private bool IsAdvance_KeyA = false;        // Z-•ûŒü
-    private bool IsAdvance_KeyS = false;        // X-•ûŒü
-    private bool IsAdvance_KeyD = false;        // X-•ûŒü
+    // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒå…¨æ–¹å‘ã«é€²ã‚ã‚‹ã‹ã©ã†ã‹
+    private bool IsAdvance_KeyW = false;        // Z+æ–¹å‘
+    private bool IsAdvance_KeyA = false;        // Z-æ–¹å‘
+    private bool IsAdvance_KeyS = false;        // X-æ–¹å‘
+    private bool IsAdvance_KeyD = false;        // X-æ–¹å‘
 
-    // ƒvƒŒƒCƒ„[‚ª‚Ç‚Ì•ûŒü‚Éi‚ñ‚¾‚©
+    // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒã©ã®æ–¹å‘ã«é€²ã‚“ã ã‹
     [SerializeField]
     public bool PressKey_W = false;
     [SerializeField]
@@ -36,10 +37,10 @@ public class PlayerMovement : MonoBehaviour
     public bool PressKey_D = false;
 
     [SerializeField]
-    public int StepCount = 0;                  // •à”
+    public int StepCount = 0;                  // æ­©æ•°
     // ------------------------------------------------------------------
 
-    // 2Dƒ}ƒbƒv¶¬ƒXƒNƒŠƒvƒg—p -----------------------------------------
+    // 2Dãƒãƒƒãƒ—ç”Ÿæˆã‚¹ã‚¯ãƒªãƒ—ãƒˆç”¨ -----------------------------------------
     [SerializeField]
     private GameObject GameClear_Text;
     [SerializeField]
@@ -47,42 +48,47 @@ public class PlayerMovement : MonoBehaviour
     public bool IsTouched = false;
     // ------------------------------------------------------------------
 
-    // 2Dƒ}ƒbƒv¶¬ƒXƒNƒŠƒvƒg—p -----------------------------------------
+    // 2Dãƒãƒƒãƒ—ç”Ÿæˆã‚¹ã‚¯ãƒªãƒ—ãƒˆç”¨ -----------------------------------------
     private GameObject StageMake;               // 
     private ElementGenerator elementGenerator;  // 
-    private int[,] map;                         // ƒ}ƒbƒvî•ñŠi”[—p
-    private bool bMapLoading = false;           // ƒ}ƒbƒv‚ªƒ[ƒh‚³‚ê‚½‚©
+    private int[,] map;                         // ãƒãƒƒãƒ—æƒ…å ±æ ¼ç´ç”¨
+    private bool bMapLoading = false;           // ãƒãƒƒãƒ—ãŒãƒ­ãƒ¼ãƒ‰ã•ã‚ŒãŸã‹
     // ------------------------------------------------------------------
 
-    // •à”ƒJƒEƒ“ƒg‚ğ“`‚¦‚éƒCƒxƒ“ƒg
+    // æ­©æ•°ã‚«ã‚¦ãƒ³ãƒˆã‚’ä¼ãˆã‚‹ã‚¤ãƒ™ãƒ³ãƒˆ
     public event Action Walk;
     public event Action Auto;
     private List<int> log;
     private int logIdx = 0;
     private bool replay = false;
+    // æ¬¡ã®ã‚·ãƒ¼ãƒ³ãƒã‚§ãƒ³ã‚¸å¯èƒ½ã‹ã©ã†ã‹
+    public bool ClearCheck = false;
+
     // Start is called before the first frame update
     void Start()
     {
         PlayerObj = GameObject.Find("Player");
         StageMake = GameObject.Find("StageMake");
         log = StageMake.GetComponent<ElementGenerator>().GetEnemyData().GetReplay();
-        // Input ActionƒCƒ“ƒXƒ^ƒ“ƒX¶¬
+        // Input Actionã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ç”Ÿæˆ
         _gameInputs = new Controller();
 
-        // ActionƒCƒxƒ“ƒg“o˜^
+        // Actionã‚¤ãƒ™ãƒ³ãƒˆç™»éŒ²
         _gameInputs.Player.Move.started += OnMove;
         _gameInputs.Player.Move.performed += OnMove;
         _gameInputs.Player.Move.canceled += OnMove;
 
-        // Input Action‚ğ‹@”\‚³‚¹‚é‚½‚ß‚É‚ÍA
-        // —LŒø‰»‚·‚é•K—v‚ª‚ ‚é
+        // Input Actionã‚’æ©Ÿèƒ½ã•ã›ã‚‹ãŸã‚ã«ã¯ã€
+        // æœ‰åŠ¹åŒ–ã™ã‚‹å¿…è¦ãŒã‚ã‚‹
         _gameInputs.Enable();
+
+        
 
     }
 
     private void OnMove(InputAction.CallbackContext context)
     {
-        // MoveƒAƒNƒVƒ‡ƒ“‚Ì“ü—Íæ“¾
+        // Moveã‚¢ã‚¯ã‚·ãƒ§ãƒ³ã®å…¥åŠ›å–å¾—
         _moveInputValue = context.ReadValue<Vector2>();
     }
 
@@ -94,16 +100,16 @@ public class PlayerMovement : MonoBehaviour
             if (log.Count > 0)
                 replay = true;
             else
-                Debug.Log("ˆê“xˆÈãƒNƒŠƒA‚µ‚Ä‚­‚¾‚³‚¢");
+                Debug.Log("ä¸€åº¦ä»¥ä¸Šã‚¯ãƒªã‚¢ã—ã¦ãã ã•ã„");
         }
-        // ˆê“x‚¾‚¯Às
+        // ä¸€åº¦ã ã‘å®Ÿè¡Œ
         if (!bMapLoading)
         {
-            // ƒ_ƒ“ƒWƒ‡ƒ“ƒ}ƒbƒv“Ç‚İ‚İ
+            // ãƒ€ãƒ³ã‚¸ãƒ§ãƒ³ãƒãƒƒãƒ—èª­ã¿è¾¼ã¿
             elementGenerator = StageMake.GetComponent<ElementGenerator>();
             map = elementGenerator.GetMapGenerate();
 
-            // ƒvƒŒƒCƒ„[À•W“Ç‚İ‚İ
+            // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼åº§æ¨™èª­ã¿è¾¼ã¿
             CurrentPos.x = elementGenerator.GetMapPlayer().x;
             CurrentPos.y = 1.5f;
             CurrentPos.z = elementGenerator.GetMapPlayer().y;
@@ -111,16 +117,16 @@ public class PlayerMovement : MonoBehaviour
             bMapLoading = true;
         }
 
-        // i‚Şæ‚É•Ç‚ª‚ ‚é‚©‚Ç‚¤‚©
+        // é€²ã‚€å…ˆã«å£ãŒã‚ã‚‹ã‹ã©ã†ã‹
         IsAdvancePlayer();
 
-        // ƒvƒŒƒCƒ„[‚ÌŒü‚«‚ğ•Ï‚¦‚é
+        // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®å‘ãã‚’å¤‰ãˆã‚‹
         if (Input.GetKeyDown(KeyCode.C))
         {
             PlayerDir = !PlayerDir;
         }
 
-        // i‚Ş•ûŒü‚ÉƒvƒŒƒCƒ„[‚ğŒü‚©‚¹‚é
+        // é€²ã‚€æ–¹å‘ã«ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’å‘ã‹ã›ã‚‹
         if (!PlayerDir)
         {
             PlayerObj.transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
@@ -130,10 +136,10 @@ public class PlayerMovement : MonoBehaviour
             PlayerObj.transform.rotation = Quaternion.Euler(0.0f, 180.0f, 0.0f);
         }
 
-        // ƒvƒŒƒCƒ„[‚ª~‚Ü‚Á‚Ä‚¢‚ÄAƒvƒŒƒCƒ„[‚ªi‚ß‚éó‘Ô‚Å‚ ‚Á‚½‚ç
+        // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒæ­¢ã¾ã£ã¦ã„ã¦ã€ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒé€²ã‚ã‚‹çŠ¶æ…‹ã§ã‚ã£ãŸã‚‰
         if (PlayerObj.transform.position == CurrentPos)
         {
-            // ~‚Ü‚Á‚Ä‚¢‚é
+            // æ­¢ã¾ã£ã¦ã„ã‚‹
             IsMoving = false;
 
             if (!IsAdvance_KeyW)
@@ -192,7 +198,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            // “®‚¢‚Ä‚¢‚é
+            // å‹•ã„ã¦ã„ã‚‹
             IsMoving = true;
 
             PressKey_W = false;
@@ -201,12 +207,13 @@ public class PlayerMovement : MonoBehaviour
             PressKey_D = false;
         }
 
-        // ƒS[ƒ‹‚µ‚Ä‚¢‚é‚©
+        // ã‚´ãƒ¼ãƒ«ã—ã¦ã„ã‚‹ã‹
         if(map[(int)CurrentPos.x,(int)CurrentPos.z] == 3 && !IsTouched)
         {
             replay = false;
-            StageMake.GetComponent<ElementGenerator>().GetEnemyData().SetReplay(GetComponent<AutoRun>().GetDir());
+            //StageMake.GetComponent<ElementGenerator>().GetEnemyData().SetReplay(GetComponent<AutoRun>().GetDir());
             GameClear_Text.SetActive(true);
+            ClearCheck = true;
         }
 
         if(IsTouched)
@@ -214,14 +221,14 @@ public class PlayerMovement : MonoBehaviour
             GameOver_Text.SetActive(true);
         }
 
-        // ˆÚ“®ˆ—
+        // ç§»å‹•å‡¦ç†
         PlayerObj.transform.position = Vector3.MoveTowards(PlayerObj.transform.position, CurrentPos, MoveSpeed * Time.deltaTime);
     }
 
 
     private void IsAdvancePlayer()
     {
-        // ‘O‚É•Ç‚ª‚ ‚é‚©
+        // å‰ã«å£ãŒã‚ã‚‹ã‹
         if (map[(int)CurrentPos.x, (int)CurrentPos.z + 1] == 0 || map[(int)CurrentPos.x, (int)CurrentPos.z + 1] == 2)
         {
             IsAdvance_KeyW = true;
@@ -231,7 +238,7 @@ public class PlayerMovement : MonoBehaviour
             IsAdvance_KeyW = false;
         }
 
-        // Œã‚ë‚É•Ç‚ª‚ ‚é‚©
+        // å¾Œã‚ã«å£ãŒã‚ã‚‹ã‹
         if (map[(int)CurrentPos.x, (int)CurrentPos.z - 1] == 0 || map[(int)CurrentPos.x, (int)CurrentPos.z - 1] == 2)
         {
             IsAdvance_KeyS = true;
@@ -241,7 +248,7 @@ public class PlayerMovement : MonoBehaviour
             IsAdvance_KeyS = false;
         }
 
-        // ¶‚É•Ç‚ª‚ ‚é‚©
+        // å·¦ã«å£ãŒã‚ã‚‹ã‹
         if (map[(int)CurrentPos.x - 1, (int)CurrentPos.z] == 0 || map[(int)CurrentPos.x - 1, (int)CurrentPos.z] == 2)
         {
             IsAdvance_KeyA = true;
@@ -251,7 +258,7 @@ public class PlayerMovement : MonoBehaviour
             IsAdvance_KeyA = false;
         }
 
-        // ‰E‚É•Ç‚ª‚ ‚é‚©
+        // å³ã«å£ãŒã‚ã‚‹ã‹
         if (map[(int)CurrentPos.x + 1, (int)CurrentPos.z] == 0 || map[(int)CurrentPos.x + 1, (int)CurrentPos.z] == 2)
         {
             IsAdvance_KeyD = true;
