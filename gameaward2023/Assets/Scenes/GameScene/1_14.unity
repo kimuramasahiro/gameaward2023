@@ -204,7 +204,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8baced2f5257ef458407230d50e136a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RetryStage: MainScene
+  RetryStage: 1_14
   NextStage: TitleScene
 --- !u!1 &269396455
 GameObject:
@@ -1741,11 +1741,7 @@ MonoBehaviour:
   blockParent: {fileID: 2121854277}
   flgSearchMap: 0
   GrassList: []
-<<<<<<< HEAD
-  enemyData: {fileID: 11400000, guid: 6645cf2de57af804eabd758de000394b, type: 2}
-=======
   enemyData: {fileID: 11400000, guid: d2ecc7af15c4d63419693f28565b766e, type: 2}
->>>>>>> origin/MIYASHiTA
   enemies: []
 --- !u!114 &1725119085
 MonoBehaviour:

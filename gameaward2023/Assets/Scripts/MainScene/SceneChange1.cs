@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneChange : MonoBehaviour
+public class SceneChange1 : MonoBehaviour
 {
     private GameObject PlayerData;
     private PlayerMovement PlayerStatus;
-    public string RetryStage;
-    public string NextStage;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,20 +21,15 @@ public class SceneChange : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Return))
             {
-                FadeManager.Instance.LoadScene(RetryStage, 1.0f);
+                FadeManager.Instance.LoadScene("TitleScene", 1.0f);
             }
         }
-        if(PlayerStatus.ClearCheck&&!PlayerStatus.IsTouched)
+        if(PlayerStatus.ClearCheck)
         {
             if (Input.GetKeyDown(KeyCode.Return))
             {
-                FadeManager.Instance.LoadScene(NextStage, 1.0f);
+                FadeManager.Instance.LoadScene("TitleScene", 1.0f);
             }
-        }
-
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            FadeManager.Instance.LoadScene("TitleScene", 1.0f);
         }
 
     }
