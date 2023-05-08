@@ -649,5 +649,5 @@ MonoBehaviour:
     moveSpeed: 0
     skillTurn: 0
     pos: {x: 10, y: 8}
-    skill: 4
+    skill: 5
   heroPos: {x: 13, y: 12}
