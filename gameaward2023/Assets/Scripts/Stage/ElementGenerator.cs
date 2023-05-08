@@ -35,19 +35,19 @@ public class ElementGenerator : MonoBehaviour
     // 2Dマップ生成スクリプト用
     private DungeonGenerator dungeonGenerator;
     private int[,] map;
-
-    private int[,] Originalmap = { {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                                   {0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0},
-                                   {0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0},
-                                   {0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0},
-                                   {0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0},
-                                   {0, 1, 1, 1, 1, 3, 1, 1, 1, 1, 0},//上
-                                   {0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0},
-                                   {0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0},
-                                   {0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0},
-                                   {0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0},
-                                   {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
-                                                //↓
+    public int[,] Originalmap;
+    //private int[,] Originalmap = { {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    //                               {0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0},
+    //                               {0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0},
+    //                               {0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0},
+    //                               {0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0},
+    //                               {0, 1, 1, 1, 1, 3, 1, 1, 1, 1, 0},//上
+    //                               {0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0},
+    //                               {0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0},
+    //                               {0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0},
+    //                               {0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0},
+    //                               {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
+    //                                            //↓
 
     // パス読み込み用
     private GameObject objMap2D;                //Map2D
@@ -66,9 +66,13 @@ public class ElementGenerator : MonoBehaviour
     private EnemyData enemyData;
     [SerializeField]
     private List<GameObject> enemies = new List<GameObject>();
-    
+    public EnemyData GetEnemyData()
+    {
+        return enemyData;
+    }
     void Start()
     {
+        
         PlayerObj = GameObject.Find("Player");  // プレイヤーObjを探す
 
         GenerateObj(Originalmap, PlayerObj);    // プレイヤーを生成
@@ -86,7 +90,7 @@ public class ElementGenerator : MonoBehaviour
         {
             GameObject enemy;
             enemy = (GameObject)Resources.Load(data.GetAddress());
-            GameObject objInstant = Instantiate(enemy, new Vector3(data.GetPos().x, 2.0f, data.GetPos().y), Quaternion.Euler(0f, 0f, 0f));
+            GameObject objInstant = Instantiate(enemy, new Vector3(data.GetPos().x, 2.0f, enemyData.GetMapSize()-1-data.GetPos().y), Quaternion.Euler(0f, 0f, 0f));
             objInstant.GetComponent<EnemyBase>().SetEnemy(data);
             enemies.Add(objInstant);
         }
@@ -94,6 +98,20 @@ public class ElementGenerator : MonoBehaviour
 
     void Awake()
     {
+            Debug.Assert(enemyData != null, "StageMakeにマップ情報をセットしてください。");
+        int start = enemyData.GetMapSize() * (enemyData.GetMapSize() -1);
+        int minus = enemyData.GetMapSize();
+        Originalmap = new int[enemyData.GetMapSize(), enemyData.GetMapSize()];
+        for (int yy = 0; yy < enemyData.GetMapSize(); yy++)
+            for (int xx = 0; xx < enemyData.GetMapSize(); xx++)
+            {
+                if(enemyData.GetMap()[(start + yy) - minus * xx]==-1)
+                    Originalmap[yy, xx] =-1;
+                else
+                    Originalmap[yy, xx] = enemyData.GetMap()[(start + yy) - minus * xx] % 10;
+            }
+                
+        //Originalmap[yy, xx] = enemyData.GetMap()[enemyData.GetMapSize() * enemyData.GetMapSize() - 1 - (xx * enemyData.GetMapSize() + yy)];
         //リソース読み込み
         ReadResources();
 
@@ -204,19 +222,20 @@ public class ElementGenerator : MonoBehaviour
     //オブジェクト生成 (プレイヤー以外)
     private void GenerateObj(int[,] Originalmap, GameObject obj)
     {
-        while (true)
-        {
+        //while (true)
+        //{
             // 左下に生成
-            int Player_Pos_X = 5;
+            int Player_Pos_X = (int)enemyData.GetHeroPos().x;
             //int Player_Pos_X = Originalmap.GetLength(1) - 2;
-            int Player_Pos_Y = 1;
+            int Player_Pos_Y = enemyData.GetMapSize() - 1 - (int)enemyData.GetHeroPos().y;
+
             //int mapX = Random.Range(0, Originalmap.GetLength(0) - 1);
             //int mapY = Random.Range(0, Originalmap.GetLength(1) - 1);
 
             // 右上に生成
             //int Enemy_Pos_X = Originalmap.GetLength(0) - 2;
-            int Enemy_Pos_X = 3;
-            int Enemy_Pos_Y = 6;
+            //int Enemy_Pos_X = 3;
+            //int Enemy_Pos_Y = 6;
             //int Enemy_Pos_Y = Originalmap.GetLength(1) - 2;
 
             if (Originalmap[Player_Pos_X, Player_Pos_Y] == 1)
@@ -229,19 +248,21 @@ public class ElementGenerator : MonoBehaviour
                     PlayerPos.x = Player_Pos_X;
                     PlayerPos.y = Player_Pos_Y;
                 }
+                
                 // エネミー
-                else if (obj.CompareTag("Enemy") == true)
-                {
-                    GameObject objInstant = Instantiate(obj, new Vector3(Enemy_Pos_X, 2.0f, Enemy_Pos_Y), Quaternion.Euler(0f, 0f, 0f));
-                }
+                //else if (obj.CompareTag("Enemy") == true)
+                //{
+                //    GameObject objInstant = Instantiate(obj, new Vector3(Enemy_Pos_X, 2.0f, Enemy_Pos_Y), Quaternion.Euler(0f, 0f, 0f));
+                //}
                 //その他は生成と移動
                 //else
                 //{
                 //    GameObject objInstant = Instantiate(obj, new Vector3(mapX, 2.0f, mapY), Quaternion.Euler(0f, 0f, 0f));
                 //}
-                break;
+                //break;
             }
-        }
+            Debug.Assert(Originalmap[Player_Pos_X, Player_Pos_Y] == 1, "マップエディタ状のPlayerの位置を確認してください");
+        //}
     }
 
     //オブジェクト生成
