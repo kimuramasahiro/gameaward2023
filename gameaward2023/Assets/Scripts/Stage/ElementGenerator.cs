@@ -243,7 +243,7 @@ public class ElementGenerator : MonoBehaviour
                 // ƒvƒŒƒCƒ„[‚Í¶¬Ï‚İ‚Ì‚½‚ßˆÚ“®‚¾‚¯
                 if (obj.CompareTag("Player") == true)
                 {
-                    obj.transform.position = new Vector3(Player_Pos_X, 1.5f, Player_Pos_Y);
+                    obj.transform.position = new Vector3(Player_Pos_X, 2.0f, Player_Pos_Y);
 
                     PlayerPos.x = Player_Pos_X;
                     PlayerPos.y = Player_Pos_Y;

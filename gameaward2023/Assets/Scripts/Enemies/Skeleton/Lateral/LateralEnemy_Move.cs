@@ -10,7 +10,7 @@ public class LateralEnemy_Move : EnemyBase
     private Vector2 CheckPos = Vector2.zero;    // 
     public float MoveSpeed = 3.0f;              // スケルトンの動く速さ
     private int MoveDir = 0;                    // スケルトンの進む方向
-    private bool SkeletonDir = false;           // スケルトンの向き(false:右 true:左)
+    private int OldDir = 3;
     public bool IsMovable = true;               // スケルトンが進めるか(true:進める false:進めない)
 
     private int SearchRange = 3;                // 索敵範囲(3の場合,自分中心から縦横3マス)
@@ -43,7 +43,7 @@ public class LateralEnemy_Move : EnemyBase
         base.Start();
         PlayerObj = GameObject.Find("Player");
         PlayerMovement = PlayerObj.GetComponent<PlayerMovement>();
-
+        MoveDir = OldDir;
         //StageMake = GameObject.Find("StageMake");
     }
 
@@ -96,13 +96,21 @@ public class LateralEnemy_Move : EnemyBase
         }
 
         // 進む方向にプレイヤーを向かせる
-        if (!SkeletonDir)
+        if (SkeletonDir == 1) // 前
         {
-            this.gameObject.transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
+            transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
         }
-        else
+        else if (SkeletonDir == 0) // 後ろ
         {
-            this.gameObject.transform.rotation = Quaternion.Euler(0.0f, 180.0f, 0.0f);
+            transform.rotation = Quaternion.Euler(0.0f, 180.0f, 0.0f);
+        }
+        else if (SkeletonDir == 3) // 左
+        {
+            transform.rotation = Quaternion.Euler(0.0f, 270.0f, 0.0f);
+        }
+        else if (SkeletonDir == 2) // 右
+        {
+            transform.rotation = Quaternion.Euler(0.0f, 90.0f, 0.0f);
         }
 
         // 座標更新
@@ -141,31 +149,33 @@ public class LateralEnemy_Move : EnemyBase
         // プレイヤーが移動したら
         if (PlayerMovement.PressKey_W || PlayerMovement.PressKey_A || PlayerMovement.PressKey_S || PlayerMovement.PressKey_D)
         {
+            SkeletonDir = OldDir;
             if(isTouched_A_Wall&&isTouched_D_Wall)
             {
                 CurrentPos.x += 0.0f;
             }
             else if(isTouched_A_Wall)
             {
-                SkeletonDir = false;
+                SkeletonDir = 3;
                 CurrentPos.x += 1.0f;
             }
             else if(isTouched_D_Wall)
             {
-                SkeletonDir = true;
+                SkeletonDir = 2;
                 CurrentPos.x -= 1.0f;
             }
             else
             {
-                if(SkeletonDir)
+                if(SkeletonDir == 2)
                 {
                     CurrentPos.x -= 1.0f;
                 }
-                else
+                else if(SkeletonDir == 3)
                 {
                     CurrentPos.x += 1.0f;
                 }
             }
+            OldDir = SkeletonDir;
             onMove = true;
         }
     }

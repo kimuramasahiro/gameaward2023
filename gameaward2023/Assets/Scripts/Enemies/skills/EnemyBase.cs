@@ -16,6 +16,7 @@ public class EnemyBase : MonoBehaviour
     protected bool inSkill = false; // スキル発動中
     public float moveSpeed;
     protected bool onMove = false;// 通常移動中
+    protected int SkeletonDir = 0;
     // プレイヤー関連 ---------------------------------------------------
     private GameObject PlayerObj = null;        // プレイヤーオブジェクト
     private PlayerMovement PlayerMovement;
@@ -138,8 +139,9 @@ public class EnemyBase : MonoBehaviour
         {
             CurrentPos.x -= 1.0f;
         }
+        SkeletonDir = 2;
         // 向き調整
-        this.gameObject.transform.rotation = Quaternion.Euler(0.0f, 180.0f, 0.0f);
+        //this.gameObject.transform.rotation = Quaternion.Euler(0.0f, 270.0f, 0.0f);
         // 座標更新
         //this.gameObject.transform.position = Vector3.MoveTowards(this.gameObject.transform.position, CurrentPos, moveSpeed * Time.deltaTime);
     }
@@ -158,8 +160,9 @@ public class EnemyBase : MonoBehaviour
         {
             CurrentPos.x += 1.0f;
         }
+        SkeletonDir = 3;
         // 向き調整
-        this.gameObject.transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
+        //this.gameObject.transform.rotation = Quaternion.Euler(0.0f, 90.0f, 0.0f);
         // 座標更新
         //this.gameObject.transform.position = Vector3.MoveTowards(this.gameObject.transform.position, CurrentPos, moveSpeed * Time.deltaTime);
     }
@@ -178,6 +181,9 @@ public class EnemyBase : MonoBehaviour
         {
             CurrentPos.z += 1.0f;
         }
+        SkeletonDir = 0;
+        // 向き調整
+        //this.gameObject.transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
         // 座標更新
         //this.gameObject.transform.position = Vector3.MoveTowards(this.gameObject.transform.position, CurrentPos, moveSpeed * Time.deltaTime);
     }
@@ -196,6 +202,10 @@ public class EnemyBase : MonoBehaviour
         {
             CurrentPos.z -= 1.0f;
         }
+
+        SkeletonDir = 1;
+        // 向き調整
+        //this.gameObject.transform.rotation = Quaternion.Euler(0.0f, 180.0f, 0.0f);
         // 座標更新
         //this.gameObject.transform.position = Vector3.MoveTowards(this.gameObject.transform.position, CurrentPos, moveSpeed * Time.deltaTime);
     }

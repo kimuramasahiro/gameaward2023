@@ -10,7 +10,7 @@ public class VerticalEnemy_Move : EnemyBase
     private Vector2 CheckPos = Vector2.zero;    // 
     public float MoveSpeed = 3.0f;              // スケルトンの動く速さ
     private int MoveDir = 0;                    // スケルトンの進む方向
-    private bool SkeletonDir = false;           // スケルトンの向き(false:右 true:左)
+    private int OldDir = 1;
     public bool IsMovable = true;               // スケルトンが進めるか(true:進める false:進めない)
 
     private int SearchRange = 3;                // 索敵範囲(3の場合,自分中心から縦横3マス)
@@ -45,6 +45,7 @@ public class VerticalEnemy_Move : EnemyBase
         PlayerObj = GameObject.Find("Player");
         PlayerMovement = PlayerObj.GetComponent<PlayerMovement>();
         OldPos = CurrentPos;
+        MoveDir = OldDir;
         //StageMake = GameObject.Find("StageMake");
     }
 
@@ -95,14 +96,22 @@ public class VerticalEnemy_Move : EnemyBase
         }
 
         // 進む方向にプレイヤーを向かせる
-        //if (!SkeletonDir)
-        //{
-        //    this.gameObject.transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
-        //}
-        //else
-        //{
-        //    this.gameObject.transform.rotation = Quaternion.Euler(0.0f, 180.0f, 0.0f);
-        //}
+        if (SkeletonDir == 1) // 前
+        {
+            transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
+        }
+        else if (SkeletonDir == 0) // 後ろ
+        {
+            transform.rotation = Quaternion.Euler(0.0f, 180.0f, 0.0f);
+        }
+        else if (SkeletonDir == 3) // 左
+        {
+            transform.rotation = Quaternion.Euler(0.0f, 270.0f, 0.0f);
+        }
+        else if (SkeletonDir == 2) // 右
+        {
+            transform.rotation = Quaternion.Euler(0.0f, 90.0f, 0.0f);
+        }
 
         // 座標更新
         this.gameObject.transform.position = Vector3.MoveTowards(this.gameObject.transform.position, CurrentPos, MoveSpeed * Time.deltaTime);
@@ -140,31 +149,33 @@ public class VerticalEnemy_Move : EnemyBase
         // プレイヤーが移動したら
         if (PlayerMovement.PressKey_W || PlayerMovement.PressKey_A || PlayerMovement.PressKey_S || PlayerMovement.PressKey_D)
         {
-            if(isTouched_S_Wall&&isTouched_W_Wall)
+            SkeletonDir = OldDir;
+            if (isTouched_S_Wall&&isTouched_W_Wall)
             {
                 CurrentPos.z += 0.0f;
             }
             else if(isTouched_W_Wall)
             {
-                SkeletonDir = false;
+                SkeletonDir = 0;
                 CurrentPos.z += 1.0f;
             }
             else if(isTouched_S_Wall)
             {
-                SkeletonDir = true;
+                SkeletonDir = 1;
                 CurrentPos.z -= 1.0f;
             }
             else
             {
-                if (SkeletonDir)
+                if (SkeletonDir == 1)
                 {
                     CurrentPos.z -= 1.0f;
                 }
-                else
+                else if(SkeletonDir == 0)
                 {
                     CurrentPos.z += 1.0f;
                 }
             }
+            OldDir = SkeletonDir;
             onMove = true;
         }
     }

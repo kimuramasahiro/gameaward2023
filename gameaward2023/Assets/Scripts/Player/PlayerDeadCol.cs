@@ -21,8 +21,7 @@ public class PlayerDeadCol : MonoBehaviour
     {
         
     }
-
-    private void OnCollisionStay(Collision collision)
+    private void OnTriggerStay(Collider other)
     {
         PlayerMovement.IsTouched = true;
     }

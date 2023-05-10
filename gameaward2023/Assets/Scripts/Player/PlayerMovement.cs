@@ -14,7 +14,7 @@ public class PlayerMovement : MonoBehaviour
     private int[,] PlayerPos;                   // プレイヤー座標比較用
 
     public float MoveSpeed = 1.0f;              // プレイヤーの動く速さ
-    private bool PlayerDir = false;             // プレイヤーの向き(false:右 true:左)
+    private int PlayerDir = 0;
     public bool IsMoving = false;               // プレイヤーが動いているか
 
     private GamePad _gameInputs;             //
@@ -112,7 +112,7 @@ public class PlayerMovement : MonoBehaviour
 
             // プレイヤー座標読み込み
             CurrentPos.x = elementGenerator.GetMapPlayer().x;
-            CurrentPos.y = 1.5f;
+            CurrentPos.y = 2.0f;
             CurrentPos.z = elementGenerator.GetMapPlayer().y;
 
             bMapLoading = true;
@@ -121,20 +121,28 @@ public class PlayerMovement : MonoBehaviour
         // 進む先に壁があるかどうか
         IsAdvancePlayer();
 
-        // プレイヤーの向きを変える
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            PlayerDir = !PlayerDir;
-        }
+        //// プレイヤーの向きを変える
+        //if (Input.GetKeyDown(KeyCode.C))
+        //{
+        //    PlayerDir = !PlayerDir;
+        //}
 
         // 進む方向にプレイヤーを向かせる
-        if (!PlayerDir)
+        if (PlayerDir == 0) // 前
         {
             PlayerObj.transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
         }
-        else
+        else if (PlayerDir == 1) // 後ろ
         {
             PlayerObj.transform.rotation = Quaternion.Euler(0.0f, 180.0f, 0.0f);
+        }
+        else if (PlayerDir == 2) // 左
+        {
+            PlayerObj.transform.rotation = Quaternion.Euler(0.0f, 90.0f, 0.0f);
+        }
+        else if (PlayerDir == 3) // 右
+        {
+            PlayerObj.transform.rotation = Quaternion.Euler(0.0f, 270.0f, 0.0f);
         }
 
         // プレイヤーが止まっていて、プレイヤーが進める状態であったら
@@ -150,6 +158,7 @@ public class PlayerMovement : MonoBehaviour
                     if (log.Count > logIdx + 1)
                         logIdx++;
                     PressKey_W = true;
+                    PlayerDir = 0;
                     CurrentPos.z += 1.0f;
                     Walk?.Invoke();
                     StepCount++;
@@ -162,6 +171,7 @@ public class PlayerMovement : MonoBehaviour
                     if (log.Count > logIdx + 1)
                         logIdx++;
                     PressKey_S = true;
+                    PlayerDir = 1;
                     CurrentPos.z -= 1.0f;
                     Walk?.Invoke();
                     StepCount++;
@@ -174,7 +184,7 @@ public class PlayerMovement : MonoBehaviour
                     if (log.Count > logIdx+1)
                         logIdx++;
                     PressKey_A = true;
-                    PlayerDir = true;
+                    PlayerDir = 3;
                     CurrentPos.x -= 1.0f;
                     Walk?.Invoke();
                     StepCount++;
@@ -188,7 +198,7 @@ public class PlayerMovement : MonoBehaviour
                         logIdx++;
                     PressKey_D = true;
 
-                    PlayerDir = false;
+                    PlayerDir = 2;
                     CurrentPos.x += 1.0f;
                     Walk?.Invoke();
                     StepCount++;

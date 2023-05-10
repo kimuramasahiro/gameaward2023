@@ -10,7 +10,6 @@ public class SkeletonMovement :EnemyBase
     private Vector2 CheckPos = Vector2.zero;    // 
     public float MoveSpeed = 3.0f;              // スケルトンの動く速さ
     private int MoveDir = 0;                    // スケルトンの進む方向
-    private bool SkeletonDir = false;           // スケルトンの向き(false:右 true:左)
     public bool IsMovable = true;               // スケルトンが進めるか(true:進める false:進めない)
 
     private int SearchRange = 3;                // 索敵範囲(3の場合,自分中心から縦横3マス)
@@ -40,7 +39,7 @@ public class SkeletonMovement :EnemyBase
         base.Start();
         PlayerObj = GameObject.Find("Player");
         PlayerMovement = PlayerObj.GetComponent<PlayerMovement>();
-
+        MoveDir = 1;
         //StageMake = GameObject.Find("StageMake");
     }
 
@@ -107,14 +106,23 @@ public class SkeletonMovement :EnemyBase
         }
 
         // 進む方向にプレイヤーを向かせる
-        if (!SkeletonDir)
+        if (SkeletonDir == 1) // 前
         {
-            this.gameObject.transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
+            transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
         }
-        else
+        else if (SkeletonDir == 0) // 後ろ
         {
-            this.gameObject.transform.rotation = Quaternion.Euler(0.0f, 180.0f, 0.0f);
+            transform.rotation = Quaternion.Euler(0.0f, 180.0f, 0.0f);
         }
+        else if (SkeletonDir == 3) // 左
+        {
+            transform.rotation = Quaternion.Euler(0.0f, 270.0f, 0.0f);
+        }
+        else if (SkeletonDir == 2) // 右
+        {
+            transform.rotation = Quaternion.Euler(0.0f, 90.0f, 0.0f);
+        }
+        
 
         // 座標更新
         this.gameObject.transform.position = Vector3.MoveTowards(this.gameObject.transform.position, CurrentPos, MoveSpeed * Time.deltaTime);
@@ -140,6 +148,7 @@ public class SkeletonMovement :EnemyBase
                 {
                     CurrentPos.z += 1.0f;
                 }
+                SkeletonDir = 0;
                 break;
 
             // 後ろに進む場合
@@ -154,6 +163,7 @@ public class SkeletonMovement :EnemyBase
                 {
                     CurrentPos.z -= 1.0f;
                 }
+                SkeletonDir = 1;
                 break;
 
             // 左に進む場合
@@ -166,9 +176,10 @@ public class SkeletonMovement :EnemyBase
                 else if (map[(int)CurrentPos.x - 1, (int)CurrentPos.z] == 1 ||
                         map[(int)CurrentPos.x - 1, (int)CurrentPos.z] == 2)
                 {
-                    SkeletonDir = true;
                     CurrentPos.x -= 1.0f;
                 }
+
+                SkeletonDir = 2;
                 break;
 
             // 右に進む場合
@@ -181,9 +192,9 @@ public class SkeletonMovement :EnemyBase
                 else if (map[(int)CurrentPos.x + 1, (int)CurrentPos.z] == 1 ||
                         map[(int)CurrentPos.x + 1, (int)CurrentPos.z] == 2)
                 {
-                    SkeletonDir = false;
                     CurrentPos.x += 1.0f;
                 }
+                SkeletonDir = 3;
                 break;
         }
     }
@@ -294,6 +305,7 @@ public class SkeletonMovement :EnemyBase
                 CurrentPos.z -= 1.0f;
             }
 
+            SkeletonDir = 1;
             onMove = true;
             //PlayerMovement.PressKey_W = false;
         }
@@ -310,6 +322,7 @@ public class SkeletonMovement :EnemyBase
                 CurrentPos.z += 1.0f;
             }
 
+            SkeletonDir = 0;
             onMove = true;
             //PlayerMovement.PressKey_S = false;
         }
@@ -323,10 +336,10 @@ public class SkeletonMovement :EnemyBase
             }
             else if (map[(int)CurrentPos.x + 1, (int)CurrentPos.z] == 1 || map[(int)CurrentPos.x + 1, (int)CurrentPos.z] == 3)
             {
-                SkeletonDir = false;
                 CurrentPos.x += 1.0f;
             }
 
+            SkeletonDir = 3;
             onMove = true;
             //PlayerMovement.PressKey_A = false;
         }
@@ -339,10 +352,10 @@ public class SkeletonMovement :EnemyBase
             }
             else if (map[(int)CurrentPos.x - 1, (int)CurrentPos.z] == 1 || map[(int)CurrentPos.x - 1, (int)CurrentPos.z] == 3)
             {
-                SkeletonDir = true;
                 CurrentPos.x -= 1.0f;
             }
 
+            SkeletonDir = 2;
             onMove = true;
             //PlayerMovement.PressKey_D = false;
         }
