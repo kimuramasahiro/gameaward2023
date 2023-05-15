@@ -14,4 +14,43 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GameScene/1_1.unity
     guid: 1afc34aadad63b4449d0a6e32614e84b
+  - enabled: 1
+    path: Assets/Scenes/GameScene/1_2.unity
+    guid: bf237bab95e99d347841452c325b995f
+  - enabled: 1
+    path: Assets/Scenes/GameScene/1_3.unity
+    guid: d67ac3dd62e657a48982113131564ed8
+  - enabled: 1
+    path: Assets/Scenes/GameScene/1_4.unity
+    guid: 8fbe5f4aee5f3a54ea84126167706c64
+  - enabled: 1
+    path: Assets/Scenes/GameScene/1_5.unity
+    guid: b04304c2cd492ac44a209ee1e77571a3
+  - enabled: 1
+    path: Assets/Scenes/GameScene/1_6.unity
+    guid: f41ea2e85f3d8044381fbcef0375ab71
+  - enabled: 1
+    path: Assets/Scenes/GameScene/1_7.unity
+    guid: 80562171b641d194886a8cb5a9a7ca56
+  - enabled: 1
+    path: Assets/Scenes/GameScene/1_8.unity
+    guid: 951ba26b908796b4aade4c9dff288b12
+  - enabled: 1
+    path: Assets/Scenes/GameScene/1_9.unity
+    guid: c94c0fe0273399743a6a2632c49040ca
+  - enabled: 1
+    path: Assets/Scenes/GameScene/1_10.unity
+    guid: b848abe7836bc4d48a4fcb71ae455591
+  - enabled: 1
+    path: Assets/Scenes/GameScene/1_11.unity
+    guid: ae31eb3b4f499e64baca7b6ef052bb60
+  - enabled: 1
+    path: Assets/Scenes/GameScene/1_12.unity
+    guid: cde6f674ad80f4e47b8d129892eb741f
+  - enabled: 1
+    path: Assets/Scenes/GameScene/1_13.unity
+    guid: 1bfcc4ca591896041a5fe1ef5559729d
+  - enabled: 1
+    path: Assets/Scenes/GameScene/1_14.unity
+    guid: 76a7d3865ae7f7d4987ecddbedc5239c
   m_configObjects: {}
