@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -6,33 +6,33 @@ using UnityEngine.UI;
 
 public class ElementGenerator : MonoBehaviour
 {
-    // ƒvƒŒƒCƒ„[ŠÖ˜A ---------------------------------------------------
-    private Vector2 PlayerPos;              // ƒvƒŒƒCƒ„[À•WŠi”[—p
+    // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼é–¢é€£ ---------------------------------------------------
+    private Vector2 PlayerPos;              // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼åº§æ¨™æ ¼ç´ç”¨
     // ------------------------------------------------------------------
 
-    // ƒGƒlƒ~[ŠÖ˜A -----------------------------------------------------
-    // ’²®—pƒpƒ‰ƒ[ƒ^[
-    [SerializeField] int MaxEnemy;  // ‰Šú¶¬‚Ì“G‚Ì‰ºŒÀ”
-    [SerializeField] int MinEnemy;  // ‰Šú¶¬‚Ì“G‚ÌãŒÀ”
+    // ã‚¨ãƒãƒŸãƒ¼é–¢é€£ -----------------------------------------------------
+    // èª¿æ•´ç”¨ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ãƒ¼
+    [SerializeField] int MaxEnemy;  // åˆæœŸç”Ÿæˆã®æ•µã®ä¸‹é™æ•°
+    [SerializeField] int MinEnemy;  // åˆæœŸç”Ÿæˆã®æ•µã®ä¸Šé™æ•°
     // ------------------------------------------------------------------
 
-    // ƒŠƒ\[ƒXŠi”[—p (ŠK‘w‚Ü‚½‚¬‚ÌƒZ[ƒu/ƒ[ƒh‚Åg—p) -----------------
-    public Transform blockParent;                               // eObj
-    private GameObject blockPrefab_Grass;                       // ’n–ÊObj
-    private GameObject blockPrefab_Water;                       // …Obj
-    private GameObject PlayerObj;                               // ƒvƒŒƒCƒ„[Obj
+    // ãƒªã‚½ãƒ¼ã‚¹æ ¼ç´ç”¨ (éšå±¤ã¾ãŸãã®ã‚»ãƒ¼ãƒ–/ãƒ­ãƒ¼ãƒ‰ã§ä½¿ç”¨) -----------------
+    public Transform blockParent;                               // è¦ªObj
+    private GameObject blockPrefab_Grass;                       // åœ°é¢Obj
+    private GameObject blockPrefab_Water;                       // æ°´Obj
+    private GameObject PlayerObj;                               // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼Obj
     private GameObject EnemyObj;
     private GameObject LateralMove_Enemy;
     private GameObject VerticalMove_Enemy;
-    private GameObject[] EnemyObjList = new GameObject[1];      // “GƒŠƒXƒgObj
-    private GameObject GoalObj;                                 // ƒS[ƒ‹Obj
-    private GameObject ObstacleObj;                             // áŠQ•¨Obj
-    private GameObject[] objMapTipList = new GameObject[1];     // ƒ}ƒbƒvƒ`ƒbƒvƒŠƒXƒg
-    private Material material;                                  // •Ç‚Ìƒ}ƒeƒŠƒAƒ‹
+    private GameObject[] EnemyObjList = new GameObject[1];      // æ•µãƒªã‚¹ãƒˆObj
+    private GameObject GoalObj;                                 // ã‚´ãƒ¼ãƒ«Obj
+    private GameObject ObstacleObj;                             // éšœå®³ç‰©Obj
+    private GameObject[] objMapTipList = new GameObject[1];     // ãƒãƒƒãƒ—ãƒãƒƒãƒ—ãƒªã‚¹ãƒˆ
+    private Material material;                                  // å£ã®ãƒãƒ†ãƒªã‚¢ãƒ«
     // ------------------------------------------------------------------
 
-    // ƒ}ƒbƒvŠÖ˜A -------------------------------------------------------
-    // 2Dƒ}ƒbƒv¶¬ƒXƒNƒŠƒvƒg—p
+    // ãƒãƒƒãƒ—é–¢é€£ -------------------------------------------------------
+    // 2Dãƒãƒƒãƒ—ç”Ÿæˆã‚¹ã‚¯ãƒªãƒ—ãƒˆç”¨
     private DungeonGenerator dungeonGenerator;
     private int[,] map;
     public int[,] Originalmap;
@@ -41,27 +41,27 @@ public class ElementGenerator : MonoBehaviour
     //                               {0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0},
     //                               {0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0},
     //                               {0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0},
-    //                               {0, 1, 1, 1, 1, 3, 1, 1, 1, 1, 0},//ã
+    //                               {0, 1, 1, 1, 1, 3, 1, 1, 1, 1, 0},//ä¸Š
     //                               {0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0},
     //                               {0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0},
     //                               {0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0},
     //                               {0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0},
     //                               {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
-    //                                            //«
+    //                                            //â†“
 
-    // ƒpƒX“Ç‚İ‚İ—p
+    // ãƒ‘ã‚¹èª­ã¿è¾¼ã¿ç”¨
     private GameObject objMap2D;                //Map2D
 
-    // ¶¬‚µ‚½ƒ}ƒbƒvƒ`ƒbƒv
-    GameObject[,] objMapExist;                  //ƒtƒB[ƒ‹ƒh—p
+    // ç”Ÿæˆã—ãŸãƒãƒƒãƒ—ãƒãƒƒãƒ—
+    GameObject[,] objMapExist;                  //ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ç”¨
 
-    //•”‰®’Tõ’†ƒtƒ‰ƒO
+    //éƒ¨å±‹æ¢ç´¢ä¸­ãƒ•ãƒ©ã‚°
     public bool flgSearchMap;
 
     public List<GameObject> GrassList = new List<GameObject>();
     // ------------------------------------------------------------------
 
-    // --- “Gƒf[ƒ^ ---
+    // --- æ•µãƒ‡ãƒ¼ã‚¿ ---
     [SerializeField]
     private EnemyData enemyData;
     [SerializeField]
@@ -73,11 +73,11 @@ public class ElementGenerator : MonoBehaviour
     void Start()
     {
         
-        PlayerObj = GameObject.Find("Player");  // ƒvƒŒƒCƒ„[Obj‚ğ’T‚·
+        PlayerObj = GameObject.Find("Player");  // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼Objã‚’æ¢ã™
 
-        GenerateObj(Originalmap, PlayerObj);    // ƒvƒŒƒCƒ„[‚ğ¶¬
+        GenerateObj(Originalmap, PlayerObj);    // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’ç”Ÿæˆ
 
-        //GenerateObj(Originalmap, EnemyObj);     // “G‚ğ¶¬
+        //GenerateObj(Originalmap, EnemyObj);     // æ•µã‚’ç”Ÿæˆ
 
         //GenerateEnemy(Originalmap, EnemyObj, new Vector2(5.0f, 7.0f));
 
@@ -98,7 +98,7 @@ public class ElementGenerator : MonoBehaviour
 
     void Awake()
     {
-            Debug.Assert(enemyData != null, "StageMake‚Éƒ}ƒbƒvî•ñ‚ğƒZƒbƒg‚µ‚Ä‚­‚¾‚³‚¢B");
+            Debug.Assert(enemyData != null, "StageMakeã«ãƒãƒƒãƒ—æƒ…å ±ã‚’ã‚»ãƒƒãƒˆã—ã¦ãã ã•ã„ã€‚");
         int start = enemyData.GetMapSize() * (enemyData.GetMapSize() -1);
         int minus = enemyData.GetMapSize();
         Originalmap = new int[enemyData.GetMapSize(), enemyData.GetMapSize()];
@@ -112,20 +112,20 @@ public class ElementGenerator : MonoBehaviour
             }
                 
         //Originalmap[yy, xx] = enemyData.GetMap()[enemyData.GetMapSize() * enemyData.GetMapSize() - 1 - (xx * enemyData.GetMapSize() + yy)];
-        //ƒŠƒ\[ƒX“Ç‚İ‚İ
+        //ãƒªã‚½ãƒ¼ã‚¹èª­ã¿è¾¼ã¿
         ReadResources();
 
-        //•Ç‚ğ¶¬
+        //å£ã‚’ç”Ÿæˆ
         GenerateWall();
     }
 
-    //ƒŠƒ\[ƒX“Ç‚İ‚İ
+    //ãƒªã‚½ãƒ¼ã‚¹èª­ã¿è¾¼ã¿
     void ReadResources()
     {
-        // •Ç‚Ìƒ}ƒeƒŠƒAƒ‹
+        // å£ã®ãƒãƒ†ãƒªã‚¢ãƒ«
         material = (Material)Resources.Load("Materials/Water002");
 
-        // ƒS[ƒ‹
+        // ã‚´ãƒ¼ãƒ«
         GoalObj = (GameObject)Resources.Load("Prefabs/Goal");
 
         //EnemyObj = (GameObject)Resources.Load("Prefabs/Enemies/Skeleton");
@@ -135,53 +135,53 @@ public class ElementGenerator : MonoBehaviour
 
         ObstacleObj = (GameObject)Resources.Load("Prefabs/obstacle");
 
-        // “GƒŠƒXƒg
+        // æ•µãƒªã‚¹ãƒˆ
         EnemyObjList = Resources.LoadAll<GameObject>("Prefabs/Enemies");
 
-        // 2D‚Ìƒ}ƒbƒvƒ`ƒbƒv“Ç‚İ‚İ
+        // 2Dã®ãƒãƒƒãƒ—ãƒãƒƒãƒ—èª­ã¿è¾¼ã¿
         objMapTipList[0] = (GameObject)Resources.Load("Prefabs/UI/MapTip");
 
-        // ’n–Ê‚Ìƒ}ƒeƒŠƒAƒ‹
+        // åœ°é¢ã®ãƒãƒ†ãƒªã‚¢ãƒ«
         blockPrefab_Grass = (GameObject)Resources.Load("Prefabs/Grass");
         blockPrefab_Water = (GameObject)Resources.Load("Prefabs/Water");
     }
 
-    //•Ç‚ğ¶¬
+    //å£ã‚’ç”Ÿæˆ
     private void GenerateWall()
     {
-        // ƒ_ƒ“ƒWƒ‡ƒ“ƒ}ƒbƒv
+        // ãƒ€ãƒ³ã‚¸ãƒ§ãƒ³ãƒãƒƒãƒ—
         dungeonGenerator = GetComponent<DungeonGenerator>();
 
-        // •Ç‚Ì‚‚³
+        // å£ã®é«˜ã•
         float blockHeight = 2.0f;
 
-        // 2Dƒ}ƒbƒv¶¬
+        // 2Dãƒãƒƒãƒ—ç”Ÿæˆ
         map = dungeonGenerator.Generate();
 
-        // ¶¬‚·‚é•Ç‚Ìe‚Æ‚È‚éGameObject
+        // ç”Ÿæˆã™ã‚‹å£ã®è¦ªã¨ãªã‚‹GameObject
         GameObject objWall = GameObject.Find("Wall");
 
-        // ©“®¶¬‚µ‚½ƒ}ƒbƒv‚ÉCube‚ğ”z’u
+        // è‡ªå‹•ç”Ÿæˆã—ãŸãƒãƒƒãƒ—ã«Cubeã‚’é…ç½®
         for (int i = 0; i < Originalmap.GetLength(0); i++)
         {
             for (int j = 0; j < Originalmap.GetLength(1); j++)
             {
-                //•Ç‚ğCube‚Åì¬
+                //å£ã‚’Cubeã§ä½œæˆ
                 if (Originalmap[i, j] == 0)
                 {
                     for (int k = 0; k < blockHeight; k++)
                     {
                         GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
 
-                        //Wall’¼‰º‚ÉŠK‘w‚ğˆÚ“®
+                        //Wallç›´ä¸‹ã«éšå±¤ã‚’ç§»å‹•
                         cube.transform.parent = objWall.transform;
                         cube.GetComponent<Renderer>().material = material;
-                        cube.transform.localScale = new Vector3(1, 1, 1);
-                        cube.transform.position = new Vector3(i, 0.8f, j);
+                        cube.transform.localScale = new Vector3(1, 1.5f, 1);
+                        cube.transform.position = new Vector3(i, 1.5f, j);
                     }
                 }
 
-                // ’n–Ê‚ğ¶¬
+                // åœ°é¢ã‚’ç”Ÿæˆ
                 if (Originalmap[i, j] == 1 || Originalmap[i, j] == 2)
                 {
                     GameObject obj;
@@ -191,7 +191,7 @@ public class ElementGenerator : MonoBehaviour
                     GrassList.Add(obj);
                 }
 
-                // áŠQ•¨‚ğ¶¬
+                // éšœå®³ç‰©ã‚’ç”Ÿæˆ
                 if (Originalmap[i, j] == 2)
                 {
                     GameObject obj;
@@ -199,7 +199,7 @@ public class ElementGenerator : MonoBehaviour
                     obj.transform.position = new Vector3(i, 2.0f, j);
                 }
 
-                // ƒS[ƒ‹‚ğ¶¬
+                // ã‚´ãƒ¼ãƒ«ã‚’ç”Ÿæˆ
                 if (Originalmap[i, j] == 3)
                 {
                     GameObject obj;
@@ -207,7 +207,7 @@ public class ElementGenerator : MonoBehaviour
                     obj.transform.position = new Vector3(i, 1.0f, j);
                 }
 
-                // ’Ê˜H‚ğ¶¬
+                // é€šè·¯ã‚’ç”Ÿæˆ
                 //if(map[i, j] == 2)
                 //{
                 //    GameObject obj;
@@ -219,12 +219,12 @@ public class ElementGenerator : MonoBehaviour
         GetComponent<NavMeshSurface>().BuildNavMesh();
     }
 
-    //ƒIƒuƒWƒFƒNƒg¶¬ (ƒvƒŒƒCƒ„[ˆÈŠO)
+    //ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆç”Ÿæˆ (ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ä»¥å¤–)
     private void GenerateObj(int[,] Originalmap, GameObject obj)
     {
         //while (true)
         //{
-            // ¶‰º‚É¶¬
+            // å·¦ä¸‹ã«ç”Ÿæˆ
             int Player_Pos_X = (int)enemyData.GetHeroPos().x;
             //int Player_Pos_X = Originalmap.GetLength(1) - 2;
             int Player_Pos_Y = enemyData.GetMapSize() - 1 - (int)enemyData.GetHeroPos().y;
@@ -232,7 +232,7 @@ public class ElementGenerator : MonoBehaviour
             //int mapX = Random.Range(0, Originalmap.GetLength(0) - 1);
             //int mapY = Random.Range(0, Originalmap.GetLength(1) - 1);
 
-            // ‰Eã‚É¶¬
+            // å³ä¸Šã«ç”Ÿæˆ
             //int Enemy_Pos_X = Originalmap.GetLength(0) - 2;
             //int Enemy_Pos_X = 3;
             //int Enemy_Pos_Y = 6;
@@ -240,7 +240,7 @@ public class ElementGenerator : MonoBehaviour
 
             if (Originalmap[Player_Pos_X, Player_Pos_Y] == 1)
             {
-                // ƒvƒŒƒCƒ„[‚Í¶¬Ï‚İ‚Ì‚½‚ßˆÚ“®‚¾‚¯
+                // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¯ç”Ÿæˆæ¸ˆã¿ã®ãŸã‚ç§»å‹•ã ã‘
                 if (obj.CompareTag("Player") == true)
                 {
                     obj.transform.position = new Vector3(Player_Pos_X, 2.0f, Player_Pos_Y);
@@ -249,23 +249,23 @@ public class ElementGenerator : MonoBehaviour
                     PlayerPos.y = Player_Pos_Y;
                 }
                 
-                // ƒGƒlƒ~[
+                // ã‚¨ãƒãƒŸãƒ¼
                 //else if (obj.CompareTag("Enemy") == true)
                 //{
                 //    GameObject objInstant = Instantiate(obj, new Vector3(Enemy_Pos_X, 2.0f, Enemy_Pos_Y), Quaternion.Euler(0f, 0f, 0f));
                 //}
-                //‚»‚Ì‘¼‚Í¶¬‚ÆˆÚ“®
+                //ãã®ä»–ã¯ç”Ÿæˆã¨ç§»å‹•
                 //else
                 //{
                 //    GameObject objInstant = Instantiate(obj, new Vector3(mapX, 2.0f, mapY), Quaternion.Euler(0f, 0f, 0f));
                 //}
                 //break;
             }
-            Debug.Assert(Originalmap[Player_Pos_X, Player_Pos_Y] == 1, "ƒ}ƒbƒvƒGƒfƒBƒ^ó‚ÌPlayer‚ÌˆÊ’u‚ğŠm”F‚µ‚Ä‚­‚¾‚³‚¢");
+            Debug.Assert(Originalmap[Player_Pos_X, Player_Pos_Y] == 1, "ãƒãƒƒãƒ—ã‚¨ãƒ‡ã‚£ã‚¿çŠ¶ã®Playerã®ä½ç½®ã‚’ç¢ºèªã—ã¦ãã ã•ã„");
         //}
     }
 
-    //ƒIƒuƒWƒFƒNƒg¶¬
+    //ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆç”Ÿæˆ
     private void GenerateEnemy(int[,] Originalmap, GameObject obj, Vector2 pos)
     {
        GameObject objInstant = Instantiate(obj, new Vector3(pos.x, 2.0f, pos.y), Quaternion.Euler(0f, 0f, 0f));
