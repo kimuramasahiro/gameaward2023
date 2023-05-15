@@ -35,6 +35,15 @@ public partial class @Controller : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Switch"",
+                    ""type"": ""Button"",
+                    ""id"": ""c4fb2a36-c52d-4e3b-9abb-a690a1c2b584"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -103,6 +112,56 @@ public partial class @Controller : IInputActionCollection2, IDisposable
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8a18890d-005e-47a7-985a-00299cd45c63"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Switch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Submit"",
+            ""id"": ""0540aa28-945d-4036-8760-98d64ec38de8"",
+            ""actions"": [
+                {
+                    ""name"": ""Submit"",
+                    ""type"": ""Button"",
+                    ""id"": ""6978439d-4fe6-4fc0-8951-83d3a05b1b29"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""2f940187-4bbf-4977-9da0-be91932e618e"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Submit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2cf930de-e474-498a-9ffd-3154d7921982"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Submit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -112,6 +171,10 @@ public partial class @Controller : IInputActionCollection2, IDisposable
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
+        m_Player_Switch = m_Player.FindAction("Switch", throwIfNotFound: true);
+        // Submit
+        m_Submit = asset.FindActionMap("Submit", throwIfNotFound: true);
+        m_Submit_Submit = m_Submit.FindAction("Submit", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -172,11 +235,13 @@ public partial class @Controller : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Player;
     private IPlayerActions m_PlayerActionsCallbackInterface;
     private readonly InputAction m_Player_Move;
+    private readonly InputAction m_Player_Switch;
     public struct PlayerActions
     {
         private @Controller m_Wrapper;
         public PlayerActions(@Controller wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Player_Move;
+        public InputAction @Switch => m_Wrapper.m_Player_Switch;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -189,6 +254,9 @@ public partial class @Controller : IInputActionCollection2, IDisposable
                 @Move.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
                 @Move.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
                 @Move.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
+                @Switch.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwitch;
+                @Switch.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwitch;
+                @Switch.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwitch;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -196,12 +264,53 @@ public partial class @Controller : IInputActionCollection2, IDisposable
                 @Move.started += instance.OnMove;
                 @Move.performed += instance.OnMove;
                 @Move.canceled += instance.OnMove;
+                @Switch.started += instance.OnSwitch;
+                @Switch.performed += instance.OnSwitch;
+                @Switch.canceled += instance.OnSwitch;
             }
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
+
+    // Submit
+    private readonly InputActionMap m_Submit;
+    private ISubmitActions m_SubmitActionsCallbackInterface;
+    private readonly InputAction m_Submit_Submit;
+    public struct SubmitActions
+    {
+        private @Controller m_Wrapper;
+        public SubmitActions(@Controller wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Submit => m_Wrapper.m_Submit_Submit;
+        public InputActionMap Get() { return m_Wrapper.m_Submit; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(SubmitActions set) { return set.Get(); }
+        public void SetCallbacks(ISubmitActions instance)
+        {
+            if (m_Wrapper.m_SubmitActionsCallbackInterface != null)
+            {
+                @Submit.started -= m_Wrapper.m_SubmitActionsCallbackInterface.OnSubmit;
+                @Submit.performed -= m_Wrapper.m_SubmitActionsCallbackInterface.OnSubmit;
+                @Submit.canceled -= m_Wrapper.m_SubmitActionsCallbackInterface.OnSubmit;
+            }
+            m_Wrapper.m_SubmitActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Submit.started += instance.OnSubmit;
+                @Submit.performed += instance.OnSubmit;
+                @Submit.canceled += instance.OnSubmit;
+            }
+        }
+    }
+    public SubmitActions @Submit => new SubmitActions(this);
     public interface IPlayerActions
     {
         void OnMove(InputAction.CallbackContext context);
+        void OnSwitch(InputAction.CallbackContext context);
+    }
+    public interface ISubmitActions
+    {
+        void OnSubmit(InputAction.CallbackContext context);
     }
 }
