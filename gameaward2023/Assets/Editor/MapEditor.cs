@@ -201,6 +201,11 @@ public class CreateMap : EditorWindow
         land,
         sea,
         hero,
+        use0,
+        use1,
+        use2,
+        use3,
+        use4,
         _1,
         _2,
         _3,
@@ -241,6 +246,11 @@ public class CreateMap : EditorWindow
     private string landImagePath;
     private string seaImagePath;
     private string goalImagePath;
+    private string useImagePath;
+    private string use1ImagePath;
+    private string use2ImagePath;
+    private string use3ImagePath;
+    private string use4ImagePath;
     private string[] enemyImagePath = new string[1];
     private EnemyData data;
     private int maxEnemy = (int)IMAGE.MAX - 5;
@@ -357,6 +367,26 @@ public class CreateMap : EditorWindow
                             {
                                 imageMap[yy * mapSize + xx] = goalImagePath;
                             }
+                            else if (map[yy * mapSize + xx] == 4)
+                            {
+                                imageMap[yy * mapSize + xx] = useImagePath;
+                            }
+                            else if (map[yy * mapSize + xx] == 5)
+                            {
+                                imageMap[yy * mapSize + xx] = use1ImagePath;
+                            }
+                            else if (map[yy * mapSize + xx] == 6)
+                            {
+                                imageMap[yy * mapSize + xx] = use2ImagePath;
+                            }
+                            else if (map[yy * mapSize + xx] == 7)
+                            {
+                                imageMap[yy * mapSize + xx] = use3ImagePath;
+                            }
+                            else if (map[yy * mapSize + xx] == 8)
+                            {
+                                imageMap[yy * mapSize + xx] = use4ImagePath;
+                            }
                         }
                         else
                         {
@@ -411,6 +441,26 @@ public class CreateMap : EditorWindow
                                 {
                                     imageMap[yy * mapSize + xx] = goalImagePath;
                                 }
+                                else if (map[yy * mapSize + xx] == 4)
+                                {
+                                    imageMap[yy * mapSize + xx] = useImagePath;
+                                }
+                                else if (map[yy * mapSize + xx] == 5)
+                                {
+                                    imageMap[yy * mapSize + xx] = use1ImagePath;
+                                }
+                                else if (map[yy * mapSize + xx] == 6)
+                                {
+                                    imageMap[yy * mapSize + xx] = use2ImagePath;
+                                }
+                                else if (map[yy * mapSize + xx] == 7)
+                                {
+                                    imageMap[yy * mapSize + xx] = use3ImagePath;
+                                }
+                                else if (map[yy * mapSize + xx] == 8)
+                                {
+                                    imageMap[yy * mapSize + xx] = use4ImagePath;
+                                }
                             }
                             else
                             {
@@ -435,6 +485,26 @@ public class CreateMap : EditorWindow
                                 else if (map[yy * mapSize + xx] == 3)
                                 {
                                     imageMap[yy * mapSize + xx] = goalImagePath;
+                                }
+                                else if (map[yy * mapSize + xx] == 4)
+                                {
+                                    imageMap[yy * mapSize + xx] = useImagePath;
+                                }
+                                else if (map[yy * mapSize + xx] == 5)
+                                {
+                                    imageMap[yy * mapSize + xx] = use1ImagePath;
+                                }
+                                else if (map[yy * mapSize + xx] == 6)
+                                {
+                                    imageMap[yy * mapSize + xx] = use2ImagePath;
+                                }
+                                else if (map[yy * mapSize + xx] == 7)
+                                {
+                                    imageMap[yy * mapSize + xx] = use3ImagePath;
+                                }
+                                else if (map[yy * mapSize + xx] == 8)
+                                {
+                                    imageMap[yy * mapSize + xx] = use4ImagePath;
                                 }
                             }
                             else
@@ -462,10 +532,40 @@ public class CreateMap : EditorWindow
                             imageMap[yy * mapSize + xx] = imagePath;
                             map[yy * mapSize + xx] = 3;
                         }
-                        if(!fin)
+                        else if (imagePath.IndexOf(IMAGE.use0.ToString()) > -1)
+                        {
+                            fin = true;
+                            imageMap[yy * mapSize + xx] = imagePath;
+                            map[yy * mapSize + xx] = 4;
+                        }
+                        else if (imagePath.IndexOf(IMAGE.use1.ToString()) > -1)
+                        {
+                            fin = true;
+                            imageMap[yy * mapSize + xx] = imagePath;
+                            map[yy * mapSize + xx] = 5;
+                        }
+                        else if (imagePath.IndexOf(IMAGE.use2.ToString()) > -1)
+                        {
+                            fin = true;
+                            imageMap[yy * mapSize + xx] = imagePath;
+                            map[yy * mapSize + xx] = 6;
+                        }
+                        else if (imagePath.IndexOf(IMAGE.use3.ToString()) > -1)
+                        {
+                            fin = true;
+                            imageMap[yy * mapSize + xx] = imagePath;
+                            map[yy * mapSize + xx] = 7;
+                        }
+                        else if (imagePath.IndexOf(IMAGE.use4.ToString()) > -1)
+                        {
+                            fin = true;
+                            imageMap[yy * mapSize + xx] = imagePath;
+                            map[yy * mapSize + xx] = 8;
+                        }
+                        if (!fin)
                         for(int i = 3; i < maxEnemy+1; i++)
                         {
-                            int j = i + 4;
+                                int j = i + (int)(IMAGE._1)-1;
                                 Debug.Log(((IMAGE)j).ToString());
                             if (imagePath.IndexOf(((IMAGE)j).ToString()) > -1)
                             {
@@ -613,6 +713,7 @@ public class CreateMap : EditorWindow
 
                         //}
                         /*else */
+                        // 
                         if (!fin)
                         {
                             if (imagePath.IndexOf(IMAGE._1.ToString()) > -1)
@@ -688,6 +789,26 @@ public class CreateMap : EditorWindow
                         else if (mapBase == 3)
                         {
                             imageMap[yy * mapSize + xx] = goalImagePath;
+                        }
+                        else if (mapBase == 4)
+                        {
+                            imageMap[yy * mapSize + xx] = useImagePath;
+                        }
+                        else if (mapBase == 5)
+                        {
+                            imageMap[yy * mapSize + xx] = use1ImagePath;
+                        }
+                        else if (mapBase == 6)
+                        {
+                            imageMap[yy * mapSize + xx] = use2ImagePath;
+                        }
+                        else if (mapBase == 7)
+                        {
+                            imageMap[yy * mapSize + xx] = use3ImagePath;
+                        }
+                        else if (mapBase == 8)
+                        {
+                            imageMap[yy * mapSize + xx] = use4ImagePath;
                         }
                         Texture2D tex = (Texture2D)AssetDatabase.LoadAssetAtPath(imageMap[yy * mapSize + xx], typeof(Texture2D));
                         GUI.DrawTexture(gridRect[yy, xx], tex, ScaleMode.StretchToFill, true);
@@ -860,6 +981,26 @@ public class CreateMap : EditorWindow
                 else if (d.IndexOf(IMAGE.goal.ToString()) > -1)
                 {
                     goalImagePath = d;
+                }
+                else if (d.IndexOf(IMAGE.use0.ToString()) > -1)
+                {
+                    useImagePath = d;
+                }
+                else if (d.IndexOf(IMAGE.use1.ToString()) > -1)
+                {
+                    use1ImagePath = d;
+                }
+                else if (d.IndexOf(IMAGE.use2.ToString()) > -1)
+                {
+                    use2ImagePath = d;
+                }
+                else if (d.IndexOf(IMAGE.use3.ToString()) > -1)
+                {
+                    use3ImagePath = d;
+                }
+                else if (d.IndexOf(IMAGE.use4.ToString()) > -1)
+                {
+                    use4ImagePath = d;
                 }
                 if (GUILayout.Button(tex, GUILayout.MaxWidth(w), GUILayout.MaxHeight(h), GUILayout.ExpandWidth(false), GUILayout.ExpandHeight(false)))
                 {

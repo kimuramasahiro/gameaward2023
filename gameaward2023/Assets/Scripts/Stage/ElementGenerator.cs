@@ -27,6 +27,11 @@ public class ElementGenerator : MonoBehaviour
     private GameObject[] EnemyObjList = new GameObject[1];      // 敵リストObj
     private GameObject GoalObj;                                 // ゴールObj
     private GameObject ObstacleObj;                             // 障害物Obj
+    private GameObject useObj;
+    private GameObject use1Obj;
+    private GameObject use2Obj;
+    private GameObject use3Obj;
+    private GameObject use4Obj;
     private GameObject[] objMapTipList = new GameObject[1];     // マップチップリスト
     private Material material;                                  // 壁のマテリアル
     // ------------------------------------------------------------------
@@ -128,6 +133,12 @@ public class ElementGenerator : MonoBehaviour
         // ゴール
         GoalObj = (GameObject)Resources.Load("Prefabs/Goal");
 
+        useObj = (GameObject)Resources.Load("Prefabs/Temp_Grass");
+        use1Obj = (GameObject)Resources.Load("Prefabs/Temp_Grass 1");
+        use2Obj = (GameObject)Resources.Load("Prefabs/Temp_Grass 2");
+        use3Obj = (GameObject)Resources.Load("Prefabs/Temp_Grass 3");
+        use4Obj = (GameObject)Resources.Load("Prefabs/Temp_Grass 4");
+
         //EnemyObj = (GameObject)Resources.Load("Prefabs/Enemies/Skeleton");
 
         //VerticalMove_Enemy = (GameObject)Resources.Load("Prefabs/Enemies/Enemy_02");
@@ -204,6 +215,38 @@ public class ElementGenerator : MonoBehaviour
                 {
                     GameObject obj;
                     obj = Instantiate(GoalObj, blockParent);
+                    obj.transform.position = new Vector3(i, 1.0f, j);
+                }
+
+                // を生成
+                if (Originalmap[i, j] == 4)
+                {
+                    GameObject obj;
+                    obj = Instantiate(useObj, blockParent);
+                    obj.transform.position = new Vector3(i, 1.0f, j);
+                }
+                if (Originalmap[i, j] == 5)
+                {
+                    GameObject obj;
+                    obj = Instantiate(use1Obj, blockParent);
+                    obj.transform.position = new Vector3(i, 1.0f, j);
+                }
+                if (Originalmap[i, j] == 6)
+                {
+                    GameObject obj;
+                    obj = Instantiate(use2Obj, blockParent);
+                    obj.transform.position = new Vector3(i, 1.0f, j);
+                }
+                if (Originalmap[i, j] == 7)
+                {
+                    GameObject obj;
+                    obj = Instantiate(use3Obj, blockParent);
+                    obj.transform.position = new Vector3(i, 1.0f, j);
+                }
+                if (Originalmap[i, j] == 8)
+                {
+                    GameObject obj;
+                    obj = Instantiate(use4Obj, blockParent);
                     obj.transform.position = new Vector3(i, 1.0f, j);
                 }
 
