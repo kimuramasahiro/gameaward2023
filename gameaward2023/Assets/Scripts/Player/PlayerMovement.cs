@@ -240,7 +240,9 @@ public class PlayerMovement : MonoBehaviour
     private void IsAdvancePlayer()
     {
         // 前に壁があるか
-        if (map[(int)CurrentPos.x, (int)CurrentPos.z + 1] == 0 || map[(int)CurrentPos.x, (int)CurrentPos.z + 1] == 2)
+        if (map[(int)CurrentPos.x, (int)CurrentPos.z + 1] == 0 || map[(int)CurrentPos.x, (int)CurrentPos.z + 1] == 2 || map[(int)CurrentPos.x, (int)CurrentPos.z + 1] == 4
+            || map[(int)CurrentPos.x, (int)CurrentPos.z + 1] == 5 || map[(int)CurrentPos.x, (int)CurrentPos.z + 1] == 6
+            || map[(int)CurrentPos.x, (int)CurrentPos.z + 1] == 7 || map[(int)CurrentPos.x, (int)CurrentPos.z + 1] == 8)
         {
             IsAdvance_KeyW = true;
         }
@@ -250,7 +252,9 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // 後ろに壁があるか
-        if (map[(int)CurrentPos.x, (int)CurrentPos.z - 1] == 0 || map[(int)CurrentPos.x, (int)CurrentPos.z - 1] == 2)
+        if (map[(int)CurrentPos.x, (int)CurrentPos.z - 1] == 0 || map[(int)CurrentPos.x, (int)CurrentPos.z - 1] == 2 || map[(int)CurrentPos.x, (int)CurrentPos.z - 1] == 4
+            || map[(int)CurrentPos.x, (int)CurrentPos.z - 1] == 5 || map[(int)CurrentPos.x, (int)CurrentPos.z - 1] == 6
+            || map[(int)CurrentPos.x, (int)CurrentPos.z - 1] == 7 || map[(int)CurrentPos.x, (int)CurrentPos.z - 1] == 8)
         {
             IsAdvance_KeyS = true;
         }
@@ -260,7 +264,9 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // 左に壁があるか
-        if (map[(int)CurrentPos.x - 1, (int)CurrentPos.z] == 0 || map[(int)CurrentPos.x - 1, (int)CurrentPos.z] == 2)
+        if (map[(int)CurrentPos.x - 1, (int)CurrentPos.z] == 0 || map[(int)CurrentPos.x - 1, (int)CurrentPos.z] == 2 || map[(int)CurrentPos.x-1, (int)CurrentPos.z] == 4
+            || map[(int)CurrentPos.x - 1, (int)CurrentPos.z] == 5 || map[(int)CurrentPos.x - 1, (int)CurrentPos.z] == 6
+            || map[(int)CurrentPos.x - 1, (int)CurrentPos.z] == 7 || map[(int)CurrentPos.x - 1, (int)CurrentPos.z] == 8)
         {
             IsAdvance_KeyA = true;
         }
@@ -270,7 +276,9 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // 右に壁があるか
-        if (map[(int)CurrentPos.x + 1, (int)CurrentPos.z] == 0 || map[(int)CurrentPos.x + 1, (int)CurrentPos.z] == 2)
+        if (map[(int)CurrentPos.x + 1, (int)CurrentPos.z] == 0 || map[(int)CurrentPos.x + 1, (int)CurrentPos.z] == 2 || map[(int)CurrentPos.x+1, (int)CurrentPos.z] == 4
+            || map[(int)CurrentPos.x + 1, (int)CurrentPos.z] == 5 || map[(int)CurrentPos.x + 1, (int)CurrentPos.z] == 6
+            || map[(int)CurrentPos.x + 1, (int)CurrentPos.z] == 7 || map[(int)CurrentPos.x + 1, (int)CurrentPos.z] == 8)
         {
             IsAdvance_KeyD = true;
         }

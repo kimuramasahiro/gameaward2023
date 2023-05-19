@@ -130,7 +130,9 @@ public class EnemyBase : MonoBehaviour
     {
         // •Ç‚ª‚ ‚é‚©
         if (map[(int)CurrentPos.x - 1, (int)CurrentPos.z] == 0 ||
-                map[(int)CurrentPos.x - 1, (int)CurrentPos.z] == 2)
+                map[(int)CurrentPos.x - 1, (int)CurrentPos.z] == 2 || map[(int)CurrentPos.x-1, (int)CurrentPos.z] == 4
+                || map[(int)CurrentPos.x - 1, (int)CurrentPos.z] == 5 || map[(int)CurrentPos.x - 1, (int)CurrentPos.z] == 6
+                || map[(int)CurrentPos.x - 1, (int)CurrentPos.z] == 7 || map[(int)CurrentPos.x - 1, (int)CurrentPos.z] == 8)
         {
             CurrentPos.x -= 0.0f;
         }
@@ -151,7 +153,9 @@ public class EnemyBase : MonoBehaviour
     {
         // •Ç‚ª‚ ‚é‚©
         if (map[(int)CurrentPos.x + 1, (int)CurrentPos.z] == 0 ||
-                map[(int)CurrentPos.x + 1, (int)CurrentPos.z] == 2)
+                map[(int)CurrentPos.x + 1, (int)CurrentPos.z] == 2 || map[(int)CurrentPos.x+1, (int)CurrentPos.z] == 4
+                 || map[(int)CurrentPos.x + 1, (int)CurrentPos.z] == 5 || map[(int)CurrentPos.x + 1, (int)CurrentPos.z] == 6
+                  || map[(int)CurrentPos.x + 1, (int)CurrentPos.z] == 7 || map[(int)CurrentPos.x + 1, (int)CurrentPos.z] == 8)
         {
             CurrentPos.x += 0.0f;
         }
@@ -172,7 +176,9 @@ public class EnemyBase : MonoBehaviour
     {
         // •Ç‚ª‚ ‚é‚©
         if (map[(int)CurrentPos.x, (int)CurrentPos.z + 1] == 0 ||
-               map[(int)CurrentPos.x, (int)CurrentPos.z + 1] == 2)
+               map[(int)CurrentPos.x, (int)CurrentPos.z + 1] == 2 || map[(int)CurrentPos.x, (int)CurrentPos.z + 1] == 4
+                || map[(int)CurrentPos.x, (int)CurrentPos.z + 1] == 5 || map[(int)CurrentPos.x, (int)CurrentPos.z + 1] == 6
+                 || map[(int)CurrentPos.x, (int)CurrentPos.z + 1] == 7 || map[(int)CurrentPos.x, (int)CurrentPos.z + 1] == 8)
         {
             CurrentPos.z += 0.0f;
         }
@@ -193,7 +199,9 @@ public class EnemyBase : MonoBehaviour
     {
         // •Ç‚ª‚ ‚é‚©
         if (map[(int)CurrentPos.x, (int)CurrentPos.z - 1] == 0 ||
-                map[(int)CurrentPos.x, (int)CurrentPos.z - 1] == 2)
+                map[(int)CurrentPos.x, (int)CurrentPos.z - 1] == 2 || map[(int)CurrentPos.x, (int)CurrentPos.z - 1] == 4
+                || map[(int)CurrentPos.x, (int)CurrentPos.z - 1] == 5 || map[(int)CurrentPos.x, (int)CurrentPos.z - 1] == 6
+                || map[(int)CurrentPos.x, (int)CurrentPos.z - 1] == 7 || map[(int)CurrentPos.x, (int)CurrentPos.z - 1] == 8)
         {
             CurrentPos.z -= 0.0f;
         }
