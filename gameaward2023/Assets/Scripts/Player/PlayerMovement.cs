@@ -63,6 +63,11 @@ public class PlayerMovement : MonoBehaviour
     private bool replay = false;
     // 次のシーンチェンジ可能かどうか
     public bool ClearCheck = false;
+    // ワープチェック(myst)
+    public GameObject WarpEffect;
+    private int WarpCount;
+    public int WarpTime = 210;
+    private bool GoalCheak;
 
     // Start is called before the first frame update
     void Start()
@@ -82,7 +87,8 @@ public class PlayerMovement : MonoBehaviour
         // 有効化する必要がある
         _gameInputs.Enable();
 
-        
+        WarpCount = 0;
+        GoalCheak = false;
 
     }
 
@@ -146,7 +152,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // プレイヤーが止まっていて、プレイヤーが進める状態であったら
-        if (PlayerObj.transform.position == CurrentPos)
+        if (PlayerObj.transform.position == CurrentPos && !GoalCheak &&!IsTouched)
         {
             // 止まっている
             IsMoving = false;
@@ -222,14 +228,22 @@ public class PlayerMovement : MonoBehaviour
         if(map[(int)CurrentPos.x,(int)CurrentPos.z] == 3 && !IsTouched)
         {
             replay = false;
+            GoalCheak = true;
             //StageMake.GetComponent<ElementGenerator>().GetEnemyData().SetReplay(GetComponent<AutoRun>().GetDir());
-            GameClear_Text.SetActive(true);
-            ClearCheck = true;
+            //GameClear_Text.SetActive(true);
+            WarpCount++;
+            WarpEffect.SetActive(true);
+            if (WarpCount >= WarpTime && !IsTouched)
+            {               
+                ClearCheck = true;
+            }
+
         }
 
         if(IsTouched)
         {
             GameOver_Text.SetActive(true);
+            WarpEffect.SetActive(false);
         }
 
         // 移動処理
