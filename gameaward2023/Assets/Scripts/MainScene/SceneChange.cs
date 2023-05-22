@@ -9,11 +9,18 @@ public class SceneChange : MonoBehaviour
     private PlayerMovement PlayerStatus;
     public string RetryStage;
     public string NextStage;
+    public AudioClip WarpSound;
+    public AudioClip RetrySound;
+    AudioSource SceneAudioSource;
+    private bool OnlyClear;
+    public float FadeTime = 1.5f;
     // Start is called before the first frame update
     void Start()
     {
+        SceneAudioSource = GetComponent<AudioSource>();
         PlayerData = GameObject.Find("Player");
         PlayerStatus = PlayerData.GetComponent<PlayerMovement>();
+        OnlyClear = false;
     }
 
     // Update is called once per frame
@@ -24,14 +31,15 @@ public class SceneChange : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Return))
             {
                 FadeManager.Instance.LoadScene(RetryStage, 1.0f);
+                SceneAudioSource.PlayOneShot(RetrySound);
             }
         }
-        if(PlayerStatus.ClearCheck&&!PlayerStatus.IsTouched)
+        if(PlayerStatus.ClearCheck&&!PlayerStatus.IsTouched && !OnlyClear)
         {
-            if (Input.GetKeyDown(KeyCode.Return))
-            {
-                FadeManager.Instance.LoadScene(NextStage, 1.0f);
-            }
+
+            FadeManager.Instance.LoadScene(NextStage,FadeTime);
+            SceneAudioSource.PlayOneShot(WarpSound);
+            OnlyClear = true;
         }
 
         if (Input.GetKeyDown(KeyCode.Escape))
