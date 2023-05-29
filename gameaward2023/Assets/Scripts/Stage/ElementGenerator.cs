@@ -128,7 +128,7 @@ public class ElementGenerator : MonoBehaviour
     void ReadResources()
     {
         // 壁のマテリアル
-        material = (Material)Resources.Load("Materials/Water002");
+        material = (Material)Resources.Load("Materials/NewWall");
 
         // ゴール
         GoalObj = (GameObject)Resources.Load("Prefabs/Goal");
@@ -223,31 +223,36 @@ public class ElementGenerator : MonoBehaviour
                 {
                     GameObject obj;
                     obj = Instantiate(useObj, blockParent);
-                    obj.transform.position = new Vector3(i, 1.0f, j);
+                    obj.transform.localScale = new Vector3(1, 1.5f, 1);
+                    obj.transform.position = new Vector3(i, 1.5f, j);
                 }
                 if (Originalmap[i, j] == 5)
                 {
                     GameObject obj;
                     obj = Instantiate(use1Obj, blockParent);
-                    obj.transform.position = new Vector3(i, 1.0f, j);
+                    obj.transform.localScale = new Vector3(1, 1.5f, 1);
+                    obj.transform.position = new Vector3(i, 1.5f, j);
                 }
                 if (Originalmap[i, j] == 6)
                 {
                     GameObject obj;
                     obj = Instantiate(use2Obj, blockParent);
-                    obj.transform.position = new Vector3(i, 1.0f, j);
+                    obj.transform.localScale = new Vector3(1, 1.5f, 1);
+                    obj.transform.position = new Vector3(i, 1.5f, j);
                 }
                 if (Originalmap[i, j] == 7)
                 {
                     GameObject obj;
                     obj = Instantiate(use3Obj, blockParent);
-                    obj.transform.position = new Vector3(i, 1.0f, j);
+                    obj.transform.localScale = new Vector3(1, 1.5f, 1);
+                    obj.transform.position = new Vector3(i, 1.5f, j);
                 }
                 if (Originalmap[i, j] == 8)
                 {
                     GameObject obj;
                     obj = Instantiate(use4Obj, blockParent);
-                    obj.transform.position = new Vector3(i, 1.0f, j);
+                    obj.transform.localScale = new Vector3(1, 1.5f, 1);
+                    obj.transform.position = new Vector3(i, 1.5f, j);
                 }
 
                 // 通路を生成
