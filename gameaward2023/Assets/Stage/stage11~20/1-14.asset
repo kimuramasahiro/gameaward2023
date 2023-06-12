@@ -647,7 +647,7 @@ MonoBehaviour:
     name: 2
     health: 10
     moveSpeed: 3
-    skillTurn: 2
+    skillTurn: 3
     pos: {x: 21, y: 5}
     skill: 3
   - tag: yoko2
@@ -712,7 +712,7 @@ MonoBehaviour:
     moveSpeed: 3
     skillTurn: 15
     pos: {x: 23, y: 5}
-    skill: 1
+    skill: 5
   - tag: tate11
     name: 1
     health: 10
@@ -754,7 +754,7 @@ MonoBehaviour:
     moveSpeed: 3
     skillTurn: 15
     pos: {x: 22, y: 6}
-    skill: 3
+    skill: 4
   - tag: tate17
     name: 1
     health: 10
