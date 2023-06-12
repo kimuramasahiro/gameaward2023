@@ -28,13 +28,6 @@ public class TitleScene : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if(Input.GetKeyDown(KeyCode.Return) || && Only)
-        //{
-        //    audioSource.PlayOneShot(sound1);
-        //    FadeManager.Instance.LoadScene("1_1",1.0f);
-        //    Only = false;
-        //}
-
         EndGame();
     }
     //ゲーム終了
@@ -56,8 +49,10 @@ public class TitleScene : MonoBehaviour
     private void OnSelect(InputAction.CallbackContext context)
     {
         if (Only)
+        {
             audioSource.PlayOneShot(sound1);
             FadeManager.Instance.LoadScene("1_1", 1.0f);
             Only = false;
+        }
     }
 }
