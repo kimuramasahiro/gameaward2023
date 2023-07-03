@@ -32,6 +32,21 @@ public class ElementGenerator : MonoBehaviour
     private GameObject use2Obj;
     private GameObject use3Obj;
     private GameObject use4Obj;
+    private GameObject use5Obj;
+    private GameObject use6Obj;
+    private GameObject use7Obj;
+    private GameObject use8Obj;
+    private GameObject use9Obj;
+    private GameObject use10Obj;
+    private GameObject use11Obj;
+    private GameObject use12Obj;
+    private GameObject use13Obj;
+    private GameObject use14Obj;
+    private GameObject use15Obj;
+    private GameObject use16Obj;
+    private GameObject use17Obj;
+    private GameObject use18Obj;
+    private GameObject use19Obj;
     private GameObject[] objMapTipList = new GameObject[1];     // マップチップリスト
     private Material material;                                  // 壁のマテリアル
     // ------------------------------------------------------------------
@@ -113,7 +128,7 @@ public class ElementGenerator : MonoBehaviour
                 if(enemyData.GetMap()[(start + yy) - minus * xx]==-1)
                     Originalmap[yy, xx] =-1;
                 else
-                    Originalmap[yy, xx] = enemyData.GetMap()[(start + yy) - minus * xx] % 10;
+                    Originalmap[yy, xx] = enemyData.GetMap()[(start + yy) - minus * xx] % 100;
             }
                 
         //Originalmap[yy, xx] = enemyData.GetMap()[enemyData.GetMapSize() * enemyData.GetMapSize() - 1 - (xx * enemyData.GetMapSize() + yy)];
@@ -138,6 +153,21 @@ public class ElementGenerator : MonoBehaviour
         use2Obj = (GameObject)Resources.Load("Prefabs/Temp_Grass 2");
         use3Obj = (GameObject)Resources.Load("Prefabs/Temp_Grass 3");
         use4Obj = (GameObject)Resources.Load("Prefabs/Temp_Grass 4");
+        use5Obj = (GameObject)Resources.Load("Prefabs/Temp_Grass 5");
+        use6Obj = (GameObject)Resources.Load("Prefabs/Temp_Grass 6");
+        use7Obj = (GameObject)Resources.Load("Prefabs/Temp_Grass 7");
+        use8Obj = (GameObject)Resources.Load("Prefabs/Temp_Grass 8");
+        use9Obj = (GameObject)Resources.Load("Prefabs/Temp_Grass 9");
+        use10Obj = (GameObject)Resources.Load("Prefabs/Temp_Grass 10");
+        use11Obj = (GameObject)Resources.Load("Prefabs/Temp_Grass 11");
+        use12Obj = (GameObject)Resources.Load("Prefabs/Temp_Grass 12");
+        use13Obj = (GameObject)Resources.Load("Prefabs/Temp_Grass 13");
+        use14Obj = (GameObject)Resources.Load("Prefabs/Temp_Grass 14");
+        use15Obj = (GameObject)Resources.Load("Prefabs/Temp_Grass 15");
+        use16Obj = (GameObject)Resources.Load("Prefabs/Temp_Grass 16");
+        use17Obj = (GameObject)Resources.Load("Prefabs/Temp_Grass 17");
+        use18Obj = (GameObject)Resources.Load("Prefabs/Temp_Grass 18");
+        use19Obj = (GameObject)Resources.Load("Prefabs/Temp_Grass 19");
 
         //EnemyObj = (GameObject)Resources.Load("Prefabs/Enemies/Skeleton");
 
@@ -251,6 +281,111 @@ public class ElementGenerator : MonoBehaviour
                 {
                     GameObject obj;
                     obj = Instantiate(use4Obj, blockParent);
+                    obj.transform.localScale = new Vector3(1, 1.5f, 1);
+                    obj.transform.position = new Vector3(i, 1.5f, j);
+                }
+                if (Originalmap[i, j] == 9)
+                {
+                    GameObject obj;
+                    obj = Instantiate(use5Obj, blockParent);
+                    obj.transform.localScale = new Vector3(1, 1.5f, 1);
+                    obj.transform.position = new Vector3(i, 1.5f, j);
+                }
+                if (Originalmap[i, j] == 10)
+                {
+                    GameObject obj;
+                    obj = Instantiate(use6Obj, blockParent);
+                    obj.transform.localScale = new Vector3(1, 1.5f, 1);
+                    obj.transform.position = new Vector3(i, 1.5f, j);
+                }
+                if (Originalmap[i, j] == 11)
+                {
+                    GameObject obj;
+                    obj = Instantiate(use7Obj, blockParent);
+                    obj.transform.localScale = new Vector3(1, 1.5f, 1);
+                    obj.transform.position = new Vector3(i, 1.5f, j);
+                }
+                if (Originalmap[i, j] == 12)
+                {
+                    GameObject obj;
+                    obj = Instantiate(use8Obj, blockParent);
+                    obj.transform.localScale = new Vector3(1, 1.5f, 1);
+                    obj.transform.position = new Vector3(i, 1.5f, j);
+                }
+                if (Originalmap[i, j] == 13)
+                {
+                    GameObject obj;
+                    obj = Instantiate(use9Obj, blockParent);
+                    obj.transform.localScale = new Vector3(1, 1.5f, 1);
+                    obj.transform.position = new Vector3(i, 1.5f, j);
+                }
+                if (Originalmap[i, j] == 14)
+                {
+                    GameObject obj;
+                    obj = Instantiate(use10Obj, blockParent);
+                    obj.transform.localScale = new Vector3(1, 1.5f, 1);
+                    obj.transform.position = new Vector3(i, 1.5f, j);
+                }
+                if (Originalmap[i, j] == 15)
+                {
+                    GameObject obj;
+                    obj = Instantiate(use11Obj, blockParent);
+                    obj.transform.localScale = new Vector3(1, 1.5f, 1);
+                    obj.transform.position = new Vector3(i, 1.5f, j);
+                }
+                if (Originalmap[i, j] == 16)
+                {
+                    GameObject obj;
+                    obj = Instantiate(use12Obj, blockParent);
+                    obj.transform.localScale = new Vector3(1, 1.5f, 1);
+                    obj.transform.position = new Vector3(i, 1.5f, j);
+                }
+                if (Originalmap[i, j] == 17)
+                {
+                    GameObject obj;
+                    obj = Instantiate(use13Obj, blockParent);
+                    obj.transform.localScale = new Vector3(1, 1.5f, 1);
+                    obj.transform.position = new Vector3(i, 1.5f, j);
+                }
+                if (Originalmap[i, j] == 18)
+                {
+                    GameObject obj;
+                    obj = Instantiate(use14Obj, blockParent);
+                    obj.transform.localScale = new Vector3(1, 1.5f, 1);
+                    obj.transform.position = new Vector3(i, 1.5f, j);
+                }
+                if (Originalmap[i, j] == 19)
+                {
+                    GameObject obj;
+                    obj = Instantiate(use15Obj, blockParent);
+                    obj.transform.localScale = new Vector3(1, 1.5f, 1);
+                    obj.transform.position = new Vector3(i, 1.5f, j);
+                }
+                if (Originalmap[i, j] == 20)
+                {
+                    GameObject obj;
+                    obj = Instantiate(use16Obj, blockParent);
+                    obj.transform.localScale = new Vector3(1, 1.5f, 1);
+                    obj.transform.position = new Vector3(i, 1.5f, j);
+                }
+                if (Originalmap[i, j] == 21)
+                {
+                    GameObject obj;
+                    obj = Instantiate(use17Obj, blockParent);
+                    obj.transform.localScale = new Vector3(1, 1.5f, 1);
+                    obj.transform.position = new Vector3(i, 1.5f, j);
+                }
+                if (Originalmap[i, j] == 22)
+                {
+                    GameObject obj;
+                    obj = Instantiate(use18Obj, blockParent);
+                    obj.transform.localScale = new Vector3(1, 1.5f, 1);
+                    obj.transform.position = new Vector3(i, 1.5f, j);
+                }
+                if (Originalmap[i, j] == 23)
+                {
+                    GameObject obj;
+                    obj = Instantiate(use19Obj, blockParent);
                     obj.transform.localScale = new Vector3(1, 1.5f, 1);
                     obj.transform.position = new Vector3(i, 1.5f, j);
                 }
