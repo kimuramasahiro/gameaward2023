@@ -164,6 +164,34 @@ public partial class @Controller : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""UI"",
+            ""id"": ""2954b406-283b-4201-bd5b-7d6f943431cb"",
+            ""actions"": [
+                {
+                    ""name"": ""OnOff"",
+                    ""type"": ""Button"",
+                    ""id"": ""6033b4da-6c96-4de4-b688-697b88cd2de0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""77740936-4a0a-4c3b-9c73-3014803edabd"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""OnOff"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -175,6 +203,9 @@ public partial class @Controller : IInputActionCollection2, IDisposable
         // Submit
         m_Submit = asset.FindActionMap("Submit", throwIfNotFound: true);
         m_Submit_Submit = m_Submit.FindAction("Submit", throwIfNotFound: true);
+        // UI
+        m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
+        m_UI_OnOff = m_UI.FindAction("OnOff", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -304,6 +335,39 @@ public partial class @Controller : IInputActionCollection2, IDisposable
         }
     }
     public SubmitActions @Submit => new SubmitActions(this);
+
+    // UI
+    private readonly InputActionMap m_UI;
+    private IUIActions m_UIActionsCallbackInterface;
+    private readonly InputAction m_UI_OnOff;
+    public struct UIActions
+    {
+        private @Controller m_Wrapper;
+        public UIActions(@Controller wrapper) { m_Wrapper = wrapper; }
+        public InputAction @OnOff => m_Wrapper.m_UI_OnOff;
+        public InputActionMap Get() { return m_Wrapper.m_UI; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(UIActions set) { return set.Get(); }
+        public void SetCallbacks(IUIActions instance)
+        {
+            if (m_Wrapper.m_UIActionsCallbackInterface != null)
+            {
+                @OnOff.started -= m_Wrapper.m_UIActionsCallbackInterface.OnOnOff;
+                @OnOff.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnOnOff;
+                @OnOff.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnOnOff;
+            }
+            m_Wrapper.m_UIActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @OnOff.started += instance.OnOnOff;
+                @OnOff.performed += instance.OnOnOff;
+                @OnOff.canceled += instance.OnOnOff;
+            }
+        }
+    }
+    public UIActions @UI => new UIActions(this);
     public interface IPlayerActions
     {
         void OnMove(InputAction.CallbackContext context);
@@ -312,5 +376,9 @@ public partial class @Controller : IInputActionCollection2, IDisposable
     public interface ISubmitActions
     {
         void OnSubmit(InputAction.CallbackContext context);
+    }
+    public interface IUIActions
+    {
+        void OnOnOff(InputAction.CallbackContext context);
     }
 }
