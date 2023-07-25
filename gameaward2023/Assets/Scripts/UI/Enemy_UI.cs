@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Enemy_UI : MonoBehaviour
 {
@@ -20,6 +21,12 @@ public class Enemy_UI : MonoBehaviour
     private GameObject[] SkillTurnObj;  // 
     private SKILL skill;
 
+    private Controller _gameInputs;    //gamepad
+    private bool bSwitch = true;
+    private CanvasGroup canvasGroup;
+
+    private bool bTouch = false;
+
     void Start()
     {
         SkeletonObj = this.gameObject;
@@ -31,6 +38,16 @@ public class Enemy_UI : MonoBehaviour
 
         //リソース読み込み
         ReadResources();
+
+        // コントローラー処理
+        //Input Actionインスタンス生成
+        _gameInputs = new Controller();
+
+        //Actionイベント登録
+        _gameInputs.UI.OnOff.started += UI_OnOff;
+        //_gameInputs.UI.OnOff.performed += UI_OnOff;
+
+        _gameInputs.Enable();
     }
 
     void ReadResources()
@@ -52,8 +69,6 @@ public class Enemy_UI : MonoBehaviour
             // 初期設定
             objUI.transform.SetParent(SkeletonTrasform, false);
             objUI.transform.localPosition = Vector3.zero;
-            //objUI.transform.localRotation = new Quaternion(20.0f, 0.0f, 0.0f, 0.0f);
-            //objUI.transform.localScale = new Vector3(0.001f, 0.001f, 1.0f);
 
             // 子Objの数をカウント
             nChildCount = objUI.transform.childCount;
@@ -71,11 +86,17 @@ public class Enemy_UI : MonoBehaviour
                 SkillTurnObj[i - 1].SetActive(false);
             }
 
+            // objUIのCanvasGroupコンポーネントを取得する
+            canvasGroup = objUI.GetComponent<CanvasGroup>();
+
             bCreate = true;
         }
 
+        // UIを常に正面を向いているようにする
+        objUI.transform.eulerAngles = new Vector3(50.0f, 0.0f, 0.0f);
+
         // スキル発動したらゲージを非表示
-        if(SkeletonMovement.skillStep == SkillTurnObj.Length)
+        if (SkeletonMovement.skillStep == SkillTurnObj.Length)
         {
             for (int i = 0; i < SkillTurnObj.Length; i++)
             {
@@ -87,12 +108,28 @@ public class Enemy_UI : MonoBehaviour
             // スキルチャージ数によって表示する
             SkillTurnObj[SkeletonMovement.skillStep].SetActive(true);
         }
+
+        // UIの表示.非表示の切り替え
+        if(bSwitch)
+        {
+            canvasGroup.alpha = 1.0f;
+        }
+        else
+        {
+            canvasGroup.alpha = 0.0f;
+        }
     }
 
-    //
-    void EnemySkillUI()
+    // 特定のボタンを押したらUIの表示を消す
+    private void UI_OnOff(InputAction.CallbackContext context)
     {
-        // 敵のスキルによって表示するUIを変更する
+        // boolの切り替え
+        bSwitch = !bSwitch;
+    }
+
+    // 敵のスキルによって表示するUIを変更する
+    private void EnemySkillUI()
+    {
         switch(SkeletonMovement.skill)
         {
             case SKILL.up:
@@ -126,5 +163,4 @@ public class Enemy_UI : MonoBehaviour
                 }
         }
     }
-      
 }
